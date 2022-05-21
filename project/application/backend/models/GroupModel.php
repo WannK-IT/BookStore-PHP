@@ -22,6 +22,9 @@ class GroupModel extends Model
 		//search
 		$query[] = (!empty($arrParams['search_value'])) ? "AND `name` LIKE '%" . $arrParams['search_value'] . "%'" : '';
 
+		// order by
+		$query[]	= "ORDER BY `id` ASC";
+
 		// pagination
 		$pagination			= $arrParams['pagination'];
 		$totalItemsPerPage	= $pagination['totalItemsPerPage'];

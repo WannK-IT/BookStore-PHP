@@ -1,7 +1,5 @@
-<?php ob_start();?>
-
 <?php 
-
+ob_start();
 $dashboard      = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'dashboard', 'index'), 'dashboard', 'fas fa-tachometer-alt', $this->arrParam['controller']);
 
 $arrItemGroup   =   [   
@@ -48,7 +46,7 @@ $user   = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $this-
                 <img src="<?= $this->_dirImg?>logoAdmin.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= Session::get('loginFullname')?></a>
+                <a href="#" class="d-block"><b><?= Session::get('loginFullname')?></b><br><small><?= Session::get('loginRole')?></small></a>
             </div>
         </div>
 

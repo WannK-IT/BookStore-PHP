@@ -16,14 +16,14 @@
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="<?= $this->_dirImg?>logoAdmin.png" class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline"><?= Session::get('loginFullname')?></span>
+                <span class="d-none d-md-inline"><b><?= Session::get('loginFullname')?></b></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-info">
                     <img src="<?= $this->_dirImg?>logoAdmin.png" class="img-circle elevation-2" alt="User Image">
 
-                    <p><?= Session::get('loginFullname')?><small>admin</small></p>
+                    <p><b><?= Session::get('loginFullname')?></b><small><?= Session::get('loginRole')?></small></p>
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">

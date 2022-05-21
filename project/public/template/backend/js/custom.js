@@ -89,9 +89,14 @@ $(document).ready(function () {
     });
 
     // Generate random string
+    function randomString(){
+        return (Math.random().toString(36).substring(2, 12));
+    }
+
+    $('#generateString').val(randomString()); //aut
+
     $('.btn-generate-password').click(function () {
-        let randomString = (Math.random().toString(36).substring(2, 12));
-        $('#generateString').val(randomString);
+        $('#generateString').val(randomString());
     });
 
     $('#changePassWord').click(function (e) {

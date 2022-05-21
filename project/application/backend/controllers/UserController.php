@@ -74,7 +74,7 @@ class UserController extends Controller
 		if (!empty($this->_arrParam['form'])) {
 			$source = [
 				'username' 	=> $this->_arrParam['form']['username'],
-				'password' 	=> md5($this->_arrParam['form']['password']),
+				'password' 	=> (!empty(($this->_arrParam['form']['password'])) ? md5($this->_arrParam['form']['password']) : ''),
 				'email' 	=> $this->_arrParam['form']['email'],
 				'fullname' 	=> $this->_arrParam['form']['fullname'],
 				'status' 	=> $this->_arrParam['form']['status'],

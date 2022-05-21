@@ -19,8 +19,11 @@ class UserModel extends Model
 		// filter group user
 		$query[] 	= ((!empty($arrParams['filter_group'])) && $arrParams['filter_group'] != 'default') ? "AND `u`.`group_id` = '{$arrParams['filter_group']}'" : '';
 
-		//search
+		// search
 		$query[] = (!empty($arrParams['search_value'])) ? "AND `u`.`username` LIKE '%" . $arrParams['search_value'] . "%'" : '';
+
+		// order by
+		$query[]	= "ORDER BY `u`.`id` ASC";
 
 		// pagination
 		$pagination			= $arrParams['pagination'];
@@ -52,16 +55,7 @@ class UserModel extends Model
 	{
 		$query[]	= "SELECT `id`, `name` FROM `group`";
 		$query		= implode(" ", $query);
-		$result		= $this->listRecord($query);
-
-		if (!empty($result)) {
-			$idGroup = $nameGroup = [];
-			foreach ($result as $value) {
-				$idGroup[] .= $value['id'];
-				$nameGroup[] .= $value['name'];
-			}
-		}
-		$result = array_combine($idGroup, $nameGroup);
+		$result		= array_column($this->listRecord($query), 'name', 'id');
 		return $result;
 	}
 
@@ -91,27 +85,27 @@ class UserModel extends Model
 	public function countItem($arrParams, $option = null)
 	{
 		if ($option['task'] == 'count-status') {
-			$query[] = "SELECT `status`, COUNT(`id`) AS 'countStatus'";
-			$query[] = "FROM `{$this->table}` WHERE `id` > 0";
+			$query[] 		= "SELECT `status`, COUNT(`id`) AS 'countStatus'";
+			$query[] 		= "FROM `{$this->table}` WHERE `id` > 0";
 
 			// search
-			$query[] = (!empty($arrParams['search_value'])) ? "AND `username` LIKE '%" . $arrParams['search_value'] . "%'" : '';
+			$query[] 		= (!empty($arrParams['search_value'])) ? "AND `username` LIKE '%" . $arrParams['search_value'] . "%'" : '';
 
 			// group user
-			$query[] 	= ((!empty($arrParams['filter_group'])) && $arrParams['filter_group'] != 'default') ? "AND `group_id` = '{$arrParams['filter_group']}'" : '';
+			$query[] 		= ((!empty($arrParams['filter_group'])) && $arrParams['filter_group'] != 'default') ? "AND `group_id` = '{$arrParams['filter_group']}'" : '';
 
-			$query[] = "GROUP BY `status`";
-			$query		= implode(" ", $query);
-			$result		= $this->listRecord($query);
+			$query[] 		= "GROUP BY `status`";
+			$query			= implode(" ", $query);
+			$result			= $this->listRecord($query);
 
 			foreach ($result as $value) {
-				$status[] = $value['status'];
-				$count[] = $value['countStatus'];
+				$status[] 	= $value['status'];
+				$count[] 	= $value['countStatus'];
 			}
 			if (!empty($status) || !empty($count)) {
 
-				$result = array_combine($status, $count);
-				$result = ['all' => array_sum($result)] + $result;
+				$result 	= array_combine($status, $count);
+				$result 	= ['all' => array_sum($result)] + $result;
 			}
 			return $result;
 		}
@@ -121,12 +115,12 @@ class UserModel extends Model
 	{
 		if ($option == 'add') {
 			// $arrParams['created'] set default ở phpmyadmin
-			$arrParams['created_by'] = Session::get('loginFullname');
-			$arrParams['created'] = date('Y-m-d H:i:s');
+			$arrParams['created_by'] 	= Session::get('loginFullname');
+			$arrParams['created'] 		= date('Y-m-d H:i:s');
 			$this->insert([$arrParams], 'multi');
 		} elseif ($option == 'edit') {
-			$arrParams['modified_by'] = Session::get('loginFullname');
-			$arrParams['modified'] = date('Y-m-d H:i:s');
+			$arrParams['modified_by'] 	= Session::get('loginFullname');
+			$arrParams['modified'] 		= date('Y-m-d H:i:s');
 			$this->update($arrParams, [['id', $paramsUrl['eid']]]);
 		}
 	}
@@ -134,7 +128,7 @@ class UserModel extends Model
 	public function updatePassword($arrParams)
 	{
 		if (!empty($arrParams)) {
-			$query = "UPDATE `{$this->table}` SET `password` = '{$arrParams['password']}' WHERE `id` = '{$arrParams['id']}'";
+			$query = "UPDATE `{$this->table}` SET `password` = '" . md5($arrParams['password']) . "' WHERE `id` = '{$arrParams['id']}'";
 			$this->query($query);
 		}
 	}
