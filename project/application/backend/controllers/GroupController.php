@@ -11,6 +11,8 @@ class GroupController extends Controller
 		$this->_templateObj->load();
 		Session::init();
 		Authentication::checkLogin();
+
+		$this->_view->getFullName = $this->_model->getFullName($this->_arrParam);
 	}
 
 	public function indexAction()

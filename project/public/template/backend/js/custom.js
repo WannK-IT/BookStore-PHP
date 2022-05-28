@@ -64,6 +64,16 @@ $(document).ready(function () {
         $("#form_group").submit();
     });
 
+    // Filter category
+    $('#filter_category').change(function (e) {
+        $("#form_category").submit();
+    });
+
+    // Filter special
+    $('#filter_special').change(function (e) {
+        $("#form_special").submit();
+    });
+
     // fade popup
     $("#add-success").fadeTo(3000, 500).slideUp(500, function () {
         $("#add-success").slideUp(500);

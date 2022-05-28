@@ -27,8 +27,36 @@ $arrItemUser    =   [
                             'title' => 'form'
                         ],
                     ];
+
+$arrItemBook    =   [   
+                        [
+                            'link' => URL::createLink($this->arrParam['module'], 'book', 'index'),              
+                            'icon' => 'fas fa-list-ul',             
+                            'title' => 'list'
+                        ],
+                        [
+                            'link' => URL::createLink($this->arrParam['module'], 'book', 'form'),              
+                            'icon' => 'fas fa-edit',             
+                            'title' => 'form'
+                        ],
+                    ];
+
+$arrItemCategory    =   [   
+                        [
+                            'link' => URL::createLink($this->arrParam['module'], 'category', 'index'),              
+                            'icon' => 'fas fa-list-ul',             
+                            'title' => 'list'
+                        ],
+                        [
+                            'link' => URL::createLink($this->arrParam['module'], 'category', 'form'),              
+                            'icon' => 'fas fa-edit',             
+                            'title' => 'form'
+                        ],
+                    ];
 $group  = HelperBackend::itemSideBar('multi', '#', 'group', 'fas fa-users', $this->arrParam['controller'], $arrItemGroup);
 $user   = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $this->arrParam['controller'], $arrItemUser);
+$book   = HelperBackend::itemSideBar('multi', '#', 'book', 'fas fa-book-open', $this->arrParam['controller'], $arrItemBook);
+$category   = HelperBackend::itemSideBar('multi', '#', 'category', 'fas fa-bars', $this->arrParam['controller'], $arrItemCategory);
 ?>
 
 <aside class="main-sidebar sidebar-dark-info elevation-4">
@@ -46,14 +74,14 @@ $user   = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $this-
                 <img src="<?= $this->_dirImg?>logoAdmin.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><b><?= Session::get('loginFullname')?></b><br><small><?= Session::get('loginRole')?></small></a>
+                <a href="#" class="d-block"><b><?= $this->getFullName['fullname']?></b><br><small><?= $_SESSION['login']['loginRole']?></small></a>
             </div>
         </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <?= $dashboard . $group . $user?>
+                <?= $dashboard . $group . $user . $category . $book?>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

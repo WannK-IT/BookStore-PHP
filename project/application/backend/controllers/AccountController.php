@@ -30,8 +30,7 @@ class AccountController extends Controller
 	}
 
 	public function logoutAccountAction(){
-		Session::delete('loginSuccess');
-		Session::delete('loginFullname');
+		Session::delete('login');
 		URL::direct('backend', 'account', 'login');
 	}
 

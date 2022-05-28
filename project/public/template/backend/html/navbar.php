@@ -9,21 +9,21 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#" role="button">
+            <a class="nav-link" href="index.php?module=default&controller=index&action=index" role="button">
                 <i class="fas fa-eye"></i> View Site
             </a>
         </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="<?= $this->_dirImg?>logoAdmin.png" class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline"><b><?= Session::get('loginFullname')?></b></span>
+                <span class="d-none d-md-inline"><b><?= $this->getFullName['fullname']?></b></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-info">
                     <img src="<?= $this->_dirImg?>logoAdmin.png" class="img-circle elevation-2" alt="User Image">
 
-                    <p><b><?= Session::get('loginFullname')?></b><small><?= Session::get('loginRole')?></small></p>
+                    <p><b><?= $this->getFullName['fullname']?></b><small><?= $_SESSION['login']['loginRole']?></small></p>
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">

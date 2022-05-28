@@ -40,6 +40,14 @@ class FormBackend
         return $xhtml;
     }
 
+    public static function createInputFile($name, $id){
+        return sprintf('<input type="file" name="%s" class="form-control-file" id="%s">', $name, $id);
+    }
+
+    public static function createTextArea($name, $rows, $value){
+        return sprintf('<textarea name="%s" class="form-control form-control-sm" id="%s" rows="%s">%s</textarea>', $name, $name, $rows, $value);
+    }
+
     public static function formGroup($arrElement)
     {
         return sprintf('<div class="form-group row">

@@ -9,37 +9,37 @@ $arrGroup   = $this->listGroup;
 $arrElement = [
     // Username
     [
-        'label' => FormBackend::createLabel('form[username]', 'Username', true),
+        'label' => FormBackend::createLabel('form[username]', 'Username'),
         'input' => FormBackend::createInput('form[username]', 'text', @$data['username'])
     ],
 
     // Password
     [
-        'label' => FormBackend::createLabel('form[password]', 'Password', true),
+        'label' => FormBackend::createLabel('form[password]', 'Password'),
         'input' => FormBackend::createInput('form[password]', 'password', @$data['password'])
     ],
 
     // Email
     [
-        'label' => FormBackend::createLabel('form[email]', 'Email', true),
+        'label' => FormBackend::createLabel('form[email]', 'Email'),
         'input' => FormBackend::createInput('form[email]', 'email', @$data['email'])
     ],
 
     // Fullname
     [
-        'label' => FormBackend::createLabel('form[fullname]', 'Fullname', true),
+        'label' => FormBackend::createLabel('form[fullname]', 'Fullname'),
         'input' => FormBackend::createInput('form[fullname]', 'text', @$data['fullname'])
     ],
 
     // Status
     [
-        'label' => FormBackend::createLabel('form[status]', 'Status', true),
+        'label' => FormBackend::createLabel('form[status]', 'Status'),
         'input' => FormBackend::createFormSelectBox('form[status]', $arrStatus, @$data['status'])
     ],
 
     // Group
     [
-        'label' => FormBackend::createLabel('form[group_id]', 'Group', true),
+        'label' => FormBackend::createLabel('form[group_id]', 'Group'),
         'input' => FormBackend::createFormSelectBox('form[group_id]', $arrGroup, @$data['group_id'])
     ],
 

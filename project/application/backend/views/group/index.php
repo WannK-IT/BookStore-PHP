@@ -3,18 +3,18 @@ $xhtml = '';
 @$search = $this->arrParam['search_value'];
 if (!empty($this->list)) {
     foreach ($this->list as $value) {
-        $id = $value['id'];
-        $name = HelperBackend::highlightSearch($search, $value['name']);
-        $status = HelperBackend::itemStatusAjax($this->arrParam['module'], $this->arrParam['controller'], $id, $value['status'], 'ajaxStatus');
-        $groupACP = HelperBackend::itemGroupACP($this->arrParam['module'], $this->arrParam['controller'], $id, $value['group_acp'], 'ajaxGroupACP');
-        $created = HelperBackend::itemHistory($value['created_by'], $value['created']);
-        $modified = HelperBackend::itemHistory($value['modified_by'], $value['modified']);
+        $id         = $value['id'];
+        $name       = HelperBackend::highlightSearch($search, $value['name']);
+        $status     = HelperBackend::itemStatusAjax($this->arrParam['module'], $this->arrParam['controller'], $id, $value['status'], 'ajaxStatus');
+        $groupACP   = HelperBackend::itemGroupACP($this->arrParam['module'], $this->arrParam['controller'], $id, $value['group_acp'], 'ajaxGroupACP');
+        $created    = HelperBackend::itemHistory($value['created_by'], $value['created']);
+        $modified   = HelperBackend::itemHistory($value['modified_by'], $value['modified']);
         
-        $urlDelete = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'delete', ['id' => $id]);
-        $urlEdit = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'form', ['task' => 'edit', 'eid' => $id]);
+        $urlDelete  = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'delete', ['id' => $id]);
+        $urlEdit    = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'form', ['task' => 'edit', 'eid' => $id]);
 
-        $btnEdit = HelperBackend::btnLink($urlEdit, 'bg-gradient-info', 'Edit', 'fas fa-pencil-alt');
-        $btnDelete = HelperBackend::btnLink($urlDelete, 'btn-delete bg-gradient-danger', 'Delete', 'fas fa-trash-alt');
+        $btnEdit    = HelperBackend::btnLink($urlEdit, 'bg-gradient-info', 'Edit', 'fas fa-pencil-alt');
+        $btnDelete  = HelperBackend::btnLink($urlDelete, 'btn-delete bg-gradient-danger', 'Delete', 'fas fa-trash-alt');
 
         $xhtml .= '<tr id="position-' . $id . '">
                     <td class="text-center">

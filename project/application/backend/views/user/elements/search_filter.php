@@ -4,7 +4,7 @@ $xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arr
 
 // Select Box Group User
 $arrGroupList = ['default' => '-- Select Group --'] + $this->listGroup;
-$selectBox_GroupACP = HelperBackend::selectBox('filter_group', 'filter_group', $arrGroupList, @$this->arrParam['filter_group']);
+$selectBox_Group = HelperBackend::selectBox('filter_group', 'filter_group', $arrGroupList, @$this->arrParam['filter_group']);
 ?>
 
 <div class="card card-info card-outline">
@@ -27,7 +27,7 @@ $selectBox_GroupACP = HelperBackend::selectBox('filter_group', 'filter_group', $
                     <input type="hidden" name="module" value="<?= $this->arrParam['module'] ?>">
                     <input type="hidden" name="controller" value="<?= $this->arrParam['controller'] ?>">
                     <input type="hidden" name="action" value="index">
-                    <?= $selectBox_GroupACP ?>
+                    <?= $selectBox_Group ?>
                 </form>
             </div>
             <div class="mb-1">

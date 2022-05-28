@@ -20,7 +20,7 @@ class UserModel extends Model
 		$query[] 	= ((!empty($arrParams['filter_group'])) && $arrParams['filter_group'] != 'default') ? "AND `u`.`group_id` = '{$arrParams['filter_group']}'" : '';
 
 		// search
-		$query[] = (!empty($arrParams['search_value'])) ? "AND `u`.`username` LIKE '%" . $arrParams['search_value'] . "%'" : '';
+		$query[] = (!empty($arrParams['search_value'])) ? "AND `u`.`username` LIKE '%" . trim($arrParams['search_value']) . "%'" : '';
 
 		// order by
 		$query[]	= "ORDER BY `u`.`id` ASC";
@@ -115,11 +115,11 @@ class UserModel extends Model
 	{
 		if ($option == 'add') {
 			// $arrParams['created'] set default ở phpmyadmin
-			$arrParams['created_by'] 	= Session::get('loginFullname');
+			$arrParams['created_by'] 	= self::getFullName();
 			$arrParams['created'] 		= date('Y-m-d H:i:s');
 			$this->insert([$arrParams], 'multi');
 		} elseif ($option == 'edit') {
-			$arrParams['modified_by'] 	= Session::get('loginFullname');
+			$arrParams['modified_by'] 	= self::getFullName();
 			$arrParams['modified'] 		= date('Y-m-d H:i:s');
 			$this->update($arrParams, [['id', $paramsUrl['eid']]]);
 		}
@@ -139,5 +139,16 @@ class UserModel extends Model
 		$this->query($query);
 
 		return [$idElement, $idGroupSelected];
+	}
+
+	public function getFullName()
+	{
+		$query[] 	= "SELECT `fullname`";
+		$query[] 	= "FROM `user`";
+		$query[] 	= "WHERE `id` = '" . $_SESSION['login']['idUser'] . "'";
+		$query		= implode(" ", $query);
+		$result		= $this->singleRecord($query);
+
+		return $result;
 	}
 }

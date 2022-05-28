@@ -31,6 +31,21 @@ class HelperBackend
         return $xhtml;
     }
 
+    public static function itemSpecialAjax($module, $controller, $id, $special, $function)
+    {
+        $link = URL::createLink($module, $controller, 'changeSpecial', ['id' => $id, 'special' => $special]);
+        $xhtml = '';
+        $class = 'bg-gradient-success';
+        $icon = 'fa-check';
+        if ($special == 'no') {
+            $class = 'bg-gradient-danger';
+            $icon = 'fa-minus';
+        }
+        $xhtml .= '<a id="special-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
+
+        return $xhtml;
+    }
+
     public static function itemGroupACP($module, $controller, $id, $groupACP, $function)
     {
         $link = URL::createLink($module, $controller, 'changeGroupACP', ['id' => $id, 'groupACP' => $groupACP]);
@@ -97,7 +112,7 @@ class HelperBackend
         return $xhtml;
     }
 
-    public static function filterStatus($module, $controller, $itemStatusCount, $currentStt, $search, $group_acp)
+    public static function filterStatus($module, $controller, $itemStatusCount, $currentStt, $search, $group_acp, $special = null, $category = null)
     {
         $xhtml = "";
         if (!empty($itemStatusCount)) {
@@ -107,24 +122,14 @@ class HelperBackend
                 $params = ['status' => $key];
                 if (!empty($search)) $params['search_value'] = $search;
                 if (!empty($group_acp)) $params['filter_group_acp'] = $group_acp;
+                if (!empty($special)) $params['filter_special'] = $special;
+                if (!empty($category)) $params['filter_category'] = $category;
                 $link = URL::createLink($module, $controller, 'index', $params);
                 $xhtml .= sprintf('<a href="' . $link . '" class="mr-1 btn btn-sm ' . $active . '">' . $name . ' <span class="badge badge-pill badge-light">' . $value . '</span></a>');
             }
             return $xhtml;
         }
     }
-
-    // public static function itemSideBar($link, $name, $icon)
-    // {
-    //     $xhtml = sprintf('
-    //     <li class="nav-item pl-2">
-    //         <a href="%s" class="nav-link">
-    //             <i class="'.$icon.' nav-icon"></i>
-    //             <p>%s</p>
-    //         </a>
-    //     </li>', $link, $name);
-    //     return $xhtml;
-    // }
 
     public static function itemSideBar($type, $link, $title, $icon, $active,  $arrElement = null)
     {

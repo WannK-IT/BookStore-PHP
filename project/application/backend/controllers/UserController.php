@@ -11,6 +11,8 @@ class UserController extends Controller
 		$this->_templateObj->load();
 		Session::init();
 		Authentication::checkLogin();
+
+		$this->_view->getFullName = $this->_model->getFullName($this->_arrParam);
 	}
 
 	public function indexAction()
@@ -24,6 +26,7 @@ class UserController extends Controller
 		$configPagination = ['totalItemsPerPage'	=> 5, 'pageRange' => 3];
 		$this->setPagination($configPagination);
 		@$this->_view->pagination	= new Pagination($totalItems['all'], $this->_pagination);
+		
 		$this->_view->list = $this->_model->listItems($this->_arrParam);
 		$this->_view->listGroup = $this->_model->listGroup();
 		$this->_view->render('user/index', true);

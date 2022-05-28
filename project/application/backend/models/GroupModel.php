@@ -20,7 +20,7 @@ class GroupModel extends Model
 		$query[] 	= ((!empty($arrParams['filter_group_acp'])) && $arrParams['filter_group_acp'] != 'default') ? "AND `group_acp` = '{$arrParams['filter_group_acp']}'" : '';
 
 		//search
-		$query[] = (!empty($arrParams['search_value'])) ? "AND `name` LIKE '%" . $arrParams['search_value'] . "%'" : '';
+		$query[] = (!empty($arrParams['search_value'])) ? "AND `name` LIKE '%" . trim($arrParams['search_value']) . "%'" : '';
 
 		// order by
 		$query[]	= "ORDER BY `id` ASC";
@@ -114,13 +114,24 @@ class GroupModel extends Model
 	{
 		if ($option == 'add') {
 			// $arrParams['created'] set default ở phpmyadmin
-			$arrParams['created_by'] = Session::get('loginFullname');
+			$arrParams['created_by'] = self::getFullName();
 			$arrParams['created'] = date('Y-m-d H:i:s');
 			$this->insert([$arrParams], 'multi');
 		} elseif ($option == 'edit') {
-			$arrParams['modified_by'] = Session::get('loginFullname');
+			$arrParams['modified_by'] = self::getFullName();
 			$arrParams['modified'] = date('Y-m-d H:i:s');
 			$this->update($arrParams, [['id', $paramsUrl['eid']]]);
 		}
+	}
+
+	public function getFullName()
+	{
+		$query[] 	= "SELECT `fullname`";
+		$query[] 	= "FROM `user`";
+		$query[] 	= "WHERE `id` = '" . $_SESSION['login']['idUser'] . "'";
+		$query		= implode(" ", $query);
+		$result		= $this->singleRecord($query);
+
+		return $result;
 	}
 }

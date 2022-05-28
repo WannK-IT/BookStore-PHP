@@ -1,13 +1,4 @@
 <?php
-if (!empty($this->errors)) {
-    echo '<div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-exclamation-triangle"></i> Lỗi!</h5>
-                <ul class="list-unstyled" style="font-size: 17px">
-                <pre style="color: blue;"><li class="text-white list-unstyled">';
-    print_r($this->errors);
-    echo '</li></pre></ul></div>';
-}
 
 $arrStatus = ['default' => ' - Select Status - ', 'active' => 'Active', 'inactive' => 'Inactive'];
 $arrGroupACP = ['default' => ' - Select Group ACP - ', 'active' => 'Active', 'inactive' => 'Inactive'];
@@ -39,6 +30,7 @@ $arrElement = [
 ];
 
 $showForm = FormBackend::showForm($arrElement);
+FormBackend::showError(($this->errors) ?? '');
 ?>
 
 </div>
