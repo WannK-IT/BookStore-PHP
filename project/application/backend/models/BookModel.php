@@ -26,7 +26,7 @@ class BookModel extends Model
 		$query[] = (!empty($arrParams['search_value'])) ? "AND `name` LIKE '%" . trim($arrParams['search_value']) . "%'" : '';
 
 		// order by
-		$query[]	= "ORDER BY `id` ASC";
+		$query[]	= "ORDER BY `ordering` ASC";
 
 		// pagination
 		$pagination			= $arrParams['pagination'];
@@ -41,7 +41,8 @@ class BookModel extends Model
 		return $result;
 	}
 
-	public function listCategory(){
+	public function listCategory()
+	{
 		$query[]	= "SELECT `id`, `name` FROM `category`";
 		$query		= implode(" ", $query);
 		$result		= array_column($this->listRecord($query), 'name', 'id');
@@ -115,6 +116,12 @@ class BookModel extends Model
 
 			// search
 			$query[] = (!empty($arrParams['search_value'])) ? "AND `name` LIKE '%" . trim($arrParams['search_value']) . "%'" : '';
+
+			// filter category
+			$query[] 	= ((!empty($arrParams['filter_category'])) && $arrParams['filter_category'] != 'default') ? "AND `category_id` = '{$arrParams['filter_category']}'" : '';
+
+			// filter special
+			$query[] 	= ((!empty($arrParams['filter_special'])) && $arrParams['filter_special'] != 'default') ? "AND `special` = '{$arrParams['filter_special']}'" : '';
 
 			$query[] = "GROUP BY `status`";
 			$query		= implode(" ", $query);
@@ -193,6 +200,4 @@ class BookModel extends Model
 
 		return [$idElement, $idGroupSelected];
 	}
-
-	
 }

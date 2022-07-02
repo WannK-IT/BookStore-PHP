@@ -1,6 +1,6 @@
 <?php
 $statusCount = $this->countStatus;
-$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', @$this->arrParam['search_value'], @$this->arrParam['filter_group_acp']);
+$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', ['search_value' => @$this->arrParam['search_value'], 'filter_group' => @$this->arrParam['filter_group']]);
 
 // Select Box Group User
 $arrGroupList = ['default' => '-- Select Group --'] + $this->listGroup;

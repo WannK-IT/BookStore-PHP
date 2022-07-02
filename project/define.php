@@ -1,7 +1,7 @@
 <?php
 	
 	// ====================== PATHS ===========================
-	define ('DS'					, DIRECTORY_SEPARATOR);
+	define ('DS'					, '/');
 	define ('ROOT_PATH'				, dirname(__FILE__));						
 	define ('LIBRARY_PATH'			, ROOT_PATH . DS . 'libs' . DS);			
 	define ('PUBLIC_PATH'			, ROOT_PATH . DS . 'public' . DS);									
@@ -20,12 +20,12 @@
 	define	('UPLOAD_BOOK_URL'		, UPLOAD_URL . 'book' . DS);
 	define	('UPLOAD_CATEGORY_URL'	, UPLOAD_URL . 'category' . DS);
 	
-	define	('DEFAULT_MODULE'		, 'backend');
-	define	('DEFAULT_CONTROLLER'	, 'group');
+	define	('DEFAULT_MODULE'		, 'default');
+	define	('DEFAULT_CONTROLLER'	, 'home');
 	define	('DEFAULT_ACTION'		, 'index');
 
 	// ====================== DATABASE ===========================
-	define ('DB_HOST'				, 'localhost');
+	define ('DB_HOST'				, $_SERVER['SERVER_NAME']);
 	define ('DB_USER'				, 'root');						
 	define ('DB_PASS'				, '');						
 	define ('DB_NAME'				, 'projectfinal');						

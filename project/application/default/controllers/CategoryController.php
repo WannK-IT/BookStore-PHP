@@ -1,5 +1,5 @@
 <?php
-class IndexController extends Controller
+class CategoryController extends Controller
 {
 
 	public function __construct($arrParams)
@@ -10,16 +10,12 @@ class IndexController extends Controller
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
 		Session::init();
-		Authentication::checkLoginDefault();
 
-		// $this->_view->getFullName = $this->_model->getFullName($this->_arrParam);
 	}
 
-	public function indexAction()
+	public function listAction()
 	{
-		// $this->_view->_title = ('Group :: List');
-		
-		$this->_view->render('index/index', true);
+		$this->_view->render('category/list', true);
 	}
 
 }

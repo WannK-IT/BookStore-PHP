@@ -73,6 +73,21 @@ class HelperBackend
         return $xhtml;
     }
 
+    public static function itemHomeAjax($module, $controller, $id, $status, $function)
+    {
+        $link = URL::createLink($module, $controller, 'changeIsHomepage', ['id' => $id, 'status' => $status]);
+        $xhtml = '';
+        $class = 'bg-gradient-success';
+        $icon = 'fa-check';
+        if ($status == 'no') {
+            $class = 'bg-gradient-danger';
+            $icon = 'fa-minus';
+        }
+        $xhtml .= '<a id="isHome-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
+
+        return $xhtml;
+    }
+
     public static function highlightSearch($keyword, $string)
     {
         $xhtml = !empty($keyword) ? preg_replace("#$keyword#ui", "<mark>$0</mark>", $string) : $string;
@@ -112,7 +127,7 @@ class HelperBackend
         return $xhtml;
     }
 
-    public static function filterStatus($module, $controller, $itemStatusCount, $currentStt, $search, $group_acp, $special = null, $category = null)
+    public static function filterStatus($module, $controller, $itemStatusCount, $currentStt, $arrFilter = null)
     {
         $xhtml = "";
         if (!empty($itemStatusCount)) {
@@ -120,10 +135,18 @@ class HelperBackend
                 $active = ($key == $currentStt) ? 'bg-gradient-info' : 'bg-gradient-secondary';
                 $name =  ucfirst($key);
                 $params = ['status' => $key];
-                if (!empty($search)) $params['search_value'] = $search;
-                if (!empty($group_acp)) $params['filter_group_acp'] = $group_acp;
-                if (!empty($special)) $params['filter_special'] = $special;
-                if (!empty($category)) $params['filter_category'] = $category;
+                
+                if(!empty($arrFilter)){
+                    foreach($arrFilter as $keyFilter => $valueFilter){
+                        $params[$keyFilter] = $valueFilter;
+                    }
+                }
+                // if (!empty($search)) $params['search_value'] = $search;
+                // if (!empty($group_acp)) $params['filter_group_acp'] = $group_acp;
+                // if (!empty($group)) $params['filter_group'] = $group;
+                // if (!empty($special)) $params['filter_special'] = $special;
+                // if (!empty($category)) $params['filter_category'] = $category;
+                // if (!empty($isHomePage)) $params['filter_homepage'] = $isHomePage;
                 $link = URL::createLink($module, $controller, 'index', $params);
                 $xhtml .= sprintf('<a href="' . $link . '" class="mr-1 btn btn-sm ' . $active . '">' . $name . ' <span class="badge badge-pill badge-light">' . $value . '</span></a>');
             }

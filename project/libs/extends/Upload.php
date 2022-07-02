@@ -10,9 +10,9 @@ class Upload{
                 $fileName = $uploadDir . $newFileName . $exts;
                 copy($file['tmp_name'], $fileName);
 
-                $thumb = PhpThumbFactory::create($fileName);
-                $thumb->adaptiveResize(60, 90);
-                $thumb->save($fileName);
+                // $thumb = PhpThumbFactory::create($fileName);
+                // $thumb->adaptiveResize(60, 90);
+                // $thumb->save($fileName);
             }
             return $newFileName . $exts;
         }

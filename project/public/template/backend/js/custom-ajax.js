@@ -29,6 +29,33 @@ function ajaxStatus(link) {
     }, 'json');
 }
 
+function ajaxIsHome(link) {
+    $.get(link, function (data) {
+        // id       = data[0]
+        // status   = data[1]
+        // link     = data[2]
+        let tagHref = 'a#isHome-post-' + data[0];
+        let classActive = 'bg-gradient-success';
+        let classInactive = 'bg-gradient-danger';
+        let iconActive = 'fa-check';
+        let iconInactive = 'fa-minus';
+        if (data[1] == 'yes') {
+            classActive = 'bg-gradient-danger';
+            classInactive = 'bg-gradient-success';
+            iconActive = 'fa-minus';
+            iconInactive = 'fa-check';
+        }
+        $(tagHref).attr('href', "javascript:ajaxIsHome('" + data[2] + "')");
+        $(tagHref).removeClass(classActive).addClass(classInactive);
+        $(tagHref + ' i').removeClass(iconActive).addClass(iconInactive);
+
+        $("#isHome-post-" + data[0]).notify("Cập nhật thành công !", {
+            className: 'success',
+            position: 'top center'
+        });
+    }, 'json');
+}
+
 
 function ajaxSpecial(link) {
     $.get(link, function (data) {
@@ -173,3 +200,4 @@ $(document).ready(function () {
     })
 
 })
+

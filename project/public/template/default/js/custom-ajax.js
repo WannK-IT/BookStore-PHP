@@ -39,7 +39,29 @@ function registerForm(link, direct) {
     }
 }
 
+// Load modal info book
+function loadModal(link, uploadDir){
+    $.get(link, function(data){
+        // load img
+        $('div.quick-view-img img').attr('src', uploadDir + data['picture'])
 
+        // load name
+        $('div.product-right .book-name').html(data['name'])
+
+        // load price
+        salePrice = data['price'] - ((parseFloat(data['price']) * parseFloat(data['sale_off'])) / 100);
+        $('div.product-right .book-price').html(formatCurrency(salePrice) + ' <del>' + formatCurrency(data['price']) + ' </del>')
+
+        // load description
+        $('div.product-right .book-description').html(data['description'])
+
+    }, 'json');
+    $('#quick-view').modal('show')
+}
+
+function formatCurrency(number){
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number)
+}
 
 const Toast = Swal.mixin({
     toast: true,

@@ -66,6 +66,7 @@ $(document).ready(function () {
     setTimeout(function () {
         $('#frontend-message').toggle('slow');
     }, 4000);
+
 });
 
 function activeMenu() {

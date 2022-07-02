@@ -37,6 +37,7 @@
                         <a class="btn btn-solid" href="javascript:registerForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'registerAccount')?>', '<?= URL::createLink('default', 'account', 'login')?>')">Đăng ký</a>
                     </form>
                 </div>
+                <p class="mt-4 h6">Đã có tài khoản ? <a style="color: #5fcbc4" class="font-weight-bold" href="<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'login')?>">Đăng nhập ngay</a></p>
             </div>
         </div>
     </div>

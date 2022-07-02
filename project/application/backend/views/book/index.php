@@ -30,9 +30,11 @@ if (!empty($this->list)) {
                     <td class="text-center">' . $id . '</td>
                     <td class="text-wrap" style="min-width: 150px">' . $name . '</td>
                     <td class="text-center">
-                        <img class="item-image w-100" src="' . $picture . '">
+                        <a href="javascript:modalImg(\'' . $picture . '\')">
+                            <img class="img-fluid" style="max-height: 150px" src="' . $picture . '">
+                        </a>
                     </td>
-                    <td class="text-center">' . number_format($price) . 'đ</td>
+                    <td class="text-center">' . number_format($price) . ' đ</td>
                     <td class="text-center">' . $saleOff . '%</td>
                     <td class="text-center position-relative">' . $category . '</td>
                     <td class="text-center position-relative">' . $status . '</td>
@@ -103,4 +105,21 @@ if (isset($_SESSION['message'])) {
     <?php require_once "elements/pagination.php" ?>
 </div>
 
+
+<!-- Quick-view modal popup start-->
+<div class="modal fade bd-example-modal-lg theme-modal" id="view-img-admin" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content view-img-admin-modal">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+
+                <div class="col-xs-12 d-flex justify-content-center align-items-center">
+                    <div class="view-img-admin"><img src="" alt="" class="img-fluid" style="max-width: 400px;"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Quick-view modal popup end-->
 

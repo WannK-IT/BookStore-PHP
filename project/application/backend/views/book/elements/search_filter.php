@@ -1,7 +1,7 @@
 <?php
 $statusCount = $this->countStatus;
 
-$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', @$this->arrParam['search_value'], '');
+$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', ['search_value' => @$this->arrParam['search_value'], 'filter_special' => @$this->arrParam['filter_special'], 'filter_category' => @$this->arrParam['filter_category']]);
 
 
 // Select Box Special
@@ -28,8 +28,6 @@ $selectBox_Category = HelperBackend::selectBox('filter_category', 'filter_catego
                     <?= $xhtmlStatus ?>
                 </div>
             </div>
-
-
 
             <div class="mb-1">
                 <form action="" method="get" id="form_special">

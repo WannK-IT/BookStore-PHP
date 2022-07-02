@@ -8,8 +8,8 @@ if(!empty($this->results['picture']) && empty($this->errors)){
     $picture = '';
 }
 
-
-$arrStatus = ['default' => ' - Select Status - ', 'active' => 'Active', 'inactive' => 'Inactive'];
+$arrStatus          = ['default' => ' - Select Status - ', 'active' => 'Active', 'inactive' => 'Inactive'];
+$arrshowHomepage    = ['default' => ' - Select Show Home - ', 'yes' => 'Yes', 'no' => 'No'];
 $arrElement = [
     // Name
     [
@@ -27,6 +27,12 @@ $arrElement = [
     [
         'label' => FormBackend::createLabel('form[status]', 'status'),
         'input' => FormBackend::createFormSelectBox('form[status]', $arrStatus, @$this->results['status'])
+    ],
+
+    // Show Home
+    [
+        'label' => FormBackend::createLabel('form[isShowHome]', 'Show Homepage'),
+        'input' => FormBackend::createFormSelectBox('form[isShowHome]', $arrshowHomepage, @$this->results['isShowHome'])
     ],
 
     // Picture

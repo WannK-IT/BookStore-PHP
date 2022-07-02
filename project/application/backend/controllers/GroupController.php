@@ -18,13 +18,14 @@ class GroupController extends Controller
 	public function indexAction()
 	{
 		$this->_view->_title = ('Group :: List');
-		$totalItems = $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
-		$this->_view->countStatus = $totalItems;
+		$countStatus 	= $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
+		@$totalItems 	= $countStatus[$this->_arrParam['status'] ?? 'all'];
+		$this->_view->countStatus = $countStatus;
 
 		// Pagination
 		$configPagination = ['totalItemsPerPage'	=> 5, 'pageRange' => 3];
 		$this->setPagination($configPagination);
-		@$this->_view->pagination	= new Pagination($totalItems['all'], $this->_pagination);
+		@$this->_view->pagination	= new Pagination($totalItems, $this->_pagination);
 
 		$this->_view->list = $this->_model->listItems($this->_arrParam);
 		$this->_view->render('group/index', true);

@@ -17,10 +17,11 @@ class AccountModel extends Model
 		$loadInfo	= $this->singleRecord($query);
 
 		// Check username & password exist
-		if($this->isExist($query) == true){
+		if($this->isExist($query)){
 			$result = 'success';
 			$_SESSION['loginDefault']['loginSuccess'] = true;
 			$_SESSION['loginDefault']['idUser'] = $loadInfo['id'];
+			$_SESSION['loginDefault']['fullnameUser'] = $loadInfo['fullname'];
 	
 		}else{
 			$result = 'failed';
@@ -37,7 +38,7 @@ class AccountModel extends Model
 
         // Query to load information of employer
         $result = 'not exist';
-        if ($this->isExist($query) == true) {
+        if ($this->isExist($query)) {
             $result = 'exist';
         }
         return $result;
@@ -58,17 +59,6 @@ class AccountModel extends Model
 		}else{
 			$result = 'not exist';
 		}
-		return $result;
-	}
-
-	public function getFullName()
-	{
-		$query[] 	= "SELECT `fullname`";
-		$query[] 	= "FROM `user`";
-		$query[] 	= "WHERE `id` = '" . $_SESSION['loginDefault']['idUser'] . "'";
-		$query		= implode(" ", $query);
-		$result		= $this->singleRecord($query);
-
 		return $result;
 	}
 

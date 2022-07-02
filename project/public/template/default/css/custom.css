@@ -1,6 +1,5 @@
 body {
-    font-family: 'Helvetica Neue', Roboto, 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-        'Segoe UI', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: 'Nunito', sans-serif;
 }
 
 table.table.btn-table td {
@@ -101,7 +100,7 @@ header.sticky {
 
 .product-box .product-detail a h6,
 .product-box .product-detail a h4 {
-    min-height: 50px;
+    min-height: 67px;
 }
 
 .home-slider .home,
@@ -243,4 +242,20 @@ mark {
     .product-wrapper-grid.list-view .product-box .img-wrapper {
         min-width: 35%;
     }
+}
+
+
+
+.cs-ellipsis-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cs-ellipsis-10 {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

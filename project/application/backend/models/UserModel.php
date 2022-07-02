@@ -9,21 +9,21 @@ class UserModel extends Model
 
 	public function listItems($arrParams)
 	{
-		$query[] 	= "SELECT `u`.`id`, `u`.`username`, `u`.`email`, `u`.`fullname`, `u`.`password`, `u`.`created`, `u`.`created_by`, `u`.`status`, `u`.`group_id`, `g`.`name` AS `group`";
-		$query[] 	= "FROM `{$this->table}` AS `u`, `group` AS `g`";
-		$query[] 	= "WHERE  `g`.`id` = `u`.`group_id` AND `u`.`id` > 0";
+		$query[] 	= "SELECT `id`, `username`, `email`, `fullname`, `password`, `created`, `created_by`, `status`, `group_id`";
+		$query[] 	= "FROM `{$this->table}`";
+		$query[] 	= "WHERE `id` > 0";
 
 		// filter status
-		$query[] 	= (!empty($arrParams['status']) && $arrParams['status'] != 'all') ? "AND `u`.`status` = '{$arrParams['status']}'" : '';
+		$query[] 	= (!empty($arrParams['status']) && $arrParams['status'] != 'all') ? "AND `status` = '{$arrParams['status']}'" : '';
 
 		// filter group user
-		$query[] 	= ((!empty($arrParams['filter_group'])) && $arrParams['filter_group'] != 'default') ? "AND `u`.`group_id` = '{$arrParams['filter_group']}'" : '';
+		$query[] 	= ((!empty($arrParams['filter_group'])) && $arrParams['filter_group'] != 'default') ? "AND `group_id` = '{$arrParams['filter_group']}'" : '';
 
 		// search
-		$query[] = (!empty($arrParams['search_value'])) ? "AND `u`.`username` LIKE '%" . trim($arrParams['search_value']) . "%'" : '';
+		$query[] = (!empty($arrParams['search_value'])) ? "AND `username` LIKE '%" . trim($arrParams['search_value']) . "%'" : '';
 
 		// order by
-		$query[]	= "ORDER BY `u`.`id` ASC";
+		$query[]	= "ORDER BY `id` ASC";
 
 		// pagination
 		$pagination			= $arrParams['pagination'];

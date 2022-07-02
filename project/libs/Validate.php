@@ -2,16 +2,16 @@
 class Validate{
 	
 	// Error array
-	private $errors	= array();
+	private $errors	= [];
 	
 	// Source array
-	private $source	= array();
+	private $source	= [];
 	
 	// Rules array
-	private $rules	= array();
+	private $rules	= [];
 	
 	// Result array
-	private $result	= array();
+	private $result	= [];
 	
 	// Contrucst
 	public function __construct($source){

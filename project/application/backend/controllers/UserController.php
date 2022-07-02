@@ -19,13 +19,14 @@ class UserController extends Controller
 	{
 		$this->_view->setTitle('List User');
 		$this->_view->_title = ('User :: List');
-		$totalItems = $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
-		$this->_view->countStatus = $totalItems;
+		$countStatus 	= $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
+		@$totalItems 	= $countStatus[$this->_arrParam['status'] ?? 'all'];
+		$this->_view->countStatus = $countStatus;
 
 		// Pagination
 		$configPagination = ['totalItemsPerPage'	=> 5, 'pageRange' => 3];
 		$this->setPagination($configPagination);
-		@$this->_view->pagination	= new Pagination($totalItems['all'], $this->_pagination);
+		@$this->_view->pagination	= new Pagination($totalItems, $this->_pagination);
 		
 		$this->_view->list = $this->_model->listItems($this->_arrParam);
 		$this->_view->listGroup = $this->_model->listGroup();

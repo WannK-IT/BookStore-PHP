@@ -1,8 +1,11 @@
 <?php
 $statusCount = $this->countStatus;
 
-$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', @$this->arrParam['search_value'], '');
+$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', ['search_value' => @$this->arrParam['search_value'], 'filter_homepage' => @$this->arrParam['filter_homepage']]);
 
+// Select Box isHomePage
+$arrShowHome = ['default' => '-- Select Show Home --', 'yes' => 'Yes', 'no' => 'No'];
+$selectBox_Homepage = HelperBackend::selectBox('filter_homepage', 'filter_homepage', $arrShowHome, @$this->arrParam['filter_homepage']);
 ?>
 
 <div class="card card-info card-outline">
@@ -19,6 +22,15 @@ $xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arr
                 <div id="stt">
                     <?= $xhtmlStatus ?>
                 </div>
+            </div>
+
+            <div class="mb-1">
+                <form action="" method="get" id="form_showhome">
+                    <input type="hidden" name="module" value="<?= $this->arrParam['module'] ?>">
+                    <input type="hidden" name="controller" value="<?= $this->arrParam['controller'] ?>">
+                    <input type="hidden" name="action" value="index">
+                    <?= $selectBox_Homepage ?>
+                </form>
             </div>
  
             <div class="mb-1">

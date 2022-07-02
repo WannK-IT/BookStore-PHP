@@ -11,20 +11,21 @@ class BookController extends Controller
 		$this->_templateObj->load();
 		Session::init();
 		Authentication::checkLogin();
-
 		$this->_view->getFullName = $this->_model->getFullName($this->_arrParam);
-	}
+	}	
 
 	public function indexAction()
 	{
+		$this->_view->setTitle('Book :: List');
 		$this->_view->_title = ('Book :: List');
-		$totalItems = $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
-		$this->_view->countStatus = $totalItems;
+		$countStatus 	= $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
+		$totalItems 	= @$countStatus[$this->_arrParam['status'] ?? 'all'];
+		$this->_view->countStatus = $countStatus;
 
 		// Pagination
-		$configPagination = ['totalItemsPerPage'	=> 3, 'pageRange' => 3];
+		$configPagination = ['totalItemsPerPage'	=> 5, 'pageRange' => 3];
 		$this->setPagination($configPagination);
-		@$this->_view->pagination	= new Pagination($totalItems['all'], $this->_pagination);
+		@$this->_view->pagination	= new Pagination($totalItems, $this->_pagination);
 
 		$this->_view->list = $this->_model->listItems($this->_arrParam);
 		$this->_view->listCategory = $this->_model->listCategory();
@@ -95,10 +96,10 @@ class BookController extends Controller
 				'picture'		=> $this->_arrParam['form']['picture']
 			];
 			$validate = new Validate($source);
-			$validate->addRule('name', 'string', ['min' => 5, 'max' => 100])
+			$validate->addRule('name', 'string', ['min' => 5, 'max' => 200])
 					->addRule('description', 'string', ['min' => 5, 'max' => 100000])
 					->addRule('price', 'int', ['min' => 1000, 'max' => 10000000])
-					->addRule('sale_off', 'int', ['min' => 1, 'max' => 100])
+					->addRule('sale_off', 'int', ['min' => 0, 'max' => 100])
 					->addRule('ordering', 'int', ['min' => 1, 'max' => 10000])
 					->addRule('category_id', 'group')
 					->addRule('status', 'status')

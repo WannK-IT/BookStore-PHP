@@ -9,17 +9,20 @@ class CategoryModel extends Model
 
 	public function listItems($arrParams)
 	{
-		$query[] 	= "SELECT `id`, `name`, `status`, `created`, `created_by`, `modified`, `modified_by`, `ordering`, `picture`";
+		$query[] 	= "SELECT *";
 		$query[] 	= "FROM `{$this->table}` WHERE `id` > 0";
 
 		// filter status
 		$query[] 	= (!empty($arrParams['status']) && $arrParams['status'] != 'all') ? "AND `status` = '{$arrParams['status']}'" : '';
 
+		// filter show homepage
+		$query[] 	= (!empty($arrParams['filter_homepage']) && $arrParams['filter_homepage'] != 'default') ? "AND `isShowHome` = '{$arrParams['filter_homepage']}'" : '';
+
 		//search
 		$query[] = (!empty($arrParams['search_value'])) ? "AND `name` LIKE '%" . trim($arrParams['search_value']) . "%'" : '';
 
 		// order by
-		$query[]	= "ORDER BY `id` ASC";
+		$query[]	= "ORDER BY `ordering` ASC";
 
 		// pagination
 		$pagination			= $arrParams['pagination'];
@@ -36,7 +39,7 @@ class CategoryModel extends Model
 
 	public function singleItem($id)
 	{
-		$query[] 	= "SELECT `name`, `picture`, `status`, `ordering`";
+		$query[] 	= "SELECT `name`, `picture`, `status`, `ordering`, `isShowHome`";
 		$query[] 	= "FROM `{$this->table}`";
 		$query[] 	= "WHERE `id` = '" . $id . "'";
 		$query		= implode(" ", $query);
@@ -53,6 +56,16 @@ class CategoryModel extends Model
 		$this->query($query);
 
 		return [$id, $status, URL::createLink($arrParams['module'], $arrParams['controller'], 'changeStatus', ['status' => $status, 'id' => $id])];
+	}
+
+	public function changeIsHomepage($arrParams)
+	{
+		$id = $arrParams['id'];
+		$status = ($arrParams['status'] == 'no') ? 'yes' : 'no';
+		$query = "UPDATE `{$this->table}` SET `isShowHome` = '$status' WHERE `id` = '$id'";
+		$this->query($query);
+
+		return [$id, $status, URL::createLink($arrParams['module'], $arrParams['controller'], 'changeIsHomepage', ['status' => $status, 'id' => $id])];
 	}
 
 
@@ -91,6 +104,9 @@ class CategoryModel extends Model
 
 			// search
 			$query[] = (!empty($arrParams['search_value'])) ? "AND `name` LIKE '%" . $arrParams['search_value'] . "%'" : '';
+
+			// filter show homepage
+			$query[] = (!empty($arrParams['filter_homepage']) && $arrParams['filter_homepage'] != 'default') ? "AND `isShowHome` = '{$arrParams['filter_homepage']}'" : '';
 
 			$query[] = "GROUP BY `status`";
 			$query		= implode(" ", $query);

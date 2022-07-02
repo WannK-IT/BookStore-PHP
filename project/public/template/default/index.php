@@ -2,10 +2,15 @@
 <html lang="en">
 
 <head>
-    <?php echo $this->_metaHTTP; ?>
-    <?php echo $this->_metaName; ?>
-    <?php echo $this->_title; ?>
-    <?php echo $this->_cssFiles; ?>
+    <?= $this->_metaHTTP; ?>
+    <?= $this->_metaName; ?>
+    <?= $this->_title; ?>
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap" rel="stylesheet">
+    <?= $this->_cssFiles; ?>
 </head>
 
 <body>
@@ -37,7 +42,7 @@
     <!-- tap to top end -->
 
     <!-- Script -->
-    <?php echo $this->_jsFiles; ?>
+    <?= $this->_jsFiles; ?>
     <script>
         function openSearch() {
             document.getElementById("search-overlay").style.display = "block";

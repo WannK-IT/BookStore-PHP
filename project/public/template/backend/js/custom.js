@@ -74,6 +74,11 @@ $(document).ready(function () {
         $("#form_special").submit();
     });
 
+    // Filter show homepage
+    $('#filter_homepage').change(function (e) {
+        $("#form_showhome").submit();
+    });
+
     // fade popup
     $("#add-success").fadeTo(3000, 500).slideUp(500, function () {
         $("#add-success").slideUp(500);
@@ -117,6 +122,11 @@ $(document).ready(function () {
     });
 
 });
+
+function modalImg(linkPicture){
+    $('.view-img-admin img').attr('src', linkPicture);
+    $('#view-img-admin').modal('show');
+}
 
 const Toast = Swal.mixin({
     toast: true,

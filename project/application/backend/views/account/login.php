@@ -27,11 +27,11 @@
                     <a class="btn btn-primary btn-block" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= URL::createLink('backend', 'group', 'index')?>')">Sign In</a>
                 </div>
             </div>
-            <div class="row mt-3">
+            <!-- <div class="row mt-3">
                 <div class="col-12 list-items">
                     <p class="text-dark list-item-inline">Don't have an account? <a class="link-unstyled" href="">Register</a></p>
                 </div>
-            </div>
+            </div> -->
         </form>
 
     </div>

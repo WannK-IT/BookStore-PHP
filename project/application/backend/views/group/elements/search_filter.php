@@ -1,7 +1,7 @@
 <?php
 $statusCount = $this->countStatus;
 
-$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', @$this->arrParam['search_value'], @$this->arrParam['filter_group_acp']);
+$xhtmlStatus = HelperBackend::filterStatus($this->arrParam['module'], $this->arrParam['controller'], $statusCount, ($this->arrParam['status']) ?? 'all', ['search_value' => @$this->arrParam['search_value'], 'filter_group_acp' => @$this->arrParam['filter_group_acp']]);
 
 // Select Box Group ACP
 $arrOptions = ['default' => '-- Select Group ACP --', 'active' => 'Active', 'inactive' => 'Inactive'];
