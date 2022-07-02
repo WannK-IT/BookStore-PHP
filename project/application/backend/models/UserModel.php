@@ -115,11 +115,11 @@ class UserModel extends Model
 	{
 		if ($option == 'add') {
 			// $arrParams['created'] set default ở phpmyadmin
-			$arrParams['created_by'] 	= self::getFullName();
+			$arrParams['created_by'] 	= self::getFullName()['fullname'];
 			$arrParams['created'] 		= date('Y-m-d H:i:s');
 			$this->insert([$arrParams], 'multi');
 		} elseif ($option == 'edit') {
-			$arrParams['modified_by'] 	= self::getFullName();
+			$arrParams['modified_by'] 	= self::getFullName()['fullname'];
 			$arrParams['modified'] 		= date('Y-m-d H:i:s');
 			$this->update($arrParams, [['id', $paramsUrl['eid']]]);
 		}

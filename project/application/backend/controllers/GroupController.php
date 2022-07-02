@@ -12,7 +12,7 @@ class GroupController extends Controller
 		Session::init();
 		Authentication::checkLogin();
 
-		$this->_view->getFullName = $this->_model->getFullName($this->_arrParam);
+		$this->_view->getFullName 	= $this->_model->getFullName($this->_arrParam);
 	}
 
 	public function indexAction()

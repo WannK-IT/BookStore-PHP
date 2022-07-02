@@ -57,6 +57,14 @@ $group  = HelperBackend::itemSideBar('multi', '#', 'group', 'fas fa-users', $thi
 $user   = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $this->arrParam['controller'], $arrItemUser);
 $book   = HelperBackend::itemSideBar('multi', '#', 'book', 'fas fa-book-open', $this->arrParam['controller'], $arrItemBook);
 $category   = HelperBackend::itemSideBar('multi', '#', 'category', 'fas fa-bars', $this->arrParam['controller'], $arrItemCategory);
+
+
+// Check Permission
+if($_SESSION['login']['loginRole'] == 'admin' || $_SESSION['login']['loginRole'] == 'manager'){
+    $sideBarList = $dashboard . $group . $user . $category . $book;
+}else{
+    $sideBarList = $dashboard . $category . $book;
+}
 ?>
 
 <aside class="main-sidebar sidebar-dark-info elevation-4">
@@ -81,7 +89,7 @@ $category   = HelperBackend::itemSideBar('multi', '#', 'category', 'fas fa-bars'
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <?= $dashboard . $group . $user . $category . $book ?>
+                <?=  $sideBarList ?>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -42,6 +42,7 @@ if (isset($_SESSION['message'])) {
     echo '<div id="add-success" class="alert bg-gradient-success font-weight-bold" style="font-size: 15px;" role="alert">' . $_SESSION['message'] . '</div>';
     Session::delete('message');
 }
+
 ?>
 
 <!-- Search & Filter -->
