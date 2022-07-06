@@ -19,6 +19,7 @@ class UserController extends Controller
 	{
 		$this->_view->setTitle('List User');
 		$this->_view->_title = ('User :: List');
+		
 		$countStatus 	= $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
 		@$totalItems 	= $countStatus[$this->_arrParam['status'] ?? 'all'];
 		$this->_view->countStatus = $countStatus;

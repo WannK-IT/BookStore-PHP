@@ -10,11 +10,10 @@ class HelperBackend
             $class = 'bg-gradient-danger';
             $icon = 'fa-minus';
         }
-        $xhtml .= '<a href="index.php?module=backend&controller=group&action=changeStatus&status=' . $status . '&id=' . $id . '" class="my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
+        $xhtml .= '<a href="index.php?module=backend&controller=group&action=changeStatus&status=' . $status . '&id=' . $id . '" class="py-2 my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
 
         return $xhtml;
     }
-
 
     public static function itemStatusAjax($module, $controller, $id, $status, $function)
     {
@@ -26,7 +25,7 @@ class HelperBackend
             $class = 'bg-gradient-danger';
             $icon = 'fa-minus';
         }
-        $xhtml .= '<a id="status-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
+        $xhtml .= '<a id="status-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="py-2 my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
 
         return $xhtml;
     }
@@ -41,7 +40,7 @@ class HelperBackend
             $class = 'bg-gradient-danger';
             $icon = 'fa-minus';
         }
-        $xhtml .= '<a id="special-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
+        $xhtml .= '<a id="special-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="py-2 my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
 
         return $xhtml;
     }
@@ -56,7 +55,7 @@ class HelperBackend
             $class = 'bg-gradient-danger';
             $icon = 'fa-minus';
         }
-        $xhtml .= '<a id="groupACP-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
+        $xhtml .= '<a id="groupACP-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="py-2 my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
 
         return $xhtml;
     }
@@ -66,7 +65,7 @@ class HelperBackend
         $xhtml = '';
         if ($by != '' || $time != '') {
             $xhtml .= '
-                <p class="mb-0 history-by"><i class="far fa-user"> ' . $by . '</i></p>
+                <p class="mb-0 history-by py-1"><i class="far fa-user"> ' . $by . '</i></p>
                 <p class="mb-0 history-time"><i class="far fa-clock"></i> ' . date('d/m/Y H:i:s', strtotime($time)) . '</p>
             ';
         }
@@ -83,7 +82,7 @@ class HelperBackend
             $class = 'bg-gradient-danger';
             $icon = 'fa-minus';
         }
-        $xhtml .= '<a id="isHome-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
+        $xhtml .= '<a id="isHome-post-' . $id . '" href="javascript:' . $function . '(\'' . $link . '\')" class="py-2 my-btn-state rounded-circle btn btn-sm ' . $class . '"><i class="fas ' . $icon . '"></i></a>';
 
         return $xhtml;
     }
@@ -101,7 +100,7 @@ class HelperBackend
 
     public static function btnLink($link, $color, $title, $icon)
     {
-        return sprintf('<a href="%s" class="mx-1 rounded-circle btn btn-sm %s" title="%s">
+        return sprintf('<a href="%s" class="py-2 mx-1 rounded-circle btn btn-sm %s" title="%s">
                             <i class="%s"></i>
                         </a>', $link, $color, $title, $icon);
     }

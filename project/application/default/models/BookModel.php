@@ -41,6 +41,14 @@ class BookModel extends Model
 				} else {
 					$query[] = "ORDER BY `b`.`ordering`";
 				}
+
+				// pagination
+				$pagination			= $arrParams['pagination'];
+				$totalItemsPerPage	= $pagination['totalItemsPerPage'];
+				if ($totalItemsPerPage > 0) {
+					$position	= ($pagination['currentPage'] - 1) * $totalItemsPerPage;
+					$query[]	= "LIMIT $position, $totalItemsPerPage";
+				}
 				break;
 
 			case 'bookSpecial':
@@ -107,6 +115,29 @@ class BookModel extends Model
 				$query[] = "WHERE `b`.`category_id` = `c`.`id`";
 				$query[] = "AND `b`.`id` = '" . $arrParams['bid'] . "'";
 				break;
+		}
+
+		$result = implode(' ', $query);
+		return $this->singleRecord($result);
+	}
+
+	public function countItem($arrParams)
+	{
+		$query[] = "SELECT COUNT(`b`.`id`) AS 'total'";
+		$query[] = "FROM `" . DB_TBL_CATEGORY . "` AS `c`, `{$this->table}` AS `b`";
+		$query[] = "WHERE `c`.`id` = `b`.`category_id`";
+		$query[] = "AND `b`.`status` = 'active' AND `c`.`status` = 'active'";
+
+		// filter category
+		$query[] = (!empty($arrParams['cid'])) ? "AND `b`.`category_id` = '" . $arrParams['cid'] . "'" : "";
+
+		// filter price
+		if (@$arrParams['sort'] == 'latest') {
+			$query[] = "ORDER BY `b`.`created` DESC";
+		} elseif (!empty(@$arrParams['sort']) && @$arrParams['sort'] != 'default') {
+			$query[] = "ORDER BY `price_discount` " . strtoupper(substr(@$arrParams['sort'], 6, strlen(@$arrParams['sort']))) . "";
+		} else {
+			$query[] = "ORDER BY `b`.`ordering`";
 		}
 
 		$result = implode(' ', $query);

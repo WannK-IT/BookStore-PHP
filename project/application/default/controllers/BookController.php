@@ -29,6 +29,13 @@ class BookController extends Controller
 
 	public function listAction()
 	{
+		@$totalItems = $this->_model->countItem($this->arrParams);
+
+		// Pagination
+		$configPagination = ['totalItemsPerPage'	=> 12, 'pageRange' => 3];
+		$this->setPagination($configPagination);
+		@$this->_view->pagination	= new Pagination($totalItems['total'], $this->_pagination);
+
 		$this->_view->listCategories 	= $this->_model->listItems($this->_arrParam, 'listCategories');
 		$this->_view->listBooks 		= $this->_model->listItems($this->_arrParam, 'listBooks');
 		$this->_view->listItemsSpecial 	= $this->_model->listItems($this->_arrParam, 'bookSpecial');
