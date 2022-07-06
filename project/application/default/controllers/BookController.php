@@ -10,22 +10,21 @@ class BookController extends Controller
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
 		Session::init();
-  
+
 		// Navbar
 		$this->_view->categoriesNavbar 	= $this->_model->listItems($this->_arrParam, 'categoryNavbar');
 
 		// Breadcrumb
-		if($this->_arrParam['action'] == 'list'){
-			$this->_view->breadcrumb = '<span class="mx-1">TẤT CẢ SÁCH </span>';
-			if(isset($this->_arrParam['cid'])){
-				$getCategoryName = $this->_model->singleItem($this->_arrParam, 'getCategoryName');
-				$this->_view->breadcrumb = '<a href="'.URL::createLink($this->_arrParam['module'], $this->_arrParam['controller'], $this->_arrParam['action']).'" class="mx-1">TẤT CẢ SÁCH </a>' . DS . '<span class="mx-1"> '.$getCategoryName['name'].'</span>';
+		if ($this->_arrParam['action'] == 'list') {
+			$this->_view->breadcrumb 		= '<span class="mx-1">TẤT CẢ SÁCH </span>';
+			if (isset($this->_arrParam['cid'])) {
+				$getCategoryName 			= $this->_model->singleItem($this->_arrParam, 'getCategoryName');
+				$this->_view->breadcrumb 	= '<a href="' . URL::createLink($this->_arrParam['module'], $this->_arrParam['controller'], $this->_arrParam['action']) . '" class="mx-1" style="color: #5fcbc4">TẤT CẢ SÁCH </a>' . DS . '<span class="mx-1"> ' . $getCategoryName['name'] . '</span>';
 			}
-		}elseif($this->_arrParam['action'] == 'item'){
-			$getBookName = $this->_model->singleItem($this->_arrParam, 'getBookName');
-			$this->_view->breadcrumb = '<a href="'.URL::createLink($this->_arrParam['module'], $this->_arrParam['controller'], 'list').'" class="mx-1">TẤT CẢ SÁCH </a>' . DS . '<span class="mx-1"> '.$getBookName['name'].'</span>';
+		} elseif ($this->_arrParam['action'] == 'item') {
+			$getBookInfo = $this->_model->singleItem($this->_arrParam, 'getBookName');
+			$this->_view->breadcrumb = '<a href="' . URL::createLink($this->_arrParam['module'], $this->_arrParam['controller'], 'list') . '" class="mx-1" style="color: #5fcbc4">TẤT CẢ SÁCH </a>' . DS . '<a href="' . URL::createLink($this->_arrParam['module'], $this->_arrParam['controller'], 'list', ['cid' => $getBookInfo['category_id']]) . '" class="mx-1" style="color: #5fcbc4"> ' . $getBookInfo['category_name'] . ' </a>' . DS . '<span class="mx-1"> ' . $getBookInfo['book_name'] . '</span>';
 		}
-
 	}
 
 	public function listAction()
@@ -36,7 +35,8 @@ class BookController extends Controller
 		$this->_view->render('book/list', true);
 	}
 
-	public function itemAction(){
+	public function itemAction()
+	{
 		$this->_view->infoItem 			= $this->_model->singleItem($this->_arrParam, 'infoItem');
 		$this->_view->listItemsSpecial 	= $this->_model->listItems($this->_arrParam, 'bookSpecial');
 		$this->_view->listItemsNew 		= $this->_model->listItems($this->_arrParam, 'bookNew');
@@ -49,6 +49,4 @@ class BookController extends Controller
 		$result = $this->_model->singleItem($this->_arrParam, 'ajaxModalView');
 		echo json_encode($result);
 	}
-
-
 }
