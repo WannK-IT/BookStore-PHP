@@ -27,7 +27,7 @@
                             <input type="password" id="password" name="password" style="font-size: 15px;" value="" class="form-control">
                         </div>
                         <input type="hidden" id="form[token]" name="form[token]" value="1599208737">
-                        <a class="btn btn-solid" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= URL::createLink('default', 'index', 'index')?>')">Đăng nhập</a>
+                        <a class="btn btn-solid" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= URL::createLink('default', 'home', 'index')?>')">Đăng nhập</a>
                     </form>
                 </div>
             </div>

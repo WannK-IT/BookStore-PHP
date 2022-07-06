@@ -62,27 +62,17 @@ class AccountModel extends Model
 		return $result;
 	}
 
-	// public function register($params)
-    // {
+	public function listItems($option)
+	{
+		if ($option == 'categoryNavbar') {
+			$query[] = "SELECT `id`, `name`";
+			$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
+			$query[] = "WHERE `status` = 'active'";
+			$query[] = "ORDER BY `ordering`";
+		}
 
-    //     // insert info company first
-    //     $dataCompany = array_intersect_key($params, array_flip($this->columnsCompany));
-    //     $this->insertOtherTable($dataCompany, 'company');
-    //     $lastID =  $this->lastID();
-
-    //     // then insert employer account
-    //     $dataEmployer = array_intersect_key($params, array_flip($this->columnsEmployer));
-    //     $dataEmployer['comp_id'] = $lastID;
-    //     $dataEmployer['emp_password'] = md5($dataEmployer['emp_password']);
-    //     $this->insert($dataEmployer);
-
-    //     $query = "SELECT `emp_id` FROM `{$this->table}` WHERE `emp_user` = '".$dataEmployer['emp_user']."' AND `emp_password` = '".$dataEmployer['emp_password']."'";
-    //     $getID  = $this->singleRecord($query);
-
-    //     // create a folder storage images
-    //     mkdir(UPLOAD_PATH_ADMIN . 'img' . DS . $getID['emp_id']);
-    // }
-
-    
+		$result = implode(' ', $query);
+		return $this->listRecord($result);
+	}
 
 }

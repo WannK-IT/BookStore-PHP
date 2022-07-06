@@ -7,10 +7,12 @@ class AccountController extends Controller
 	{
 		parent::__construct($arrParams);
 		$this->_templateObj->setFolderTemplate('default/');
-		$this->_templateObj->setFileTemplate('login.php');
+		$this->_templateObj->setFileTemplate('index.php');
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
 		Session::init();
+
+		$this->_view->categoriesNavbar = $this->_model->listItems('categoryNavbar');
 	}
 
     public function loginAction(){		
@@ -42,6 +44,10 @@ class AccountController extends Controller
 	public function registerAccountAction(){
 		$result =  $this->_model->register($this->_arrParam);
 		echo $result;
+	}
+
+	public function accountFormAction(){
+		$this->_view->render('account/account_form');
 	}
 
 }

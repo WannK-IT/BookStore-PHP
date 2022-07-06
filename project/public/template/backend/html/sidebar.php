@@ -69,7 +69,7 @@ if($_SESSION['login']['loginRole'] == 'admin' || $_SESSION['login']['loginRole']
 
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="index.php?module=backend&controller=dashboard&action=index" class="brand-link">
         <img src="<?= $this->_dirImg ?>logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">ZendVN</span>
     </a>
@@ -82,7 +82,7 @@ if($_SESSION['login']['loginRole'] == 'admin' || $_SESSION['login']['loginRole']
                 <img src="<?= $this->_dirImg ?>logoAdmin.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><b><?= $this->getFullName['fullname'] ?></b><br><small><?= $_SESSION['login']['loginRole'] ?></small></a>
+                <a href="index.php?module=backend&controller=dashboard&action=index" class="d-block"><b><?= $this->getFullName['fullname'] ?></b><br><small><?= $_SESSION['login']['loginRole'] ?></small></a>
             </div>
         </div>
 

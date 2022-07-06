@@ -28,4 +28,18 @@ class HelperFrontend
         }
         return $result;
     }
+
+    public static function currencyVND($priceFormat)
+    {
+        return number_format($priceFormat, 0, '', ',');
+    }
+
+    public static function sidebarVategory($link, $name, $id, $dataActive = null)
+    {
+        $textActive = (!empty($dataActive) && $dataActive == $id) ? 'my-text-primary' : 'text-dark';
+        $xhtml = '<div class="custom-control custom-checkbox collection-filter-checkbox pl-0 category-item">
+                    <a class="' . $textActive . '" data-id="' . $id . '" href="' . $link . '">' . $name . '</a>
+                </div>';
+        return $xhtml;
+    }
 }

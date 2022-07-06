@@ -1,29 +1,12 @@
 <?php
-$arrEleCategory = [
-    [
-        'link' => 'indeclgf.f',
-        'title' => 'ggfgdgdfg'
-    ],
-    [
-        'link' => 'indeclgf.f',
-        'title' => 'ggfgdgdfg'
-    ],
-    [
-        'link' => 'indeclgf.f',
-        'title' => 'ggfgdgdfg'
-    ],
-    [
-        'link' => 'indeclgf.f',
-        'title' => 'ggfgdgdfg'
-    ],
-    [
-        'link' => 'indeclgf.f',
-        'title' => 'ggfgdgdfg'
-    ],
-];
-$home = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index'), 'Trang chủ', 'home');
-$book = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list'), 'Sách', 'book');
-$category = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list'), 'Danh mục', 'category', $arrEleCategory);
+$arrEleCategory = [];
+foreach($this->categoriesNavbar as $value){
+    $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $value['id']]), 'title' => $value['name']];
+}
+
+$home       = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index'), 'Trang chủ', 'home');
+$book       = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list'), 'Sách', 'book');
+$category   = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list'), 'Danh mục', 'category', $arrEleCategory);
 ?>
 
 <header class="my-header sticky">
@@ -61,7 +44,13 @@ $category = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrPar
                                     <ul class="onhover-show-div">
                                         <?php
                                         if (@$_SESSION['loginDefault']['loginSuccess'] == true) {
-                                            $xhtml = '<li><a href="' . URL::createLink($this->arrParam['module'], 'account', 'logoutAccount') . '">Đăng xuất</a></li>';
+                                            $xhtml = '
+                                            <li>
+                                                <a href="' . URL::createLink($this->arrParam['module'], 'account', 'accountForm') . '">Tài khoản</a>
+                                            </li>
+                                            <li>
+                                                <a href="' . URL::createLink($this->arrParam['module'], 'account', 'logoutAccount') . '">Đăng xuất</a>
+                                            </li>';
                                         } else {
                                             $xhtml = '<li><a href="' . URL::createLink($this->arrParam['module'], 'account', 'login') . '">Đăng nhập</a></li>
                                             <li><a href="' . URL::createLink($this->arrParam['module'], 'account', 'register') . '">Đăng ký</a></li>';

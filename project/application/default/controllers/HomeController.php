@@ -11,6 +11,8 @@ class HomeController extends Controller
 		$this->_templateObj->load();
 		Session::init();
 
+		$this->_view->categoriesNavbar = $this->_model->listItems('categoryNavbar');
+
 	}
 
 	public function indexAction()
@@ -23,7 +25,7 @@ class HomeController extends Controller
 
 	public function ajaxLoadInfoAction()
 	{
-		$result = $this->_model->infoItem($this->_arrParam);
+		$result = $this->_model->infoItem($this->_arrParam, 'ajaxModalView');
 		echo json_encode($result);
 	}
 

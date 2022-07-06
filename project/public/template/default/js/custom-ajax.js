@@ -1,5 +1,6 @@
 function loginForm(link, direct) {
     // Check empty input field
+    console.log(link);
     if (!$('#username').val() || !$('#password').val()) {
         toastMsg('warning', 'Vui lòng nhập tên tài khoản và mật khẩu !');
     } else {
@@ -54,6 +55,9 @@ function loadModal(link, uploadDir){
 
         // load description
         $('div.product-right .book-description').html(data['description'])
+
+        // load view info book
+        $('.btn-view-book-detail').attr('href', 'index.php?module=default&controller=book&action=item&bid=' + data['id'])
 
     }, 'json');
     $('#quick-view').modal('show')

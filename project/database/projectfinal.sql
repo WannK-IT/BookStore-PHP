@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th7 02, 2022 lúc 10:27 AM
+-- Thời gian đã tạo: Th7 06, 2022 lúc 06:10 AM
 -- Phiên bản máy phục vụ: 5.7.33
 -- Phiên bản PHP: 8.0.19
 
@@ -50,7 +50,7 @@ CREATE TABLE `book` (
 
 INSERT INTO `book` (`id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `category_id`) VALUES
 (13, 'Xe bus ma', 'Bạn có tin trên đời này có ma không?\r\n\r\nMọi chuyện bắt đầu từ một chiếc xe bus 666 thần bí, ba cô cậu sinh viên trẻ Nguyễn Cao Phong, Nguyễn Ngọc Phương Vy và Trần Khánh Linh bèo nước gặp nhau hay là do định mệnh sắp đặt?\r\n\r\nTai ương nào sẽ đến với ba người bọn họ? \r\n\r\nBọn họ sẽ phải làm gì để chống lại các hồn ma đang nhăm nhe đoạt mạng họ?\r\n\r\nĐừng nhìn về phía sau.\r\n\r\nĐừng đọc đến chương cuối nếu không muốn hối hận.\r\n\r\nCác tổ chức, đoàn thể hay cá nhân trong truyện đều là hư cấu. Mọi sự trùng hợp đều là ngẫu nhiên.', 50000, 'yes', 45, '29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png', '2022-06-30 15:13:13', 'Quang Nguyễn', '2022-06-30 16:16:02', 'Quang Nguyễn', 'active', 4, 34),
-(14, 'Oan hồn người vợ trẻ', 'Truyện Oan Hồn Người Vợ Trẻ nói về những cô gái trẻ bị những cường hào ác bá giờ trò làm nhục họ còn làm hại thanh danh của họ nên khi chết các cô gái đó không siêu thoát, hằng đêm cứ quay về quấy phá những kẻ tà ác đó, nếu xã hội hay pháp luật không trừng trị được bọn họ thì hãy để tâm linh các cô gái này trừng phạt.\r\n\r\nNhững cái chết của cô gái khiến kẻ đầu bạc tiễn kẻ đầu xanh, gia đình họ chua xót nhưng cũng không làm gì được bọn chúng, nhưng chính lương tâm của hán sẽ tự dày vò hắn cho đến chết.\r\n\r\nNếu bạn là độc giả yêu thích thể loại truyện ma kinh dị thì không nên bỏ qua tựa truyện hay này nhé.', 90000, 'yes', 45, 'oan-hon-nguoi-vo-treaONg8bRn.jpg', '2022-06-30 15:34:44', 'Quang Nguyễn', '2022-07-01 14:25:28', 'Quang Nguyễn', 'active', 3, 34),
+(14, 'Oan hồn người vợ trẻ', 'Truyện Oan Hồn Người Vợ Trẻ nói về những cô gái trẻ bị những cường hào ác bá giờ trò làm nhục họ còn làm hại thanh danh của họ nên khi chết các cô gái đó không siêu thoát, hằng đêm cứ quay về quấy phá những kẻ tà ác đó, nếu xã hội hay pháp luật không trừng trị được bọn họ thì hãy để tâm linh các cô gái này trừng phạt.\r\n\r\nNhững cái chết của cô gái khiến kẻ đầu bạc tiễn kẻ đầu xanh, gia đình họ chua xót nhưng cũng không làm gì được bọn chúng, nhưng chính lương tâm của hán sẽ tự dày vò hắn cho đến chết.\r\n\r\nNếu bạn là độc giả yêu thích thể loại truyện ma kinh dị thì không nên bỏ qua tựa truyện hay này nhé.', 90000, 'yes', 10, 'oan-hon-nguoi-vo-treaONg8bRn.jpg', '2022-06-30 15:34:44', 'Quang Nguyễn', '2022-07-04 14:34:42', 'Quang Nguyễn', 'active', 3, 34),
 (15, 'Người mẹ quỷ', 'Đây là câu chuyện cả Việt Nam về cương thi, hay gọi bằng cái tên quen thuộc hơn: quỷ nhập tràng.\r\n\r\nCó lẽ nghe tới quỷ, mọi người sẽ nghĩ đây là một bộ truyện ma kinh dị. Nhưng thật ra, khi bạn càng đọc về sau, bạn sẽ càng nhận rõ những tình cảm khác trong truyện: tình cảm gia đình, tình mẫu tử, tình thầy trò,... tất cả sẽ đọng lại trong từng chap truyện của Người Mẹ Quỷ…\r\n\r\nNgoài những yếu tố kinh dị, ly kỳ, hấp dẫn, truyện của tác giả Trường Lê còn mang một thứ gì đó hơi hướng nói về Tình Người.', 100000, 'yes', 30, 'nguoimequymXwh8zNQPWTEA3nC9K.jpg', '2022-06-30 16:09:12', 'Quang Nguyễn', NULL, NULL, 'active', 5, 34),
 (16, 'Mao sơn tróc quỷ nhân', 'Diệp Thiếu Dương vốn là một Mao Sơn tróc quỷ nhân, dũng cảm tiến vào đô thị, gặp người đấu người, gặp quỷ đấu quỷ, gặp yêu đấu yêu, gặp hồ đấu hồ...\n\nTương tây Thi vương, Tà Thần bất tử, điệp tiên hung linh, tứ phương quỷ khấu.\n\nNữ minh tinh nuôi tiểu quỷ, công chúa hoàng thất hút máu, nữ giám đốc là hồ yêu,...\n\nThi triển Mao Sơn thần thuật, đánh lui tất cả,...', 120000, 'yes', 40, 'mao-son-troc-quy-nhan83hngfm4.jpg', '2022-06-30 16:11:29', 'Quang Nguyễn', NULL, NULL, 'active', 8, 34),
 (17, 'Nhà giả kim', 'Tất cả những trải nghiệm trong chuyến phiêu du theo đuổi vận mệnh của mình đã giúp Santiago thấu hiểu được ý nghĩa sâu xa nhất của hạnh phúc, hòa hợp với vũ trụ và con người. \r\n\r\nTiểu thuyết Nhà giả kim của Paulo Coelho như một câu chuyện cổ tích giản dị, nhân ái, giàu chất thơ, thấm đẫm những minh triết huyền bí của phương Đông. Trong lần xuất bản đầu tiên tại Brazil vào năm 1988, sách chỉ bán được 900 bản. Nhưng, với số phận đặc biệt của cuốn sách dành cho toàn nhân loại, vượt ra ngoài biên giới quốc gia, Nhà giả kim đã làm rung động hàng triệu tâm hồn, trở thành một trong những cuốn sách bán chạy nhất mọi thời đại, và có thể làm thay đổi cuộc đời người đọc.\r\n\r\n“Nhưng nhà luyện kim đan không quan tâm mấy đến những điều ấy. Ông đã từng thấy nhiều người đến rồi đi, trong khi ốc đảo và sa mạc vẫn là ốc đảo và sa mạc. Ông đã thấy vua chúa và kẻ ăn xin đi qua biển cát này, cái biển cát thường xuyên thay hình đổi dạng vì gió thổi nhưng vẫn mãi mãi là biển cát mà ông đã biết từ thuở nhỏ. Tuy vậy, tự đáy lòng mình, ông không thể không cảm thấy vui trước hạnh phúc của mỗi người lữ khách, sau bao ngày chỉ có cát vàng với trời xanh nay được thấy chà là xanh tươi hiện ra trước mắt. ‘Có thể Thượng đế tạo ra sa mạc chỉ để cho con người biết quý trọng cây chà là,’ ông nghĩ.”\r\n\r\n- Trích Nhà giả kim\r\n\r\nNhận định\r\n\r\n“Sau Garcia Márquez, đây là nhà văn Mỹ Latinh được đọc nhiều nhất thế giới.” - The Economist, London, Anh\r\n\r\n \r\n\r\n“Santiago có khả năng cảm nhận bằng trái tim như Hoàng tử bé của Saint-Exupéry.” - Frankfurter Allgemeine Zeitung, Đức\r\n\r\nMã hàng	8935235226272\r\nTên Nhà Cung Cấp	Nhã Nam\r\nTác giả	Paulo Coelho\r\nNgười Dịch	Lê Chu Cầu\r\nNXB	NXB Hội Nhà Văn\r\nNăm XB	2020\r\nTrọng lượng (gr)	220\r\nKích Thước Bao Bì	20.5 x 13 cm\r\nSố trang	227\r\nHình thức	Bìa Mềm\r\nSản phẩm hiển thị trong	\r\nĐồ Chơi Cho Bé - Giá Cực Tốt\r\nNhã Nam\r\nPNJ\r\nTop sách được phiên dịch nhiều nhất\r\nVNPAY\r\nSản phẩm bán chạy nhất	Top 100 sản phẩm Tiểu thuyết bán chạy của tháng\r\nTất cả những trải nghiệm trong chuyến phiêu du theo đuổi vận mệnh của mình đã giúp Santiago thấu hiểu được ý nghĩa sâu xa nhất của hạnh phúc, hòa hợp với vũ trụ và con người. \r\n\r\nTiểu thuyết Nhà giả kim của Paulo Coelho như một câu chuyện cổ tích giản dị, nhân ái, giàu chất thơ, thấm đẫm những minh triết huyền bí của phương Đông. Trong lần xuất bản đầu tiên tại Brazil vào năm 1988, sách chỉ bán được 900 bản. Nhưng, với số phận đặc biệt của cuốn sách dành cho toàn nhân loại, vượt ra ngoài biên giới quốc gia, Nhà giả kim đã làm rung động hàng triệu tâm hồn, trở thành một trong những cuốn sách bán chạy nhất mọi thời đại, và có thể làm thay đổi cuộc đời người đọc.\r\n\r\n“Nhưng nhà luyện kim đan không quan tâm mấy đến những điều ấy. Ông đã từng thấy nhiều người đến rồi đi, trong khi ốc đảo và sa mạc vẫn là ốc đảo và sa mạc. Ông đã thấy vua chúa và kẻ ăn xin đi qua biển cát này, cái biển cát thường xuyên thay hình đổi dạng vì gió thổi nhưng vẫn mãi mãi là biển cát mà ông đã biết từ thuở nhỏ. Tuy vậy, tự đáy lòng mình, ông không thể không cảm thấy vui trước hạnh phúc của mỗi người lữ khách, sau bao ngày chỉ có cát vàng với trời xanh nay được thấy chà là xanh tươi hiện ra trước mắt. ‘Có thể Thượng đế tạo ra sa mạc chỉ để cho con người biết quý trọng cây chà là,’ ông nghĩ.”\r\n\r\n- Trích Nhà giả kim', 55000, 'yes', 30, 'image_195509_1_36793FToQdJyN.jpg', '2022-06-30 16:14:11', 'Quang Nguyễn', NULL, NULL, 'active', 7, 33),
@@ -94,11 +94,12 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `picture`, `created`, `created_by`, `modified`, `modified_by`, `status`, `ordering`, `isShowHome`) VALUES
-(33, 'Văn học', 'vanhoc0RTpgco7.jpg', '2022-06-30 15:51:01', 'Quang Nguyễn', '2022-07-01 22:20:37', 'Quang Nguyễn', 'active', 3, 'yes'),
-(34, 'Truyện ma', 'truyenma8NZnxm4q.jpg', '2022-06-30 15:52:54', 'Quang Nguyễn', '2022-07-01 21:38:12', 'Quang Nguyễn', 'active', 1, 'yes'),
-(35, 'Thiếu nhi', 'thieunhiZ6s5qC2l.png', '2022-06-30 15:54:37', 'Quang Nguyễn', '2022-06-30 17:27:44', 'Quang Nguyễn', 'active', 2, 'yes'),
+(33, 'Văn học', '2-6tvNIQFkB.jpg', '2022-06-30 15:51:01', 'Quang Nguyễn', '2022-07-02 17:33:24', 'Quang Nguyễn', 'active', 3, 'yes'),
+(34, 'Truyện ma', 'truyenma8NZnxm4q.jpg', '2022-06-30 15:52:54', 'Quang Nguyễn', '2022-07-01 21:38:12', 'Quang Nguyễn', 'inactive', 1, 'yes'),
+(35, 'Thiếu nhi', 'thieunhiZ6s5qC2l.png', '2022-06-30 15:54:37', 'Quang Nguyễn', '2022-06-30 17:27:44', 'Quang Nguyễn', 'inactive', 2, 'yes'),
 (36, 'Ngoại ngữ', 'ngoainguDWvZhl6T.jpg', '2022-06-30 15:54:58', 'Quang Nguyễn', NULL, NULL, 'active', 4, 'yes'),
-(37, 'Công nghệ', 'laptrinh1vJrGxoR.png', '2022-06-30 15:55:45', 'Quang Nguyễn', NULL, NULL, 'active', 5, 'yes');
+(37, 'Công nghệ', 'laptrinh1vJrGxoR.png', '2022-06-30 15:55:45', 'Quang Nguyễn', NULL, NULL, 'active', 5, 'yes'),
+(38, 'Tài chính', 'deep-finance-9781637350270_hrIyfkJzlU.jpg', '2022-07-05 13:31:06', 'Quang Nguyễn', NULL, NULL, 'active', 11, 'yes');
 
 -- --------------------------------------------------------
 
@@ -154,17 +155,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `created`, `created_by`, `modified`, `modified_by`, `status`, `group_id`) VALUES
-(19, 'quangnguyen', 'n.nquangh2t@gmail.com', 'Nguyễn Văn A', '5f765ce6a2ae0c963cf720a71c13d32a', '2022-05-21 04:02:26', 'Admin', NULL, NULL, 'inactive', 2),
-(20, 'quangtest', 'abcdef@gmail.com', 'nguyen van', '2b10351253eed030812674e8aa18a5ab', '2022-05-21 04:04:53', 'Admin', NULL, NULL, 'active', 2),
-(21, 'phpquangnguyen', 'php@gmail.com', 'Tran Van A', '21232f297a57a5a743894a0e4a801fc3', '2022-05-21 04:09:34', 'nguyen van', '2022-05-21 16:27:45', 'Nguyễn Nhựt Quang', 'active', 3),
-(22, 'testtt', 'tetstt@gmail.com', 'testet', 'da7619474d1f0c28af4da3b5675ae46f', '2022-05-21 04:10:05', 'nguyen van', NULL, NULL, 'inactive', 4),
-(23, 'hellllo', 'hello@gmail.com', 'hellooooooooo', '5d41402abc4b2a76b9719d911017c592', '2022-05-21 04:10:47', 'nguyen van', NULL, NULL, 'active', 2),
-(24, 'hiiiiiiiiiii', 'hiiiiiiiiiii@gmail.com', 'hehehehhe', 'cce8f4212df1b3e94c76634d21d2361e', '2022-05-21 04:11:16', 'nguyen van', NULL, NULL, 'active', 4),
 (26, 'usertest', 'quang@gmail.com', 'Quang Nguyễn', '974e0509eda5affaf61e79d882c9e6ba', '2022-05-21 13:42:06', 'Nguyễn Nhựt Quang', '2022-05-21 13:42:42', 'Nguyễn Nhựt Quang', 'active', 2),
-(27, 'usertest', 'quang@gmail.com', 'Quang Nguyễn', '806b2af4633e64af88d33fbe4165a06a', '2022-05-21 13:47:53', 'Nguyễn Nhựt Quang', NULL, NULL, 'active', 2),
-(28, 'quangng', 'quangng@gmail.com', 'Quang Nguyen', 'c2a64dabc1b08b02e943e8f101b969a9', '2022-05-21 16:37:27', 'Nguyễn Nhựt Quang', NULL, NULL, 'inactive', 208),
-(29, 'admin2', 'admin2@gmail.com', 'admin2', 'c84258e9c39059a89ab77d846ddab909', '2022-05-21 16:38:44', 'Quang Nguyen', NULL, NULL, 'active', 209),
-(30, 'admin', 'admin@gmail.com', 'Quang Nguyễn', '21232f297a57a5a743894a0e4a801fc3', NULL, NULL, NULL, NULL, 'active', 2);
+(29, 'admin2', 'admin2@gmail.com', 'admin2', '21232f297a57a5a743894a0e4a801fc3', '2022-05-21 16:38:44', 'Quang Nguyen', NULL, NULL, 'active', 209),
+(30, 'admin', 'admin@gmail.com', 'Quang Nguyễn', '21232f297a57a5a743894a0e4a801fc3', NULL, NULL, NULL, NULL, 'active', 2),
+(32, 'quangnguyen', 'n.nquangh4t@gmail.com', 'Nguyễn Quang', '5f765ce6a2ae0c963cf720a71c13d32a', '2022-07-02 17:39:14', 'Quang Nguyễn', NULL, NULL, 'active', 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -209,7 +203,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `group`
@@ -221,7 +215,7 @@ ALTER TABLE `group`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
