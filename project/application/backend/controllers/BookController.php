@@ -99,7 +99,7 @@ class BookController extends Controller
 			$validate->addRule('name', 'string', ['min' => 5, 'max' => 200])
 					->addRule('description', 'string', ['min' => 5, 'max' => 100000])
 					->addRule('price', 'int', ['min' => 1000, 'max' => 10000000])
-					->addRule('sale_off', 'int', ['min' => 0, 'max' => 100])
+					->addRule('sale_off', 'int2', ['min' => 0, 'max' => 100])
 					->addRule('ordering', 'int', ['min' => 1, 'max' => 10000])
 					->addRule('category_id', 'group')
 					->addRule('status', 'status')

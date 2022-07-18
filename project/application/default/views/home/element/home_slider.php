@@ -2,25 +2,25 @@
     <div class="slide-1 home-slider">
         <div>
             <a href="" class="home text-center">
-                <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/80/63/9a/8111158d6b957b60c77209a16c71decf.jpg.webp" alt="" class="bg-img blur-up lazyload">
+                <img src="https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/Thieu_nhi/thang5/quoctethieunhi_1.3_1920.jpg" alt="" class="bg-img blur-up lazyload">
             </a>
         </div>
 
         <div>
             <a href="" class="home text-center">
-                <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/06/1d/b8/dec8142c4de2e411466650aef604db9a.png.webp" alt="" class="bg-img blur-up lazyload">
+                <img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-07-2022/Bigsale_1920.jpg" alt="" class="bg-img blur-up lazyload">
             </a>
         </div>
 
         <div>
             <a href="" class="home text-center">
-                <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/0a/60/37/6fda21e47bd2a060913568f7b9c22bb5.jpg.webp" alt="" class="bg-img blur-up lazyload">
+                <img src="https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/ehon/1920x700.png" alt="" class="bg-img blur-up lazyload">
             </a>
         </div>
 
         <div>
             <a href="" class="home text-center">
-                <img src="https://salt.tikicdn.com/cache/w1240/ts/brickv2og/61/73/b9/8aa6cf161484720c0809a90b1ff13055.png.webp" alt="" class="bg-img blur-up lazyload">
+                <img src="https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/campaign_t7/Sach_tham_khao_1920x700.jpg" alt="" class="bg-img blur-up lazyload">
             </a>
         </div>
     </div>

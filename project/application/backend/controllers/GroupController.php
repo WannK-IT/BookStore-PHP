@@ -85,7 +85,7 @@ class GroupController extends Controller
 				'group_acp' => $this->_arrParam['form']['group_acp']
 			];
 			$validate = new Validate($source);
-			$validate->addRule('name', 'string', ['min' => 5, 'max' => 50])
+			$validate->addRule('name', 'string', ['min' => 1, 'max' => 50])
 					->addRule('status', 'status')
 					->addRule('group_acp', 'group_acp');
 			$validate->run();

@@ -131,15 +131,6 @@ class BookModel extends Model
 		// filter category
 		$query[] = (!empty($arrParams['cid'])) ? "AND `b`.`category_id` = '" . $arrParams['cid'] . "'" : "";
 
-		// filter price
-		if (@$arrParams['sort'] == 'latest') {
-			$query[] = "ORDER BY `b`.`created` DESC";
-		} elseif (!empty(@$arrParams['sort']) && @$arrParams['sort'] != 'default') {
-			$query[] = "ORDER BY `price_discount` " . strtoupper(substr(@$arrParams['sort'], 6, strlen(@$arrParams['sort']))) . "";
-		} else {
-			$query[] = "ORDER BY `b`.`ordering`";
-		}
-
 		$result = implode(' ', $query);
 		return $this->singleRecord($result);
 	}

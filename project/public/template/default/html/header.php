@@ -1,12 +1,14 @@
 <?php
 $arrEleCategory = [];
-foreach($this->categoriesNavbar as $value){
+foreach ($this->categoriesNavbar as $value) {
     $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $value['id']]), 'title' => $value['name']];
 }
 
 $home       = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index'), 'Trang chủ', 'home');
 $book       = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list'), 'Sách', 'book');
 $category   = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list'), 'Danh mục', 'category', $arrEleCategory);
+
+$linkViewCart = URL::createLink($this->arrParam['module'], 'account', 'cart');
 ?>
 
 <header class="my-header sticky">
@@ -22,7 +24,7 @@ $category   = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrP
                             </a>
                         </div>
                     </div>
-                    <div class="menu-right pull-right">
+                    <div class="menu-right pull-right mr-3">
                         <div>
                             <nav id="main-nav">
                                 <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
@@ -30,7 +32,7 @@ $category   = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrP
                                     <li>
                                         <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                                     </li>
-                                    <?= $home . $book . $category?>
+                                    <?= $home . $book . $category ?>
                                 </ul>
                             </nav>
                         </div>
@@ -43,7 +45,7 @@ $category   = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrP
 
                                     <ul class="onhover-show-div">
                                         <?php
-                                        if (@$_SESSION['loginDefault']['loginSuccess'] == true) {
+                                        if (isset($_SESSION['loginDefault']['idUser'])) {
                                             $xhtml = '
                                             <li>
                                                 <a href="' . URL::createLink($this->arrParam['module'], 'account', 'accountForm') . '">Tài khoản</a>
@@ -93,10 +95,11 @@ $category   = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrP
                                     </li>
                                     <li class="onhover-div mobile-cart">
                                         <div>
-                                            <a href="cart.html" id="cart" class="position-relative">
+                                            <a href="<?= $linkViewCart?>" id="cart" class="position-relative">
                                                 <img src="<?= $this->_dirImg ?>cart.png" class="img-fluid blur-up lazyload" alt="cart">
                                                 <i class="ti-shopping-cart"></i>
-                                                <span class="badge badge-warning">0</span>
+                                                <!-- <span class="badge badge-warning">0</span> -->
+                                                <span id="cart-summary" class="ml-1 position-absolute translate-middle badge rounded-pill bg-warning text-dark">0</span>
                                             </a>
                                         </div>
                                     </li>

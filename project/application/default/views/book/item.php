@@ -90,8 +90,6 @@ $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
     </div>
 </section>
 
-<?php include_once "element/phone_contact.php" ?>
-
 <!-- Quick-view modal popup start-->
 <?= FormFrontend::modalViewProduct() ?>
 <!-- Quick-view modal popup end-->

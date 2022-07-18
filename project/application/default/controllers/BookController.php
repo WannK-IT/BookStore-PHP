@@ -29,7 +29,10 @@ class BookController extends Controller
 
 	public function listAction()
 	{
-		@$totalItems = $this->_model->countItem($this->arrParams);
+		$title = (isset($this->_arrParam['cid'])) ? $this->_model->singleItem($this->_arrParam, 'getCategoryName')['name'] . ' | ' . 'BookStore' : 'BookStore';
+		$this->_view->setTitle($title);
+		@$totalItems = $this->_model->countItem($this->_arrParam);
+		$this->_view->totalItems = $totalItems['total'];
 
 		// Pagination
 		$configPagination = ['totalItemsPerPage'	=> 12, 'pageRange' => 3];
@@ -44,6 +47,8 @@ class BookController extends Controller
 
 	public function itemAction()
 	{
+		$title = $this->_model->singleItem($this->_arrParam, 'getBookName')['book_name'];
+		$this->_view->setTitle($title . ' | BookStore');
 		$this->_view->infoItem 			= $this->_model->singleItem($this->_arrParam, 'infoItem');
 		$this->_view->listItemsSpecial 	= $this->_model->listItems($this->_arrParam, 'bookSpecial');
 		$this->_view->listItemsNew 		= $this->_model->listItems($this->_arrParam, 'bookNew');
@@ -56,4 +61,5 @@ class BookController extends Controller
 		$result = $this->_model->singleItem($this->_arrParam, 'ajaxModalView');
 		echo json_encode($result);
 	}
+
 }

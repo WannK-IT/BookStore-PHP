@@ -103,10 +103,10 @@ class UserController extends Controller
 
 				// nếu tồn tại biến url task = edit thì sẽ update dữ liệu, nếu không thì thêm dữ liệu
 				if ($this->_arrParam['task'] == 'edit') {
-					$this->_model->formHandle($params, $this->_arrParam, $option = 'edit');
+					$this->_model->formHandle($params, $this->_arrParam, 'edit');
 					Session::set('messageUser', 'Cập nhật dữ liệu thành công');
 				} else {
-					$this->_model->formHandle($params, $this->_arrParam, $option = 'add');
+					$this->_model->formHandle($params, $this->_arrParam, 'add');
 					Session::set('messageUser', 'Thêm dữ liệu thành công');
 				}
 				$this->redirect('backend', 'user', 'index');

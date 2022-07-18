@@ -39,6 +39,3 @@ if(!empty($listCategories)){
         <?php include_once "element/pagination.php"?>
     </div>
 </section>
-
-<!-- Phone contact -->
-<?php include_once "element/phone_contact.php"?>

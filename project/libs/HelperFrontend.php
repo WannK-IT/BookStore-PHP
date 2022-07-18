@@ -34,12 +34,18 @@ class HelperFrontend
         return number_format($priceFormat, 0, '', ',');
     }
 
-    public static function sidebarVategory($link, $name, $id, $dataActive = null)
+    public static function sidebar($link, $name, $id, $dataActive = null, $type = 'category')
     {
-        $textActive = (!empty($dataActive) && $dataActive == $id) ? 'my-text-primary' : 'text-dark';
-        $xhtml = '<div class="custom-control custom-checkbox collection-filter-checkbox pl-0 category-item">
+        $xhtml = '';
+        if ($type == 'category') {
+            $textActive = (!empty($dataActive) && $dataActive == $id) ? 'my-text-primary' : 'text-dark';
+            $xhtml = '<div class="custom-control custom-checkbox collection-filter-checkbox pl-0 category-item">
                     <a class="' . $textActive . '" data-id="' . $id . '" href="' . $link . '">' . $name . '</a>
                 </div>';
+        } elseif ($type == 'account') {
+            $textActive = (!empty($dataActive) && $dataActive == $id) ? 'active' : '';
+            $xhtml = '<li class="' . $textActive . '"><a href="' . $link . '" data-id="' . $id . '">' . $name . '</a></li>';
+        }
         return $xhtml;
     }
 }

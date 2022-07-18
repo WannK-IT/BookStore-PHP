@@ -122,7 +122,9 @@ function loginForm(link, direct) {
             success: function (data) {
                 if (data == 'failed') {
                     toastMsg('error', 'Tên tài khoản và mật khẩu chưa chính xác !');
-                } else {
+                } else if(data == 'notPermission'){
+                    toastMsg('error', 'Bạn không có quyền truy cập');
+                } else if(data == 'success') {
                     location.href = direct;
                 }
             }

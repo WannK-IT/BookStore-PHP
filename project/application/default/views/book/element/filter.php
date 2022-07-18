@@ -32,16 +32,17 @@
                     </ul>
                 </div>
                 <div class="product-page-filter">
-                    <form action="" id="sort-form" method="GET">
-                        <input type="hidden" name="module" value="default">
-                        <input type="hidden" name="controller" value="book">
-                        <input type="hidden" name="action" value="list">
+                    <form action="" id="sort-form" method="GET" class="d-flex align-items-center">
+                        <input type="hidden" name="module" value="<?= $this->arrParam['module'] ?>">
+                        <input type="hidden" name="controller" value="<?= $this->arrParam['controller'] ?>">
+                        <input type="hidden" name="action" value="<?= $this->arrParam['action'] ?>">
                         <?php
-                            if(!empty($this->arrParam['cid'])){
-                                echo '<input type="hidden" name="cid" value="'.$this->arrParam['cid'].'">';
-                            }
+                        if (!empty($this->arrParam['cid'])) {
+                            echo '<input type="hidden" name="cid" value="' . $this->arrParam['cid'] . '">';
+                        }
                         ?>
-                        <?= FormFrontend::selectBox(['default' => '- Sắp xếp -', 'price_asc' => 'Giá tăng dần', 'price_desc' => 'Giá giảm dần', 'latest' => 'Mới nhất'], 'sort', 'sort', @$this->arrParam['sort']) ?>
+                        <?= FormFrontend::selectBox(['default' => '- Sắp xếp -', 'price_asc' => 'Giá tăng dần', 'price_desc' => 'Giá giảm dần', 'latest' => 'Mới nhất'], 'sort', 'sort', $this->arrParam['sort'] ?? 'default') ?>
+                        <span style="margin-left: -30px;"><i class="fa fa-caret-down fa-2x text-secondary" aria-hidden="true"></i></span>
                     </form>
                 </div>
             </div>

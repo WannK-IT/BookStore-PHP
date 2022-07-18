@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" href="<?= $this->_dirImg?>favicon.ico" type="image/x-icon"/>
     <?php echo $this->_metaHTTP; ?>
     <?php echo $this->_metaName; ?>
     <?php echo $this->_title; ?>

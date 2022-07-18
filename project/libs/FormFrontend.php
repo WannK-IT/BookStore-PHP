@@ -14,6 +14,45 @@ class FormFrontend
         return $xhtml;
     }
 
+    public static function label($forName, $title)
+    {
+        return sprintf('<label for="%s">%s</label>', $forName, ucfirst($title));
+    }
+
+    public static function inputText($type, $id, $name, $value, $readonly = false)
+    {
+        $readonly = ($readonly == true) ? 'readonly' : '';
+        return sprintf('<input type="%s" name="%s" id="%s" class="form-control" value="%s" %s>', $type, $name, $id, $value, $readonly);
+    }
+
+    public static function formGroup($arrElement)
+    {
+        return sprintf('<div class="form-group">
+                            %s
+                            %s
+                        </div>', $arrElement['label'], $arrElement['input']);
+    }
+
+    public static function showForm($arrForm)
+    {
+        $xhtml = '';
+        if (!empty($arrForm)) {
+            foreach ($arrForm as $form) {
+                $xhtml .= self::formGroup($form);
+            }
+        }
+        return $xhtml;
+    }
+
+    public static function showError($arrErrors)
+    {
+        $xhtml = '';
+        if (!empty($arrErrors)) {
+            $xhtml = '<div class="alert alert-danger" role="alert">' . $arrErrors . '</div>';
+        }
+        return $xhtml;
+    }
+
     public static function modalViewProduct()
     {
         $xhtml = '<div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
@@ -28,7 +67,7 @@ class FormFrontend
                             <div class="col-lg-6 rtl-text">
                                 <div class="product-right">
                                     <h2 class="book-name"></h2>
-                                    <h3 class="book-price">26.910 ₫ <del>39.000 ₫</del></h3>
+                                    <h3 class="book-price">26.910 ₫ <del></del></h3>
                                     <div class="border-product">
                                         <div class="book-description cs-ellipsis-10"></div>
                                     </div>

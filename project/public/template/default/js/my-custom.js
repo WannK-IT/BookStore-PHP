@@ -1,6 +1,5 @@
 $(document).ready(function () {
     // activeMenu();
-
     $('.slide-5').on('setPosition', function () {
         $(this).find('.slick-slide').height('auto');
         var slickTrack = $(this).find('.slick-track');
@@ -67,6 +66,8 @@ $(document).ready(function () {
         $('#frontend-message').toggle('slow');
     }, 4000);
 
+
+    
 });
 
 function activeMenu() {

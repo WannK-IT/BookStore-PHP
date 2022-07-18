@@ -66,12 +66,12 @@ $(document).ready(function () {
 
     // Filter category
     $('#filter_category').change(function (e) {
-        $("#form_category").submit();
+        $("#form-filter-special-category").submit();
     });
 
     // Filter special
     $('#filter_special').change(function (e) {
-        $("#form_special").submit();
+        $("#form-filter-special-category").submit();
     });
 
     // Filter show homepage

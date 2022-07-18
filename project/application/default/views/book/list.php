@@ -1,13 +1,14 @@
 <?php
 $xhtmlCategory = $xhtmlBook = $xhtmlBookSpecial =  '';
 
-// Duyệt mảng in danh sách category
+// Duyệt mảng in sidebar category
 if (!empty($this->listCategories)) {
     $xhtmlCategory .= '<div class="collection-collapse-block-content">
                         <div class="collection-brand-filter">';
+
     foreach ($this->listCategories as $itemCategory) {
         $linkCategory = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], $this->arrParam['action'], ['cid' => $itemCategory['id']]);
-        $xhtmlCategory .= HelperFrontend::sidebarVategory($linkCategory, $itemCategory['name'], $itemCategory['id'], @$this->arrParam['cid']);
+        $xhtmlCategory .= HelperFrontend::sidebar($linkCategory, $itemCategory['name'], $itemCategory['id'], @$this->arrParam['cid'], 'category');
     }
     $xhtmlCategory  .= '</div></div>';
 } else {
@@ -15,26 +16,30 @@ if (!empty($this->listCategories)) {
 }
 
 // Duyệt mảng in danh sách các cuốn sách
-if(!empty($this->listBooks)){
-    $xhtmlBook .= '<div class="row margin-res">';
-    foreach($this->listBooks as $itemBook){
-        $imgBook            = UPLOAD_BOOK_URL . $itemBook['picture'];
-        $hrefModalView  = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $itemBook['book_id']]);
-        $linkInfoItem1  = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemBook['book_id']]);
-    
+if (!empty($this->listBooks)) {
+    foreach ($this->listBooks as $itemBook) {
+        $imgBook                = UPLOAD_BOOK_URL . $itemBook['picture'];
+        $hrefModalView          = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $itemBook['book_id']]);
+        $linkInfoItem1          = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemBook['book_id']]);
+        $addCart              = 'javascript:addCart(\'' . $itemBook['book_id'] . '\', \'' . $itemBook['price_discount'] . '\')';
+        $percent_saleoff = $price_discount = '';
+        if ($itemBook['sale_off'] != 0) {
+            $percent_saleoff    = '<div class="lable-block">
+                                        <span class="lable4 badge badge-danger"> -' . $itemBook['sale_off'] . '%</span>
+                                    </div>';
+            $price_discount     = '<del>' . HelperFrontend::currencyVND($itemBook['price']) . 'đ</del>';
+        }
         $xhtmlBook .= '<div class="col-xl-3 col-6 col-grid-box">
             <div class="product-box">
                 <div class="img-wrapper">
-                    <div class="lable-block">
-                        <span class="lable4 badge badge-danger"> -' . $itemBook['sale_off'] . '%</span>
-                    </div>
+                    ' . $percent_saleoff . '
                     <div class="front">
                         <a href="' . $linkInfoItem1 . '">
                             <img src="' . $imgBook . '" class="img-fluid blur-up lazyload bg-img" alt="">
                         </a>
                     </div>
                     <div class="cart-info cart-wrap">
-                        <a href="#" title="Add to cart"><i class="ti-shopping-cart"></i></a>
+                        <a href="' . $addCart . '" title="Add to cart"><i class="ti-shopping-cart"></i></a>
                         <a href="javascript:loadModal(\'' . $hrefModalView . '\', \'' . UPLOAD_BOOK_URL . '\')" title="Quick View"><i class="ti-search"></i></a>
                     </div>
                 </div>
@@ -50,14 +55,13 @@ if(!empty($this->listBooks)){
                         <h6 class="pb-2">' . $itemBook['book_name'] . '</h6>
                     </a>
                     <div class="cs-ellipsis-8"><p>' . $itemBook['description'] . '</p></div>
-                    <h4 class="text-lowercase pt-2">' . HelperFrontend::currencyVND($itemBook['price_discount']) . ' đ <del>' . HelperFrontend::currencyVND($itemBook['price']) . ' đ</del></h4>
+                    <h4 class="text-lowercase pt-2">' . HelperFrontend::currencyVND($itemBook['price_discount']) . ' đ ' . $price_discount . ' </h4>
                 </div>
             </div>
         </div>';
     }
-    $xhtmlBook .= '</div>';
-}else{
-    $xhtmlBook = '<p class="font-weight-bold h6 text-muted text-center pt-5">Sách đang được cập nhật !</p>';
+} else {
+    $xhtmlBook = '<p class="font-weight-bold h6 text-muted pt-5 ml-3">Sách đang được cập nhật !</p>';
 }
 
 
@@ -92,7 +96,7 @@ if (!empty($this->listItemsSpecial)) {
                 </div>
             </div>';
         $index++;
-        if ($index == 5) {
+        if ($index == 7) {
             $xhtmlBookSpecial .= '</div>';
             $index = 1;
         }
@@ -138,7 +142,9 @@ if (!empty($this->listItemsSpecial)) {
                             <div class="collection-product-wrapper">
                                 <?php include_once "element/filter.php" ?>
                                 <div class="product-wrapper-grid" id="my-product-list">
-                                    <?= $xhtmlBook ?>
+                                    <div class="row margin-res d-flex justify-content-center">
+                                        <?= $xhtmlBook ?>
+                                    </div>
                                 </div>
 
                                 <!-- Pagination -->
@@ -152,10 +158,6 @@ if (!empty($this->listItemsSpecial)) {
         </div>
     </div>
 </section>
-
-
-<!-- Phone contact -->
-<?php include_once "element/phone_contact.php" ?>
 
 <!-- Quick-view modal popup start-->
 <?= FormFrontend::modalViewProduct() ?>
