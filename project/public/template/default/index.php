@@ -6,6 +6,7 @@
     <?= $this->_metaName; ?>
     <?= $this->_title; ?>
     <link rel="shortcut icon" href="<?= $this->_dirImg ?>favicon.ico" type="image/x-icon" />
+    
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +48,7 @@
     <?= $this->_jsFiles; ?>
     <script>
         $(document).ready(function() {
-            $('#cart-summary').text(<?= count($_SESSION['cart']['quantity']) ?>);
+            $('#cart-summary').text(<?= count($_SESSION['cart']['quantity']) ?>); 
         })
 
         function openSearch() {

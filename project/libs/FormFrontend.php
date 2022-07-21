@@ -22,7 +22,7 @@ class FormFrontend
     public static function inputText($type, $id, $name, $value, $readonly = false)
     {
         $readonly = ($readonly == true) ? 'readonly' : '';
-        return sprintf('<input type="%s" name="%s" id="%s" class="form-control" value="%s" %s>', $type, $name, $id, $value, $readonly);
+        return sprintf('<input type="%s" name="%s" id="%s" autocomplete="off" class="form-control" value="%s" %s>', $type, $name, $id, $value, $readonly);
     }
 
     public static function formGroup($arrElement)

@@ -48,4 +48,13 @@ class HelperFrontend
         }
         return $xhtml;
     }
+
+    public static function randomString($length = 8){
+        $arrChar = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9));
+        $arrChar = implode('', $arrChar);
+        $arrChar = str_shuffle($arrChar);
+
+        $result = substr($arrChar, 0, $length);
+        return $result;
+    }
 }

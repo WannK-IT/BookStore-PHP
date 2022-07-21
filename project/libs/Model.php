@@ -153,7 +153,7 @@ class Model{
 	
 	// LIST RECORD
 	public function listRecord($query){
-		$result = array();
+		$result = [];
 		if(!empty($query)){
 			$resultQuery = $this->query($query);
 			if(mysqli_num_rows($resultQuery) > 0){

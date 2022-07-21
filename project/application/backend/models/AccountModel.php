@@ -20,7 +20,7 @@ class AccountModel extends Model
 
 		// Check username & password exist
 		if ($this->isExist($query) == true) {
-			if ($loadInfo['role'] == 'admin' || $loadInfo['role'] == 'manager') {
+			if ($loadInfo['role'] == 'admin' || $loadInfo['role'] == 'manager' || $loadInfo['role'] == 'member') {
 				$result = 'success';
 				$_SESSION['login']['loginSuccess'] = true;
 				$_SESSION['login']['idUser'] = $loadInfo['id'];

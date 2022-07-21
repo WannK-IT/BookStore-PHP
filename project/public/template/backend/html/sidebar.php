@@ -1,6 +1,7 @@
 <?php
 ob_start();
 $dashboard      = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'dashboard', 'index'), 'dashboard', 'fas fa-tachometer-alt', $this->arrParam['controller']);
+$cart           = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'cart', 'index'), 'cart', 'fas fa-shopping-cart', $this->arrParam['controller']);
 
 $arrItemGroup   =   [
     [
@@ -53,15 +54,16 @@ $arrItemCategory    =   [
         'title' => 'form'
     ],
 ];
-$group  = HelperBackend::itemSideBar('multi', '#', 'group', 'fas fa-users', $this->arrParam['controller'], $arrItemGroup);
-$user   = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $this->arrParam['controller'], $arrItemUser);
-$book   = HelperBackend::itemSideBar('multi', '#', 'book', 'fas fa-book-open', $this->arrParam['controller'], $arrItemBook);
+
+$group      = HelperBackend::itemSideBar('multi', '#', 'group', 'fas fa-users', $this->arrParam['controller'], $arrItemGroup);
+$user       = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $this->arrParam['controller'], $arrItemUser);
+$book       = HelperBackend::itemSideBar('multi', '#', 'book', 'fas fa-book-open', $this->arrParam['controller'], $arrItemBook);
 $category   = HelperBackend::itemSideBar('multi', '#', 'category', 'fas fa-bars', $this->arrParam['controller'], $arrItemCategory);
 
 
 // Check Permission
 if($_SESSION['login']['loginRole'] == 'admin' || $_SESSION['login']['loginRole'] == 'manager'){
-    $sideBarList = $dashboard . $group . $user . $category . $book;
+    $sideBarList = $dashboard . $group . $user . $category . $book . $cart;
 }else{
     $sideBarList = $dashboard . $category . $book;
 }

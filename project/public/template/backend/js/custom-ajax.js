@@ -183,7 +183,7 @@ $(document).ready(function () {
         }
     })
 
-
+    // change ordering book
     $('.chkOrderingBook').change(function (e) {
         if ($(this).val() < 1) {
             e.preventDefault();
@@ -201,5 +201,24 @@ $(document).ready(function () {
         }
     })
 
+    //change status order in cart
+    $('select[name=status_order]').change(function (e) {
+        e.preventDefault();
+        let idElement = $(this).data('id');
+        let valueSelected = $(this).find(':selected').val();
+        let link = 'index.php?module=backend&controller=cart&action=changeStatusOrder&id=' + idElement + '&valueSelected=' + valueSelected;
+        $.get(link, function (data) {
+            let element = $('select[data-id=' + data['id'] + ']');
+            if(data['value'] == 'inactive'){
+                element.addClass('bg-warning').removeClass('bg-success');
+            }else{
+                element.addClass('bg-success').removeClass('bg-warning');
+            }
+            element.notify("Cập nhật thành công !", {
+                className: 'success',
+                position: 'top center'
+            });
+        }, 'json');
+    })
 })
 

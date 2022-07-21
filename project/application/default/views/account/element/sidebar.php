@@ -14,9 +14,9 @@ $arrSideBarAccount = [
         'active'    => $this->arrParam['action']
     ],
     [
-        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'orderForm'),
+        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'orderHistory'),
         'name'      => 'Lịch sử mua hàng',
-        'id'        => 'orderForm',
+        'id'        => 'orderHistory',
         'active'    => $this->arrParam['action']
     ],
     [

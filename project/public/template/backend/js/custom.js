@@ -47,7 +47,7 @@ $(document).ready(function () {
     $("#btn-search").click(function (e) {
         e.preventDefault();
         if (!$('#search_form').val()) {
-            toastMsg('warning', 'Vui lòng nhập từ khóa tìm kiếm !')
+            toastMsg('warning', 'Nhập từ khóa tìm kiếm !')
         } else {
             $("#form-search").submit();
         }
@@ -136,6 +136,21 @@ const Toast = Swal.mixin({
 })
 
 function toastMsg(icon, msg) {
+    return Toast.fire({
+        icon: icon,
+        title: msg
+    })
+}
+
+function toastMsg2(icon, msg) {
+    
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 2500,
+    })
+
     return Toast.fire({
         icon: icon,
         title: msg

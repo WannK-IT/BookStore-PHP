@@ -92,12 +92,11 @@
                                 </tr>
                             </tfoot>
                         </table>
-
                     </div>
                 </div>
                 <div class="row cart-buttons">
                     <div class="col-6"><a href="<?= URL::createLink($this->arrParam['module'], 'book', 'list') ?>" class="btn btn-solid">Tiếp tục mua sắm</a></div>
-                    <div class="col-6"><button type="submit" class="btn btn-solid">Đặt hàng</button></div>
+                    <div class="col-6"><button type="button" id="btn-order" class="btn btn-solid">Đặt hàng</button></div>
                 </div>
             <?php
             } else {
@@ -107,15 +106,7 @@
                         <a href="' . URL::createLink($this->arrParam['module'], 'book', 'list') . '" class="btn btn-solid">Tiếp tục mua sắm</a>
                     </div>';
             } ?>
+            
         </div>
     </form>
 </section>
-
-<?php
-echo '<pre style="color: blue;">';
-print_r($_SESSION);
-echo '</pre>';
-echo '<pre style="color: blue;">';
-print_r($this->itemsCart);
-echo '</pre>';
-?>

@@ -91,10 +91,11 @@ class AccountController extends Controller
 	}
 
 
-	public function orderFormAction()
+	public function orderHistoryAction()
 	{
-		$this->_view->breadcrumb = 'Lịch sử mua hàng';
-		$this->_view->render('account/order_form');
+		$this->_view->breadcrumb 	= 'Lịch sử mua hàng';
+		$this->_view->orders 		= $this->_model->listItems($this->_arrParam, 'order-history');
+		$this->_view->render('account/order_history');
 	}
 
 	public function changePasswordFormAction()
@@ -142,13 +143,13 @@ class AccountController extends Controller
 
 	public function cartAction(){
 		// Kiểm tra nếu chưa đăng nhập thì chuyển trang login
-		// if(!isset($_SESSION['loginDefault']['idUser'])){
-        //     URL::direct('default', 'account', 'login');
-        // }else{
-			$this->_view->itemsCart = $this->_model->listItems($this->_arrParam, 'cart');
-			$this->_view->breadcrumb = 'Giỏ hàng';
+		if(!isset($_SESSION['loginDefault']['idUser'])){
+            URL::direct('default', 'account', 'login');
+        }else{
+			$this->_view->breadcrumb 	= 'Giỏ hàng';
+			$this->_view->itemsCart 	= $this->_model->listItems($this->_arrParam, 'cart');
 			$this->_view->render('account/cart');
-		// }
+		}
 	}
 
 	public function removeItemCartAction(){
@@ -174,8 +175,19 @@ class AccountController extends Controller
 	}
 
 	public function buyAction(){
-		echo '<pre style="color: blue;">';
-		print_r($this->_arrParam);
-		echo '</pre>';
+		$order_id = $this->_model->saveItem($this->_arrParam, 'saveCart');
+		//redirect page success order
+		unset($_SESSION['cart']);
+		URL::direct('default', 'account', 'orderSuccess', ['order_id' => $order_id]);
+	}
+
+	public function orderSuccessAction(){
+		$this->_view->breadcrumb = 'Đặt hàng thành công';
+		$this->_view->render('account/order_success');
+	}
+
+	public function checkExistInfoAccountAction(){
+		$result = $this->_model->checkExist($this->_arrParam, 'fullInfo');
+		echo json_encode($result);
 	}
 }

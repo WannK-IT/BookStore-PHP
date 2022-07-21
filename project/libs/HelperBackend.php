@@ -112,10 +112,25 @@ class HelperBackend
                         </a>', $function, $link, $color, $title, $icon);
     }
 
-    public static function selectBox($id, $name, $arrOptions, $selected, $dataID = '')
+    public static function selectBox($id, $name, $arrOptions, $selected, $dataID = '', $changeColor = null)
     {
-        $xhtml = '';
-        $xhtml .= '<select id="' . $id . '" name="' . $name . '" class="custom-select custom-select-sm mr-1" data-id="' . $dataID . '" style="width: unset">';
+        $xhtml = $color = '';
+        $color = ($changeColor == true) ? (($selected == 'inactive') ? 'bg-warning' : 'bg-success') : '';
+        $xhtml .= '<select id="' . $id . '" name="' . $name . '" class="custom-select custom-select-sm mr-1 '.$color.'" data-id="' . $dataID . '" style="width: unset; cursor: pointer">';
+        if (!empty($arrOptions)) {
+            foreach ($arrOptions as $key => $value) {
+                $active = ($key == $selected) ? 'selected' : '';
+                $xhtml .= '<option value="' . $key . '" ' . $active . '>' . $value . '</option>';
+            }
+        }
+        $xhtml .= '</select>';
+        return $xhtml;
+    }
+
+    public static function selectBoxOption($id, $name, $arrOptions, $selected)
+    {
+        $xhtml = $color = '';
+        $xhtml .= '<select id="' . $id . '" name="' . $name . '" class="custom-select select-search-field'.$color.'" style="width: unset; cursor: pointer">';
         if (!empty($arrOptions)) {
             foreach ($arrOptions as $key => $value) {
                 $active = ($key == $selected) ? 'selected' : '';
@@ -132,7 +147,7 @@ class HelperBackend
         if (!empty($itemStatusCount)) {
             foreach ($itemStatusCount as $key => $value) {
                 $active = ($key == $currentStt) ? 'bg-gradient-info' : 'bg-gradient-secondary';
-                $name =  ucfirst($key);
+                $name   =  ucfirst($key);
                 $params = ['status' => $key];
                 
                 if(!empty($arrFilter)){
@@ -140,12 +155,29 @@ class HelperBackend
                         $params[$keyFilter] = $valueFilter;
                     }
                 }
-                // if (!empty($search)) $params['search_value'] = $search;
-                // if (!empty($group_acp)) $params['filter_group_acp'] = $group_acp;
-                // if (!empty($group)) $params['filter_group'] = $group;
-                // if (!empty($special)) $params['filter_special'] = $special;
-                // if (!empty($category)) $params['filter_category'] = $category;
-                // if (!empty($isHomePage)) $params['filter_homepage'] = $isHomePage;
+   
+                $link = URL::createLink($module, $controller, 'index', $params);
+                $xhtml .= sprintf('<a href="' . $link . '" class="mr-1 btn btn-sm ' . $active . '">' . $name . ' <span class="badge badge-pill badge-light">' . $value . '</span></a>');
+            }
+            return $xhtml;
+        }
+    }
+
+    public static function filterOrder($module, $controller, $itemStatusCount, $currentStt, $arrFilter = null)
+    {
+        $xhtml = "";
+        if (!empty($itemStatusCount)) {
+            foreach ($itemStatusCount as $key => $value) {
+                $active = ($key == $currentStt) ? 'bg-gradient-info' : 'bg-gradient-secondary';
+                $name   =  ($key == 'all') ? 'Tất cả' : (($key == 'active') ? 'Đã xử lý' : 'Chưa xử lý');
+                $params = ['status' => $key];
+                
+                if(!empty($arrFilter)){
+                    foreach($arrFilter as $keyFilter => $valueFilter){
+                        $params[$keyFilter] = $valueFilter;
+                    }
+                }
+   
                 $link = URL::createLink($module, $controller, 'index', $params);
                 $xhtml .= sprintf('<a href="' . $link . '" class="mr-1 btn btn-sm ' . $active . '">' . $name . ' <span class="badge badge-pill badge-light">' . $value . '</span></a>');
             }

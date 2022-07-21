@@ -18,23 +18,32 @@ class DashboardModel extends Model
 		return $result;
 	}
 
-	public function countItem($option){
-		if($option == 'group'){
-			$query[] = "SELECT COUNT(`id`) AS 'totalGroup'";
-			$query[] = "FROM `group`";
-		}elseif($option == 'user'){
-			$query[] = "SELECT COUNT(`id`) AS 'totalUser'";
-			$query[] = "FROM `user`";
-		}elseif($option == 'category'){
-			$query[] = "SELECT COUNT(`id`) AS 'totalCategory'";
-			$query[] = "FROM `category`";
-		}elseif($option == 'book'){
-			$query[] = "SELECT COUNT(`id`) AS 'totalBook'";
-			$query[] = "FROM `book`";
+	public function countItem($option)
+	{
+		switch ($option) {
+			case 'group':
+				$query[] = "SELECT COUNT(`id`) AS 'totalGroup'";
+				$query[] = "FROM `group`";
+				break;
+			case 'user':
+				$query[] = "SELECT COUNT(`id`) AS 'totalUser'";
+				$query[] = "FROM `user`";
+				break;
+			case 'category':
+				$query[] = "SELECT COUNT(`id`) AS 'totalCategory'";
+				$query[] = "FROM `category`";
+				break;
+			case 'book':
+				$query[] = "SELECT COUNT(`id`) AS 'totalBook'";
+				$query[] = "FROM `book`";
+				break;
+			case 'cart':
+				$query[] = "SELECT COUNT(`id`) AS 'totalCart'";
+				$query[] = "FROM `cart`";
+				break;
 		}
 
 		$query = implode(" ", $query);
 		return $this->singleRecord($query);
 	}
-
 }

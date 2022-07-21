@@ -28,8 +28,10 @@
 	define ('DB_HOST'				, $_SERVER['SERVER_NAME']);
 	define ('DB_USER'				, 'root');						
 	define ('DB_PASS'				, '');						
-	define ('DB_NAME'				, 'projectfinal');						
+	define ('DB_NAME'				, 'projectfinal');	
+						
 	define ('DB_TBL_GROUP'			, 'group');						
 	define ('DB_TBL_USER'			, 'user');						
 	define ('DB_TBL_CATEGORY'		, 'category');						
 	define ('DB_TBL_BOOK'			, 'book');						
+	define ('DB_TBL_CART'			, 'cart');						

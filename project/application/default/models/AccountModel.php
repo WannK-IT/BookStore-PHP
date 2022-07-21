@@ -22,6 +22,7 @@ class AccountModel extends Model
 			$result = 'success';
 			$_SESSION['loginDefault']['loginSuccess'] = true;
 			$_SESSION['loginDefault']['idUser'] = $loadInfo['id'];
+			$_SESSION['loginDefault']['username'] = $loadInfo['username'];
 			$_SESSION['loginDefault']['fullnameUser'] = $loadInfo['fullname'];
 		} else {
 			$result = 'failed';
@@ -31,62 +32,98 @@ class AccountModel extends Model
 
 	public function checkExist($arrParams, $option = null)
 	{
+		switch ($option) {
+			case 'username':
+				$query[]    = "SELECT `username`";
+				$query[]    = "FROM `{$this->table}`";
+				$query[]    = "WHERE `username` = '{$arrParams['username']}'";
+				$query        = implode(" ", $query);
 
-		if ($option == 'username') {
-			$query[]    = "SELECT `username`";
-			$query[]    = "FROM `{$this->table}`";
-			$query[]    = "WHERE `username` = '{$arrParams['username']}'";
-		} elseif ($option == 'password') {
-			$query[]    = "SELECT `password`";
-			$query[]    = "FROM `{$this->table}`";
-			$query[]    = "WHERE `password` = '" . md5($arrParams['old_password']) . "' AND `id` = '" . $_SESSION['loginDefault']['idUser'] . "'";
-		}
-		$query        = implode(" ", $query);
+				// Check query exist
+				$result = 'not exist';
+				if ($this->isExist($query)) {
+					$result = 'exist';
+				}
+				break;
+			case 'password':
+				$query[]    = "SELECT `password`";
+				$query[]    = "FROM `{$this->table}`";
+				$query[]    = "WHERE `password` = '" . md5($arrParams['old_password']) . "' AND `id` = '" . $_SESSION['loginDefault']['idUser'] . "'";
+				$query        = implode(" ", $query);
 
-		// Check query exist
-		$result = 'not exist';
-		if ($this->isExist($query)) {
-			$result = 'exist';
+				// Check query exist
+				$result = 'not exist';
+				if ($this->isExist($query)) {
+					$result = 'exist';
+				}
+				break;
+			case 'fullInfo':
+				$query[]    = "SELECT `address`";
+				$query[]    = "FROM `{$this->table}`";
+				$query[]    = "WHERE `id` = '" . $_SESSION['loginDefault']['idUser'] . "'";
+				$query      = implode(" ", $query);
+				$execute	= $this->singleRecord($query);
+				// Check query exist
+				$result = 'not exist';
+				if (!empty($execute['address'])) {
+					$result = 'exist';
+				}
+				break;
 		}
+
 		return $result;
 	}
 
 	public function register($params)
 	{
-		$query = "INSERT INTO `{$this->table}` (`username`, `email`, `fullname`, `password`, `created`, `status`, `group_id`) VALUES ('" . $params['username'] . "', '" . $params['email'] . "', '" . $params['fullname'] . "', '" . md5($params['password']) . "', '" . date('Y-m-d H:i:s') . "', 'active', '210')";
+		$queryGetIDUser	= "SELECT `id` FROM `" . DB_TBL_GROUP . "` WHERE `name` = 'user'";
+		$idUser			= $this->singleRecord($queryGetIDUser);
+
+		$query = "INSERT INTO `{$this->table}` (`username`, `email`, `fullname`, `password`, `created`, `status`, `group_id`) VALUES ('" . $params['username'] . "', '" . $params['email'] . "', '" . $params['fullname'] . "', '" . md5($params['password']) . "', '" . date('Y-m-d H:i:s') . "', 'active', '" . $idUser['id'] . "')";
 		$this->query($query);
 	}
 
 	public function listItems($arrParams, $option)
 	{
-		if ($option == 'categoryNavbar') {
-			$query[] = "SELECT `id`, `name`";
-			$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
-			$query[] = "WHERE `status` = 'active'";
-			$query[] = "ORDER BY `ordering`";
+		switch ($option) {
+			case 'categoryNavbar':
+				$query[] = "SELECT `id`, `name`";
+				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
+				$query[] = "WHERE `status` = 'active'";
+				$query[] = "ORDER BY `ordering`";
 
-			$query = implode(' ', $query);
-			$result = $this->listRecord($query);
-			return $result;
-		} elseif ($option == 'cart') {
-			if (!empty($_SESSION['cart']['quantity'])) {
-				$ids = implode(",", array_keys($_SESSION['cart']['quantity']));
+				$query = implode(' ', $query);
+				$result = $this->listRecord($query);
+				return $result;
+				break;
+			case 'cart':
+				if (!empty($_SESSION['cart']['quantity'])) {
+					$ids = implode(",", array_keys($_SESSION['cart']['quantity']));
 
-				$query[] 	= "SELECT `id`, `name`, `picture`";
-				$query[] 	= "FROM `" . DB_TBL_BOOK . "`";
-				$query[] 	= "WHERE `status` = 'active' AND `id` IN (" . $ids . ")";
+					$query[] 	= "SELECT `id`, `name`, `picture`";
+					$query[] 	= "FROM `" . DB_TBL_BOOK . "`";
+					$query[] 	= "WHERE `status` = 'active' AND `id` IN (" . $ids . ")";
+					$query 		= implode(' ', $query);
+					$result 	= $this->listRecord($query);
+
+					foreach ($result as $key => $value) {
+						$result[$key]['quantity'] 	= $_SESSION['cart']['quantity'][$value['id']];
+						$result[$key]['totalPrice'] = $_SESSION['cart']['price'][$value['id']];
+						$result[$key]['price'] 		= $result[$key]['totalPrice'] / $result[$key]['quantity'];
+					}
+					return $result;
+				}
+				break;
+			case 'order-history':
+				$query[] 	= "SELECT *";
+				$query[] 	= "FROM `" . DB_TBL_CART . "`";
+				$query[] 	= "WHERE `username` = '" . $_SESSION['loginDefault']['username'] . "'";
+				$query[] 	= "ORDER BY `status` DESC ";
 				$query 		= implode(' ', $query);
 				$result 	= $this->listRecord($query);
-
-				foreach($result as $key => $value){
-					$result[$key]['quantity'] 	= $_SESSION['cart']['quantity'][$value['id']];
-					$result[$key]['totalPrice'] = $_SESSION['cart']['price'][$value['id']];
-					$result[$key]['price'] 		= $result[$key]['totalPrice'] / $result[$key]['quantity'];
-				}
 				return $result;
-			}
+				break;
 		}
-		
 	}
 
 	public function singleItem($arrParams)
@@ -111,10 +148,31 @@ class AccountModel extends Model
 		}
 	}
 
-	public function deleteItem($arrParams, $option){
-		if($option == 'itemCart'){
+	public function deleteItem($arrParams, $option)
+	{
+		if ($option == 'itemCart') {
 			unset($_SESSION['cart']['quantity'][$arrParams['item_id']]);
 			unset($_SESSION['cart']['price'][$arrParams['item_id']]);
+		}
+	}
+
+	public function saveItem($arrParams, $option)
+	{
+		if ($option == 'saveCart') {
+			$id			= HelperFrontend::randomString(10);
+			$username	= $_SESSION['loginDefault']['username'];
+			$books		= json_encode($arrParams['form']['book_id']);
+			$prices		= json_encode($arrParams['form']['price']);
+			$quantities	= json_encode($arrParams['form']['quantity']);
+			$names		= json_encode($arrParams['form']['name'], JSON_UNESCAPED_UNICODE);
+			$pictures	= json_encode($arrParams['form']['picture']);
+			$date		= date('Y-m-d H:i:s');
+
+			$query[] 	= "INSERT INTO `" . DB_TBL_CART . "` (`id`, `username`, `books`, `prices`, `quantities`, `names`, `pictures`, `status`, `date`)";
+			$query[] 	= "VALUES ('" . $id . "', '" . $username . "', '" . $books . "', '" . $prices . "', '" . $quantities . "', '" . $names . "', '" . $pictures . "', 'inactive', '" . $date . "')";
+			$query 		= implode(" ", $query);
+			$this->query($query);
+			return $id;
 		}
 	}
 }

@@ -82,4 +82,21 @@ class FormBackend
             echo '</li></pre></ul></div>';
         }
     }
+
+    public static function modalViewImg(){
+        return '<div class="modal fade bd-example-modal-lg theme-modal" id="view-img-admin" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content view-img-admin-modal">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+        
+                        <div class="col-xs-12 d-flex justify-content-center align-items-center">
+                            <div class="view-img-admin"><img src="" alt="" class="img-fluid" style="max-width: 400px;"></div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>';
+    }
 }

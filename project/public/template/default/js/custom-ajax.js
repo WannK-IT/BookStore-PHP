@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('.quantity-box').change(function(){
         let bookID      = $(this).data('id');
         let quantity    = $(this).val();
@@ -18,6 +19,59 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('button#btn-order').click(function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Bạn có đồng ý mua sản phẩm ?',
+            text: 'Vui lòng kiểm tra thông tin trước khi mua hàng ! Vd: họ tên, số điện thoại, địa chỉ, ...',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5fcbc4',
+            cancelButtonColor: 'bg-secondary',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy bỏ',
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: 'index.php?module=default&controller=account&action=checkExistInfoAccount',
+                    success: function (data) {
+                        if(data == 'not exist'){
+                            Swal.fire({
+                                title: 'Bạn vẫn chưa cập nhật đầy đủ thông tin tài khoản ?',
+                                text: 'Bạn có muốn quay lại trang tài khoản không ?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#5fcbc4',
+                                cancelButtonColor: 'bg-secondary',
+                                confirmButtonText: 'Quay về trang tài khoản',
+                                cancelButtonText: 'Hủy bỏ',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                   window.location.href = 'index.php?module=default&controller=account&action=accountForm'
+                                }
+                            })
+                        }else if(data == 'exist'){
+                            $('#admin-form-checkout').submit();
+                        }
+                    }
+                })
+            }
+          })
+        // $.ajax({
+        //     type: 'post',
+        //     dataType: 'json',
+        //     url: 'index.php?module=default&controller=account&action=checkExistInfoAccount',
+        //     success: function (data) {
+        //         if(data == 'not exist'){
+
+        //         }
+                
+        //     }
+        // })
+    })
 })
 
 function loginForm(link, direct) {
@@ -105,7 +159,7 @@ function addCart(bookID, price){
         data: {order_id: bookID, order_price: price},
         success: function (data) {
             $('#cart-summary').text(data);
-            $('#cart-summary').notify("Đã thêm vào giỏ hàng", {className: 'success', position:"bottom right", autoHideDelay: 2500});
+            $('#cart-summary').notify("Đã thêm vào giỏ hàng", {className: 'success', position: "bottom right", autoHideDelay: 2500});
         }
     })
 }
