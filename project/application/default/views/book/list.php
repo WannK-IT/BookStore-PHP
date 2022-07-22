@@ -1,5 +1,6 @@
 <?php
 $xhtmlCategory = $xhtmlBook = $xhtmlBookSpecial =  '';
+$search = $this->arrParam['search'] ?? ''; 
 
 // Duyệt mảng in sidebar category
 if (!empty($this->listCategories)) {
@@ -17,7 +18,9 @@ if (!empty($this->listCategories)) {
 
 // Duyệt mảng in danh sách các cuốn sách
 if (!empty($this->listBooks)) {
+    $xhtmlBook .= '<div class="row margin-res">';
     foreach ($this->listBooks as $itemBook) {
+        $book_name              = HelperFrontend::highlightSearch($search, $itemBook['book_name']);
         $imgBook                = UPLOAD_BOOK_URL . $itemBook['picture'];
         $hrefModalView          = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $itemBook['book_id']]);
         $linkInfoItem1          = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemBook['book_id']]);
@@ -27,7 +30,7 @@ if (!empty($this->listBooks)) {
             $percent_saleoff    = '<div class="lable-block">
                                         <span class="lable4 badge badge-danger"> -' . $itemBook['sale_off'] . '%</span>
                                     </div>';
-            $price_discount     = '<del>' . HelperFrontend::currencyVND($itemBook['price']) . 'đ</del>';
+            $price_discount     = '<del>' . HelperFrontend::currencyVND($itemBook['price']) . '&#8363</del>';
         }
         $xhtmlBook .= '<div class="col-xl-3 col-6 col-grid-box">
             <div class="product-box">
@@ -52,16 +55,17 @@ if (!empty($this->listBooks)) {
                         <i class="fa fa-star"></i>
                     </div>
                     <a href="' . $linkInfoItem1 . '">
-                        <h6 class="pb-2">' . $itemBook['book_name'] . '</h6>
+                        <h6 class="pb-2">' . $book_name . '</h6>
                     </a>
                     <div class="cs-ellipsis-8"><p>' . $itemBook['description'] . '</p></div>
-                    <h4 class="text-lowercase pt-2">' . HelperFrontend::currencyVND($itemBook['price_discount']) . ' đ ' . $price_discount . ' </h4>
+                    <h4 class="text-lowercase pt-2">' . HelperFrontend::currencyVND($itemBook['price_discount']) . ' &#8363 ' . $price_discount . ' </h4>
                 </div>
             </div>
         </div>';
     }
+    $xhtmlBook .= '</div>';
 } else {
-    $xhtmlBook = '<p class="font-weight-bold h6 text-muted pt-5 ml-3">Sách đang được cập nhật !</p>';
+    $xhtmlBook = '<div class="row margin-res d-flex justify-content-center"><p class="font-weight-bold h6 text-muted pt-5 ml-3">Sách đang được cập nhật !</p></div';
 }
 
 
@@ -70,6 +74,7 @@ if (!empty($this->listItemsSpecial)) {
     $index = 1;
     foreach ($this->listItemsSpecial as $itemSpecial) {
         $linkInfoItem2   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemSpecial['book_id']]);
+
         if ($index == 1) {
             $xhtmlBookSpecial .= '<div>';
         }
@@ -92,10 +97,12 @@ if (!empty($this->listItemsSpecial)) {
                     <a href="' . $linkInfoItem2 . '">
                         <h6>' . $itemSpecial['book_name'] . '</h6>
                     </a>                        
-                    <h4 class="text-lowercase">' . HelperFrontend::currencyVND($price) . ' đ</h4>
+                    <h4 class="text-lowercase">' . HelperFrontend::currencyVND($price) . ' &#8363</h4>
                 </div>
             </div>';
         $index++;
+
+        // Mỗi line cho phép hiển thị 6 item book, nếu lớn hơn sẽ chuyển sang line khác
         if ($index == 7) {
             $xhtmlBookSpecial .= '</div>';
             $index = 1;
@@ -142,9 +149,7 @@ if (!empty($this->listItemsSpecial)) {
                             <div class="collection-product-wrapper">
                                 <?php include_once "element/filter.php" ?>
                                 <div class="product-wrapper-grid" id="my-product-list">
-                                    <div class="row margin-res d-flex justify-content-center">
-                                        <?= $xhtmlBook ?>
-                                    </div>
+                                    <?= $xhtmlBook ?>
                                 </div>
 
                                 <!-- Pagination -->

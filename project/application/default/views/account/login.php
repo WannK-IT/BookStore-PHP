@@ -19,12 +19,12 @@
                     <form action="" method="post" id="admin-form" class="theme-form">
                         <div class="form-group">
                             <label for="username" class="required">Tên tài khoản</label>
-                            <input type="text" id="username" name="username" style="font-size: 15px;" value="" class="form-control">
+                            <input type="text" id="username" name="username" autocomplete="off" style="font-size: 15px;" value="" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="password" class="required">Mật khẩu</label>
-                            <input type="password" id="password" name="password" style="font-size: 15px;" value="" class="form-control">
+                            <input type="password" id="password" name="password" autocomplete="off" style="font-size: 15px;" value="" class="form-control">
                         </div>
                         <input type="hidden" id="form[token]" name="form[token]" value="1599208737">
                         <a class="btn btn-solid" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= URL::createLink('default', 'home', 'index')?>')">Đăng nhập</a>

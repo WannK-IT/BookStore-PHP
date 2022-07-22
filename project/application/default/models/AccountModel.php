@@ -20,7 +20,6 @@ class AccountModel extends Model
 		// Check username & password exist
 		if ($this->isExist($query)) {
 			$result = 'success';
-			$_SESSION['loginDefault']['loginSuccess'] = true;
 			$_SESSION['loginDefault']['idUser'] = $loadInfo['id'];
 			$_SESSION['loginDefault']['username'] = $loadInfo['username'];
 			$_SESSION['loginDefault']['fullnameUser'] = $loadInfo['fullname'];

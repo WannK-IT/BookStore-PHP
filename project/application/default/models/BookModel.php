@@ -30,6 +30,9 @@ class BookModel extends Model
 				$query[] = "WHERE `c`.`id` = `b`.`category_id`";
 				$query[] = "AND `b`.`status` = 'active' AND `c`.`status` = 'active'";
 
+				// filter search
+				$query[] = (!empty($arrParams['search'])) ? "AND `b`.`name` LIKE '%" . trim($arrParams['search']) . "%'" : "";
+
 				// filter category
 				$query[] = (!empty($arrParams['cid'])) ? "AND `b`.`category_id` = '" . $arrParams['cid'] . "'" : "";
 
@@ -127,6 +130,9 @@ class BookModel extends Model
 		$query[] = "FROM `" . DB_TBL_CATEGORY . "` AS `c`, `{$this->table}` AS `b`";
 		$query[] = "WHERE `c`.`id` = `b`.`category_id`";
 		$query[] = "AND `b`.`status` = 'active' AND `c`.`status` = 'active'";
+
+		// filter search
+		$query[] = (!empty($arrParams['search'])) ? "AND `b`.`name` LIKE '%" . trim($arrParams['search']) . "%'" : "";
 
 		// filter category
 		$query[] = (!empty($arrParams['cid'])) ? "AND `b`.`category_id` = '" . $arrParams['cid'] . "'" : "";

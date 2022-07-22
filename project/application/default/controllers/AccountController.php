@@ -10,7 +10,7 @@ class AccountController extends Controller
 		$this->_templateObj->setFileTemplate('index.php');
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
-		Session::init();
+
 		$this->_view->categoriesNavbar = $this->_model->listItems($this->_arrParam, 'categoryNavbar');
 	}
 
@@ -47,7 +47,6 @@ class AccountController extends Controller
 	public function registerAccountAction()
 	{
 		$this->_model->register($this->_arrParam);
-		Session::set('createAccountSuccess', true);
 	}
 
 	public function accountFormAction()
@@ -69,10 +68,10 @@ class AccountController extends Controller
 
 			$validate = new Validate($source);
 			$validate->addRule('username', 'string', ['min' => 1, 'max' => 100])
-					->addRule('email', 'email', ['min' => 1, 'max' => 100])
-					->addRule('fullname', 'string', ['min' => 5, 'max' => 100])
-					->addRule('phone', 'string', ['min' => 10, 'max' => 11])
-					->addRule('address', 'string', ['min' => 5, 'max' => 100]);
+				->addRule('email', 'email', ['min' => 1, 'max' => 100])
+				->addRule('fullname', 'string', ['min' => 5, 'max' => 100])
+				->addRule('phone', 'string', ['min' => 10, 'max' => 11])
+				->addRule('address', 'string', ['min' => 5, 'max' => 100]);
 			$validate->run();
 			$this->_view->infoAccount 	 	= $validate->getResult();
 			$params 				 		= $validate->getResult();
@@ -101,19 +100,19 @@ class AccountController extends Controller
 	public function changePasswordFormAction()
 	{
 		$this->_view->breadcrumb = 'Thay đổi mật khẩu';
-		if(!empty($this->_arrParam['form']) && $this->_arrParam['form']['token'] > 0){
-			if(empty($this->_arrParam['form']['old_password']) || empty($this->_arrParam['form']['new_password'])){
+		if (!empty($this->_arrParam['form']) && $this->_arrParam['form']['token'] > 0) {
+			if (empty($this->_arrParam['form']['old_password']) || empty($this->_arrParam['form']['new_password'])) {
 				$this->_view->errors = '<li>Please type password !</li>';
-			}else{
-				if($this->_arrParam['form']['old_password'] !== $this->_arrParam['form']['new_password']){
+			} else {
+				if ($this->_arrParam['form']['old_password'] !== $this->_arrParam['form']['new_password']) {
 					$this->_view->errors = '<li><b>Password: </b>is not match. Please try again !</li>';
-				}else{
+				} else {
 					$checkPass = $this->_model->checkExist($this->_arrParam['form'], 'password');
-					if($checkPass == 'exist'){
+					if ($checkPass == 'exist') {
 						$this->_model->formHandle($this->_arrParam['form']['new_password'], 'changePassword');
 						Session::set('changePasswordDefault', true);
 						$this->redirect('default', 'account', 'changePasswordForm');
-					}else{
+					} else {
 						$this->_view->errors = '<li><b>Old password: </b>is incorrect. Please try again !</li>';
 					}
 				}
@@ -124,69 +123,76 @@ class AccountController extends Controller
 
 	public function orderAction()
 	{
-		$bookID	= $this->_arrParam['order_id'];
-		$price	= $this->_arrParam['order_price'];
+		$bookID		= $this->_arrParam['order_id'];
+		$price		= $this->_arrParam['order_price'];
+		$quantity 	= $this->_arrParam['order_qty'];
 		if (empty($_SESSION['cart'])) {
-			$_SESSION['cart']['quantity'][$bookID] 		= 1;
+			$_SESSION['cart']['quantity'][$bookID] 		= $quantity;
 			$_SESSION['cart']['price'][$bookID] 		= $price;
 		} else {
 			if (key_exists($bookID, $_SESSION['cart']['quantity'])) {
-				$_SESSION['cart']['quantity'][$bookID] 	+= 1;
+				$_SESSION['cart']['quantity'][$bookID] 	+= $quantity;
 				$_SESSION['cart']['price'][$bookID] 	= $price * $_SESSION['cart']['quantity'][$bookID];
 			} else {
-				$_SESSION['cart']['quantity'][$bookID] 	= 1;
+				$_SESSION['cart']['quantity'][$bookID] 	= $quantity;
 				$_SESSION['cart']['price'][$bookID] 	= $price;
 			}
 		}
 		echo json_encode(count($_SESSION['cart']['quantity']));
 	}
 
-	public function cartAction(){
+	public function cartAction()
+	{
 		// Kiểm tra nếu chưa đăng nhập thì chuyển trang login
-		if(!isset($_SESSION['loginDefault']['idUser'])){
-            URL::direct('default', 'account', 'login');
-        }else{
+		if (!isset($_SESSION['loginDefault']['idUser'])) {
+			URL::direct('default', 'account', 'login');
+		} else {
 			$this->_view->breadcrumb 	= 'Giỏ hàng';
 			$this->_view->itemsCart 	= $this->_model->listItems($this->_arrParam, 'cart');
 			$this->_view->render('account/cart');
 		}
 	}
 
-	public function removeItemCartAction(){
+	public function removeItemCartAction()
+	{
 		$this->_model->deleteItem($this->_arrParam, 'itemCart');
 		URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart');
 	}
 
-	public function ajaxChangeQtyAction(){
+	public function ajaxChangeQtyAction()
+	{
 		$bookID 	= $this->_arrParam['bookID'];
 		$qty 		= $this->_arrParam['qty'];
 		$price 		= $this->_arrParam['price'];
 		$_SESSION['cart']['quantity'][$bookID] 	= $qty;
 		$_SESSION['cart']['price'][$bookID] 	= $price * $qty;
 		echo json_encode(
-			[	
-				'book_id' => $bookID, 
+			[
+				'book_id' => $bookID,
 				'quantity_item' => $_SESSION['cart']['quantity'][$bookID],
-				'summaryQuantity' => count($_SESSION['cart']['quantity']), 
+				'summaryQuantity' => count($_SESSION['cart']['quantity']),
 				'totalPriceItem' => $_SESSION['cart']['price'][$bookID],
 				'totalPriceBooks' => array_sum($_SESSION['cart']['price'])
 			]
 		);
 	}
 
-	public function buyAction(){
+	public function buyAction()
+	{
 		$order_id = $this->_model->saveItem($this->_arrParam, 'saveCart');
 		//redirect page success order
 		unset($_SESSION['cart']);
 		URL::direct('default', 'account', 'orderSuccess', ['order_id' => $order_id]);
 	}
 
-	public function orderSuccessAction(){
+	public function orderSuccessAction()
+	{
 		$this->_view->breadcrumb = 'Đặt hàng thành công';
 		$this->_view->render('account/order_success');
 	}
 
-	public function checkExistInfoAccountAction(){
+	public function checkExistInfoAccountAction()
+	{
 		$result = $this->_model->checkExist($this->_arrParam, 'fullInfo');
 		echo json_encode($result);
 	}

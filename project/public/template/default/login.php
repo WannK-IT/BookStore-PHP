@@ -1,3 +1,4 @@
+<?php Session::init(); ?>
 <!DOCTYPE html>
 <html lang="en">
 

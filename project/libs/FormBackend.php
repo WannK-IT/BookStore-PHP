@@ -48,6 +48,14 @@ class FormBackend
         return sprintf('<textarea name="%s" class="form-control form-control-sm" id="%s" rows="%s">%s</textarea>', $name, $name, $rows, $value);
     }
 
+    public static function createCKEditor($name, $rows, $value){
+        return sprintf('
+        <textarea name="%s" class="form-control form-control-sm" id="%s" rows="%s">%s</textarea>
+            <script type="text/javascript">
+                CKEDITOR.replace("%s");
+            </script>', $name, $name, $rows, $value, $name);
+    }
+
     public static function formGroup($arrElement)
     {
         return sprintf('<div class="form-group row">

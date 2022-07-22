@@ -1,4 +1,4 @@
-<?php 
+<?php
 $arrForm = [
     [
         'label' => FormFrontend::label('form[username]', 'Username'),
@@ -22,7 +22,7 @@ $arrForm = [
     ],
 ];
 $formUser   = FormFrontend::showForm($arrForm);
-$showErrors = (!empty($this->errors)) ? FormFrontend::showError($this->errors) : ''; 
+$showErrors = (!empty($this->errors)) ? FormFrontend::showError($this->errors) : '';
 ?>
 
 <?php include_once "element/breadcrumb.php" ?>
@@ -35,6 +35,13 @@ $showErrors = (!empty($this->errors)) ? FormFrontend::showError($this->errors) :
             <div class="col-lg-9">
                 <div class="dashboard-right">
                     <div class="dashboard">
+
+                        <?php
+                        if (isset($_SESSION['updateInfoUser']) && $_SESSION['updateInfoUser'] == true) {
+                            echo HelperFrontend::showAlert('success', 'Cập nhật thông tin tài khoản thành công !');
+                            unset($_SESSION['updateInfoUser']);
+                        }
+                        ?>
                         <?= $showErrors ?>
                         <form action="" method="post" id="user-form" class="theme-form">
                             <?= $formUser ?>

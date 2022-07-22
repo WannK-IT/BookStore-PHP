@@ -9,10 +9,8 @@ class HomeController extends Controller
 		$this->_templateObj->setFileTemplate('index.php');
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
-		Session::init();
 
 		$this->_view->categoriesNavbar = $this->_model->listItems('categoryNavbar');
-
 	}
 
 	public function indexAction()

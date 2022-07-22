@@ -1,8 +1,15 @@
 <?php
-$item = $this->infoItem;
-$xhtmlInfoBook = '';
-$imgBook = UPLOAD_BOOK_URL . $item['picture'];
+$item           = $this->infoItem;
+$xhtmlInfoBook  = '';
+$imgBook        = UPLOAD_BOOK_URL . $item['picture'];
+$linkBuy        = 'javascript:addCart(\'' . $item['id'] . '\', \'' . $item['price_discount'] . '\', quantity)';
 
+if ($item['sale_off'] != 0) {
+    $price = '<h4><del>' . HelperFrontend::currencyVND($item['price']) . ' &#8363</del><span> -' . $item['sale_off'] . '%</span></h4>
+                <h3>' . HelperFrontend::currencyVND($item['price_discount']) . ' &#8363</h3>';
+} else {
+    $price = '<h3>' . HelperFrontend::currencyVND($item['price_discount']) . ' &#8363</h3>';
+}
 // In ra thông tin sách
 $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
         <div class="container-fluid">
@@ -20,20 +27,19 @@ $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
                 <div class="col-lg-8 col-xl-8 rtl-text">
                     <div class="product-right ml-3">
                         <h2 class="mb-2">' . $item['name'] . '</h2>
-                        <h4><del>' . HelperFrontend::currencyVND($item['price']) . ' đ</del><span> -' . $item['sale_off'] . '%</span></h4>
-                        <h3>' . HelperFrontend::currencyVND($item['price_discount']) . ' đ</h3>
+                        ' . $price . '
                         <div class="product-description border-product">
                             <h6 class="product-title">Số lượng</h6>
                             <div class="qty-box">
                                 <div class="input-group">
                                     <span class="input-group-prepend">
-                                        <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
+                                        <button type="button" class="btn quantity-left-minus btn-qty" data-type="minus" data-field="">
                                             <i class="ti-angle-left"></i>
                                         </button>
                                     </span>
                                     <input type="text" name="quantity" class="form-control input-number" value="1">
                                     <span class="input-group-prepend">
-                                        <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
+                                        <button type="button" class="btn quantity-right-plus btn-qty" data-type="plus" data-field="">
                                             <i class="ti-angle-right"></i>
                                         </button>
                                     </span>
@@ -41,7 +47,7 @@ $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
                             </div>
                         </div>
                         <div class="product-buttons">
-                            <a href="#" class="btn btn-solid ml-0"><i class="fa fa-cart-plus"></i> Chọn mua</a>
+                            <a href="' . $linkBuy . '" class="btn btn-solid ml-0 btn-add-item-cart"><i class="fa fa-cart-plus"></i> Chọn mua</a>
                         </div>
                     </div>
                 </div>

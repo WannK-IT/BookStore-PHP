@@ -78,7 +78,6 @@
                                 }
                                 echo $itemCart;
                                 ?>
-
                             </tbody>
 
                         </table>
@@ -106,7 +105,7 @@
                         <a href="' . URL::createLink($this->arrParam['module'], 'book', 'list') . '" class="btn btn-solid">Tiếp tục mua sắm</a>
                     </div>';
             } ?>
-            
+
         </div>
     </form>
 </section>

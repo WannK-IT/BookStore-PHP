@@ -22,7 +22,7 @@ $arrElement = [
     // Description
     [
         'label' => FormBackend::createLabel('form[description]', 'description'),
-        'input' => FormBackend::createTextArea('form[description]', 10, @$this->results['description'])
+        'input' => FormBackend::createCKEditor('form[description]', 10, @$this->results['description'])
     ],
 
     // Price
@@ -77,7 +77,7 @@ $arrElement = [
 $showForm = FormBackend::showForm($arrElement);
 FormBackend::showError(($this->errors) ?? '');
 ?>
-
+<script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 <div class="card card-info card-outline">
     <form action="" method="post" class="mb-0" id="admin-form" enctype="multipart/form-data">
         <div class="card-body">

@@ -1,14 +1,16 @@
 <?php
+Session::init();
 $arrEleCategory = [];
 foreach ($this->categoriesNavbar as $value) {
     $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $value['id']]), 'title' => $value['name']];
 }
 
-$home       = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index'), 'Trang chủ', 'home');
-$book       = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list'), 'Sách', 'book');
-$category   = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list'), 'Danh mục', 'category', $arrEleCategory);
+$home           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index'), 'Trang chủ', 'home');
+$book           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list'), 'Sách', 'book');
+$category       = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list'), 'Danh mục', 'category', $arrEleCategory);
 
-$linkViewCart = URL::createLink($this->arrParam['module'], 'account', 'cart');
+$linkViewCart   = URL::createLink($this->arrParam['module'], 'account', 'cart');
+$linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
 ?>
 
 <header class="my-header sticky">
@@ -81,8 +83,11 @@ $linkViewCart = URL::createLink($this->arrParam['module'], 'account', 'cart');
                                                         <div class="row">
                                                             <div class="col-xl-12">
                                                                 <form action="" method="GET">
+                                                                <input type="hidden" name="module" value="default">
+                                                                <input type="hidden" name="controller" value="book">
+                                                                <input type="hidden" name="action" value="list">
                                                                     <div class="form-group">
-                                                                        <input type="text" class="form-control" name="search" id="search-input" placeholder="Tìm kiếm sách...">
+                                                                        <input type="text" class="form-control" name="search" id="search-input" autocomplete="off" value="<?= $this->arrParam['search'] ?? ''?>" placeholder="Tìm kiếm sách...">
                                                                     </div>
                                                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                                                 </form>

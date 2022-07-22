@@ -22,6 +22,12 @@ $showErrors = (!empty($this->errors)) ? FormFrontend::showError($this->errors) :
             <div class="col-lg-9">
                 <div class="dashboard-right">
                     <div class="dashboard">
+                        <?php
+                        if (isset($_SESSION['changePasswordDefault']) && $_SESSION['changePasswordDefault'] == true) {
+                            echo HelperFrontend::showAlert('success', 'Đổi mật khẩu thành công !');
+                            unset($_SESSION['changePasswordDefault']);
+                        }
+                        ?>
                         <?= $showErrors ?>
                         <form action="" method="post" id="changePassword-form" class="theme-form">
 
@@ -36,4 +42,3 @@ $showErrors = (!empty($this->errors)) ? FormFrontend::showError($this->errors) :
         </div>
     </div>
 </section>
-

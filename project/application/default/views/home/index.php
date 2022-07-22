@@ -1,4 +1,5 @@
 <?php
+
 $xhtmlCategory = $xhtmlBook = '';
 $newArrayList = [];
 
@@ -26,14 +27,16 @@ if (!empty($newArrayList)) {
                             <div class="no-slider row tab-content-inside">';
         $countItemBook = 1;
         foreach ($itemCategory as $keyBook => $valueBook) {
-            
+
             // Danh sách "sản phẩm nổi bật" chỉ cho phép chứa tối đa 8 item, kiểm tra nếu số item vượt quá 8 sẽ ngắt vòng lặp
             if ($countItemBook > 8) {
                 break;
             }
 
             $imgBook        = UPLOAD_BOOK_URL . $valueBook['picture'];
-            $linkModalView  = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $valueBook['book_id']]);
+            $urlBook        = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $valueBook['book_id']]);
+            $linkModalView  = 'javascript:loadModal(\'' . $urlBook . '\', \'' . UPLOAD_BOOK_URL . '\')';
+            $addCart        = 'javascript:addCart(\'' . $valueBook['book_id'] . '\', \'' . $valueBook['price_discount'] . '\')';
             $linkItemBook   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $valueBook['book_id']]);
             $linkViewAll    = URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $valueBook['category_id']]);
 
@@ -48,8 +51,8 @@ if (!empty($newArrayList)) {
                         </a>
                     </div>
                     <div class="cart-info cart-wrap">
-                        <a href="#" title="Add to cart"><i class="ti-shopping-cart"></i></a>
-                        <a href="javascript:loadModal(\'' . $linkModalView . '\', \'' . UPLOAD_BOOK_URL . '\')" title="Quick View"><i class="ti-search"></i></a>
+                        <a href="' . $addCart . '" title="Add to cart"><i class="ti-shopping-cart"></i></a>
+                        <a href="' . $linkModalView . '" title="Quick View"><i class="ti-search"></i></a>
                     </div>
                 </div>
                 <div class="product-detail">
@@ -63,7 +66,7 @@ if (!empty($newArrayList)) {
                     <a href="' . $linkItemBook . '">
                         <h6 class="cs-ellipsis-4 pb-0">' . $valueBook['description'] . '</h6>
                     </a>
-                    <h4 class="text-lowercase pt-2">' . HelperFrontend::currencyVND($valueBook['price_discount']) . ' đ <del>' . HelperFrontend::currencyVND($valueBook['price']) . ' đ</del></h4>
+                    <h4 class="text-lowercase pt-2">' . HelperFrontend::currencyVND($valueBook['price_discount']) . ' &#8363 <del>' . HelperFrontend::currencyVND($valueBook['price']) . ' &#8363</del></h4>
                 </div>
             </div>';
             $countItemBook++;

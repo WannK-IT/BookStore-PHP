@@ -49,12 +49,32 @@ class HelperFrontend
         return $xhtml;
     }
 
-    public static function randomString($length = 8){
+    public static function randomString($length = 8)
+    {
         $arrChar = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9));
         $arrChar = implode('', $arrChar);
         $arrChar = str_shuffle($arrChar);
 
         $result = substr($arrChar, 0, $length);
         return $result;
+    }
+
+    public static function showAlert($color, $msg)
+    {
+        $xhtml = '';
+        $xhtml = '<div id="popup-alert" class="alert alert-' . $color . ' alert-dismissible fade show" role="alert">
+            ' . $msg . '
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>';
+
+        return $xhtml;
+    }
+
+    public static function highlightSearch($keyword, $string)
+    {
+        $xhtml = !empty($keyword) ? preg_replace("#$keyword#ui", "<mark>$0</mark>", $string) : $string;
+        return $xhtml;
     }
 }
