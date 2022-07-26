@@ -7,9 +7,11 @@ class Authentication{
     }
 
     public static function checkLoginDefault(){
+        $check =  true;
         if(!isset($_SESSION['loginDefault']['idUser'])){
-            URL::direct('default', 'account', 'login');
+            $check = false;
         }
+        return $check;
     }
 }
 ?>

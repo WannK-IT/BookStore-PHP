@@ -1,5 +1,4 @@
 <?php include_once "element/breadcrumb.php" ?>
-
 <section class="cart-section section-b-space">
     <form action="<?= URL::createLink($this->arrParam['module'], 'account', 'buy') ?>" method="POST" name="admin-form" id="admin-form-checkout">
         <div class="container">
@@ -27,7 +26,7 @@
                                 foreach ($this->itemsCart as $value) {
                                     $imgBook        = UPLOAD_BOOK_URL . $value['picture'];
                                     $linkBook       = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $value['id']]);
-                                    $linkRemoveItem = URL::createLink($this->arrParam['module'], 'account', 'removeItemCart', ['item_id' => $value['id']]);
+                                    $linkRemoveItem = URL::createLink($this->arrParam['module'], 'account', 'removeItemCart', ['task' => 'item', 'item_id' => $value['id']]);
                                     $price          = HelperFrontend::currencyVND($value['price']);
                                     $totalPrice     = HelperFrontend::currencyVND($value['totalPrice']);
                                     $summary    += $value['totalPrice'];

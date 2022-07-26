@@ -24,7 +24,7 @@ if (!empty($newArrayList)) {
 
         // Các sách nổi bật theo từng tab
         $xhtmlBook .= '<div id="tab-category-' . $keyCategory . '" class="tab-content ' . $activeDefault . '">
-                            <div class="no-slider row tab-content-inside">';
+                            <div class="no-slider row tab-content-inside d-flex justify-content-center">';
         $countItemBook = 1;
         foreach ($itemCategory as $keyBook => $valueBook) {
 

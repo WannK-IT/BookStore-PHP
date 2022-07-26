@@ -5,10 +5,10 @@ $xhtml = '';
 if (!empty($this->listOrder)) {
 
     foreach ($this->listOrder as $item) {
-        $order_id       = HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['id']);
-        $fullname       = HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['fullname']);
-        $email          = HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['email']);
-        $phone          = HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['phone']);
+        $order_id       = (isset($this->arrParam['option_search']) && $this->arrParam['option_search'] == 'id') ? HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['id']) : $item['id']; 
+        $fullname       = (isset($this->arrParam['option_search']) && $this->arrParam['option_search'] == 'fullname') ? HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['fullname']) : $item['fullname'];
+        $email          = (isset($this->arrParam['option_search']) && $this->arrParam['option_search'] == 'email') ? HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['email']) : $item['email'];
+        $phone          = (isset($this->arrParam['option_search']) && $this->arrParam['option_search'] == 'phone') ? HelperBackend::highlightSearch($this->arrParam['search_value'] ?? '', $item['phone']) : $item['phone'];
         $address        = $item['address'];
         $status         = HelperBackend::selectBox('status_order', 'status_order', ['inactive' => 'Chưa xử lý', 'active' => 'Đã xử lý'], $item['status'], $order_id, true);
         $date           = $item['date'];
@@ -40,7 +40,7 @@ if (!empty($this->listOrder)) {
             $book_qty       = $arrQty[$keyBook];
             $total_price    = intval($book_price) * intval($book_qty);
             $sum_price      += $total_price;
-            $xhtml .= '<div class="my-3"><h6 class="mb-0"><i class="fas fa-book pr-1 text-info"></i> ' . $book_name . '</h6>';
+            $xhtml .= '<div class="my-3"><p class="mb-0 font-weight-bold"><i class="fas fa-book pr-1 text-info"></i> ' . $book_name . '</p>';
             $xhtml .= '<p class="mb-0"><i class="fas fa-coins text-warning"></i> <span class="mx-1">' . number_format($book_price) . ' &#8363;</span> x <span class="badge badge-info badge-pill mx-1">' . $book_qty . '</span> = <span class="mx-1">' . number_format($total_price) . ' &#8363;</span></p></div>';
         }
 

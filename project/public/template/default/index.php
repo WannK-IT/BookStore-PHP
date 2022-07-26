@@ -49,7 +49,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#cart-summary').text(<?= count($_SESSION['cart']['quantity']) ?>);
+            $('#cart-summary').text(<?= (!empty($_SESSION['cart']['quantity'])) ? count($_SESSION['cart']['quantity']) : 0  ?>);
         })
 
         function openSearch() {

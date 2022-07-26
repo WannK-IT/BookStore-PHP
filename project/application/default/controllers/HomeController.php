@@ -1,7 +1,6 @@
 <?php
 class HomeController extends Controller
 {
-
 	public function __construct($arrParams)
 	{
 		parent::__construct($arrParams);
@@ -16,8 +15,9 @@ class HomeController extends Controller
 	public function indexAction()
 	{
 		$this->_view->setTitle('BookStore');
-		$this->_view->itemsSpecial = $this->_model->listItems('bookSpecial');
-		$this->_view->listSpecial = $this->_model->listItems('listItemsSpecial');
+		$this->_view->itemsSpecial 	= $this->_model->listItems('bookSpecial');
+		$this->_view->listSpecial 	= $this->_model->listItems('listItemsSpecial');
+		$this->_view->listSlider	= $this->_model->listItems('slider');
 		$this->_view->render('home/index', true);
 	}
 

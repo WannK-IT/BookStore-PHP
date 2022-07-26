@@ -1,8 +1,9 @@
 <?php
 Session::init();
 $arrEleCategory = [];
+
 foreach ($this->categoriesNavbar as $value) {
-    $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $value['id']]), 'title' => $value['name']];
+    $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $value['id']]), 'title' => $value['name'] . ' (' . $value['countBook'] . ')'];
 }
 
 $home           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index'), 'Trang chủ', 'home');
@@ -70,6 +71,7 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
                         <div>
                             <div class="icon-nav">
                                 <ul>
+                                    <!-- Search -->
                                     <li class="onhover-div mobile-search">
                                         <div>
                                             <img src="<?= $this->_dirImg ?>search.png" onclick="openSearch()" class="img-fluid blur-up lazyload" alt="">
@@ -83,11 +85,11 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
                                                         <div class="row">
                                                             <div class="col-xl-12">
                                                                 <form action="" method="GET">
-                                                                <input type="hidden" name="module" value="default">
-                                                                <input type="hidden" name="controller" value="book">
-                                                                <input type="hidden" name="action" value="list">
+                                                                    <input type="hidden" name="module" value="default">
+                                                                    <input type="hidden" name="controller" value="book">
+                                                                    <input type="hidden" name="action" value="list">
                                                                     <div class="form-group">
-                                                                        <input type="text" class="form-control" name="search" id="search-input" autocomplete="off" value="<?= $this->arrParam['search'] ?? ''?>" placeholder="Tìm kiếm sách...">
+                                                                        <input type="text" class="form-control" name="search" id="search-input" autocomplete="off" value="<?= $this->arrParam['search'] ?? '' ?>" placeholder="Tìm kiếm sách...">
                                                                     </div>
                                                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                                                 </form>
@@ -98,9 +100,11 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
                                             </div>
                                         </div>
                                     </li>
+
+                                    <!-- Cart -->
                                     <li class="onhover-div mobile-cart">
                                         <div>
-                                            <a href="<?= $linkViewCart?>" id="cart" class="position-relative">
+                                            <a href="<?= $linkViewCart ?>" id="cart" class="position-relative">
                                                 <img src="<?= $this->_dirImg ?>cart.png" class="img-fluid blur-up lazyload" alt="cart">
                                                 <i class="ti-shopping-cart"></i>
                                                 <!-- <span class="badge badge-warning">0</span> -->
@@ -116,4 +120,5 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
             </div>
         </div>
     </div>
+
 </header>

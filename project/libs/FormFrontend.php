@@ -102,4 +102,26 @@ class FormFrontend
     </div>';
         return $xhtml;
     }
+
+    public static function modalViewComment()
+    {
+        $xhtml = '<div class="modal fade" id="view-comment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Bình luận</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-comment-area mx-3">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        return $xhtml;
+    }
 }

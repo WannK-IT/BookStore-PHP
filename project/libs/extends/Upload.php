@@ -1,5 +1,5 @@
 <?php 
-require_once EXTEND_PATH . 'PhpThumb' . DS . 'ThumbLib.inc.php';
+// require_once EXTEND_PATH . 'PhpThumb' . DS . 'ThumbLib.inc.php';
 class Upload{
     public function uploadFile($file, $folderUpload, $option = null){
         if($option == null){

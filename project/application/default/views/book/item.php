@@ -1,6 +1,7 @@
 <?php
 $item           = $this->infoItem;
-$xhtmlInfoBook  = '';
+$listComment    = $this->listComment;
+$xhtmlInfoBook  = $xhtmlComment = '';
 $imgBook        = UPLOAD_BOOK_URL . $item['picture'];
 $linkBuy        = 'javascript:addCart(\'' . $item['id'] . '\', \'' . $item['price_discount'] . '\', quantity)';
 
@@ -10,7 +11,49 @@ if ($item['sale_off'] != 0) {
 } else {
     $price = '<h3>' . HelperFrontend::currencyVND($item['price_discount']) . ' &#8363</h3>';
 }
-// In ra thông tin sách
+
+// Kiểm tra phần bình luận đã login
+if (Authentication::checkLoginDefault() == true) {
+    $comment_place  = '<div class="col-sm-12">
+        <b>' . $_SESSION['loginDefault']['fullnameUser'] . '</b>
+        <div id="user_typing_comment" class="my-2">
+            <form method="POST" id="form-comment">
+                <textarea id="comment_place" name="comment" style="padding: 10px" cols="120" rows="5" placeholder="Viết bình luận..."></textarea>
+                <input type="hidden" name="book_id" value="' . $item['id'] . '">
+                <div class="d-flex justify-content-end mt-2"><a href="javascript:comment()" class="btn btn-solid" value="Bình luận" >Bình luận</a></div>
+            </form>
+        </div>
+    </div>';
+} else {
+    $urlLogin       = URL::createLink('default', 'account', 'login');
+    $urlRegister    = URL::createLink('default', 'account', 'register');
+    $comment_place  = '<p class="text-center font-weight-bold mb-3">Chỉ có thành viên mới có thể bình luận. Vui lòng <a href="' . $urlLogin . '">đăng nhập</a> hoặc <a href="' . $urlRegister . '">đăng ký.</a> </p>';
+}
+
+//----------------  In comment ---------------- 
+if (!empty($listComment)) {
+    $index = 1;
+    foreach ($listComment as $itemComment) {
+        if ($index > 7) {
+            $bid = $this->arrParam['bid'];
+            $linkLoadMore = 'javascript:loadMoreComment(\'' . $bid . '\')';
+            $xhtmlComment .= '<div class="text-center"><a href="' . $linkLoadMore . '" class="btn btn-solid see-more-comment">Xem thêm</a></div>';
+            break;
+        } else {
+            $xhtmlComment .= '<div class="row my-5">
+            <div class="col-sm-2">
+                <p class="text-dark p-0"><strong>' . $itemComment['fullname'] . '</strong></p>
+                <p class="text-muted mt-1 p-0" style="font-size: 12px">' . date('d/m/Y', strtotime($itemComment['created'])) . '</p>
+            </div>
+            <div class="col-sm-10"><p class="p-0">' . $itemComment['text'] . '</p></div>
+        </div>';
+            $index++;
+        }
+    }
+} else {
+}
+
+//----------------  In thông tin sách ---------------- 
 $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
         <div class="container-fluid">
             <div class="row">
@@ -61,11 +104,29 @@ $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
                             <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-toggle="tab" href="#top-home" role="tab" aria-selected="true">Mô tả sản phẩm</a>
                                 <div class="material-border"></div>
                             </li>
+
+                            <li class="nav-item"><a class="nav-link" id="comment-section-tab" data-toggle="tab" href="#comment-section" role="tab" aria-selected="false">Bình luận</a>
+                                <div class="material-border"></div>
+                            </li>
                         </ul>
                         <div class="tab-content nav-material" id="top-tabContent">
                             <div class="tab-pane fade show active ckeditor-content" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                                 <p><strong>' . $item['name'] . '</strong></p>
                                 <p>' . $item['description'] . '</p>
+                            </div>
+
+                            <div class="tab-pane fade ckeditor-content" id="comment-section" role="tabpanel" aria-labelledby="comment-section-tab">
+                                <div class="container my-3">
+                                    ' . $comment_place . '
+                                    
+                                    <div class="col-sm-12">
+                                        <p class="p-0 count-comment">' . count($listComment) . ' bình luận</p>
+                                        <div class="comment-area">
+                                            ' . $xhtmlComment . '
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,7 +135,6 @@ $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
         </section>
     </div>';
 ?>
-
 <?php include_once "element/breadcrumb.php" ?>
 
 <section class="section-b-space">
@@ -99,3 +159,7 @@ $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
 <!-- Quick-view modal popup start-->
 <?= FormFrontend::modalViewProduct() ?>
 <!-- Quick-view modal popup end-->
+
+<!-- Quick-view modal comment popup start-->
+<?= FormFrontend::modalViewComment() ?>
+<!-- Quick-view modal comment popup end-->

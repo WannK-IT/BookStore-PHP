@@ -52,6 +52,7 @@ class BookController extends Controller
 		$this->_view->listItemsSpecial 	= $this->_model->listItems($this->_arrParam, 'bookSpecial');
 		$this->_view->listItemsNew 		= $this->_model->listItems($this->_arrParam, 'bookNew');
 		$this->_view->listItemsRelate 	= $this->_model->listItems($this->_arrParam, 'listRelate');
+		$this->_view->listComment		= $this->_model->listItems($this->_arrParam, 'comment');
 		$this->_view->render('book/item', true);
 	}
 
@@ -60,5 +61,16 @@ class BookController extends Controller
 		$result = $this->_model->singleItem($this->_arrParam, 'ajaxModalView');
 		echo json_encode($result);
 	}
+
+	public function commentAction(){
+		$result = $this->_model->comment($this->_arrParam);
+		echo json_encode($result);
+	}
+
+	public function loadCommentAction(){
+		$result = $this->_model->listItems($this->_arrParam, 'comment');
+		echo json_encode($result);
+	}
+
 
 }

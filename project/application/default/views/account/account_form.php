@@ -10,7 +10,7 @@ $arrForm = [
     ],
     [
         'label' => FormFrontend::label('form[fullname]', 'Họ tên'),
-        'input' => FormFrontend::inputText('text', 'fullname', 'form[fullname]', $this->infoAccount['fullname'])
+        'input' => FormFrontend::inputText('text', 'fullname', 'form[fullname]', $this->infoAccount['fullname'], true)
     ],
     [
         'label' => FormFrontend::label('form[phone]', 'Số điện thoại'),

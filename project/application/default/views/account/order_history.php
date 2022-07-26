@@ -1,5 +1,6 @@
 <?php
 $xhtml = '';
+
 if (!empty($this->orders)) {
     foreach ($this->orders as $item) {
         $order_id       = $item['id'];
@@ -15,7 +16,7 @@ if (!empty($this->orders)) {
         $xhtml .= '<div class="card">
             <div class="card-header">
                 <h5 class="mb-0">
-                    <button style="text-transform: none;" class="btn btn-link collapsed mr-2" type="button" data-toggle="collapse" data-target="#' . $order_id . '">Mã đơn hàng: ' . $order_id . '</button>
+                    <button style="text-transform: none;" class="btn btn-link collapsed mr-2" type="button" data-toggle="collapse" data-target="#' . $order_id . '">Mã đơn hàng: ' . $order_id . ' ('.count($arrBookID).' sản phẩm)</button>
                     <span class="mr-4">Thời gian: ' . $date . '</span>
                     ' . $status . '
                 </h5>

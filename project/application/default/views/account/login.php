@@ -27,7 +27,13 @@
                             <input type="password" id="password" name="password" autocomplete="off" style="font-size: 15px;" value="" class="form-control">
                         </div>
                         <input type="hidden" id="form[token]" name="form[token]" value="1599208737">
-                        <a class="btn btn-solid" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= URL::createLink('default', 'home', 'index')?>')">Đăng nhập</a>
+                        <a class="btn btn-solid" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= ($_SESSION['directToCart']) ?? URL::createLink('default', 'home', 'index') ?>')">Đăng nhập</a>
+                        
+                        <?php 
+                        // Sau khi truyền URL directToCart thì xóa session
+                        unset($_SESSION['directToCart'])
+                        ?>
+
                     </form>
                 </div>
             </div>

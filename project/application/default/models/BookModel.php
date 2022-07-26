@@ -11,10 +11,12 @@ class BookModel extends Model
 	{
 		switch ($option) {
 			case 'categoryNavbar':
-				$query[] = "SELECT `id`, `name`";
-				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
-				$query[] = "WHERE `status` = 'active'";
-				$query[] = "ORDER BY `ordering`";
+				$query[] = "SELECT `c`.`id`, `c`.`name`, count(`b`.`id`) AS 'countBook'";
+				$query[] = "FROM `" . DB_TBL_CATEGORY . "` AS `c`";
+				$query[] = "LEFT JOIN `" . DB_TBL_BOOK . "` AS `b` ON  `c`.`id` = `b`.`category_id`";
+				$query[] = "AND `c`.`status` = 'active' AND `b`.`status` = 'active'";
+				$query[] = "GROUP BY `c`.`id`";
+				$query[] = "ORDER BY `c`.`ordering`";
 				break;
 
 			case 'listCategories':
@@ -85,6 +87,14 @@ class BookModel extends Model
 				$query[] = "ORDER BY RAND()";
 				$query[] = "LIMIT 6";
 				break;
+
+			case 'comment':
+				$query[] = "SELECT `text`, `fullname`, `created`";
+				$query[] = "FROM `" . DB_TBL_COMMENT . "`";
+				$query[] = "WHERE `book_id` = '" . $arrParams['bid'] . "'";
+				$query[] = "AND `status` = 'active'";
+				$query[] = "ORDER BY `created` DESC";
+				break;
 		}
 
 		$result = implode(' ', $query);
@@ -137,7 +147,24 @@ class BookModel extends Model
 		// filter category
 		$query[] = (!empty($arrParams['cid'])) ? "AND `b`.`category_id` = '" . $arrParams['cid'] . "'" : "";
 
-		$result = implode(' ', $query);
+		$result  = implode(' ', $query);
 		return $this->singleRecord($result);
+	}
+
+	public function comment($arrParams)
+	{
+		$comment 	= $arrParams['comment'];
+		$fullname	= $_SESSION['loginDefault']['fullnameUser'];
+		$date		= date('Y-m-d H:i:s');
+		$bookID		= $arrParams['book_id'];
+
+		$query[] 	= "INSERT INTO `" . DB_TBL_COMMENT . "` (`text`, `fullname`, `status`, `created`, `book_id`)";
+		$query[] 	= "VALUES ('" . $comment . "', '" . $fullname . "', 'active', '" . $date . "', '" . $bookID . "')";
+		$query 		= implode($query);
+		$this->query($query);
+
+		$countCmt	= "SELECT count(`id`) AS 'sumCMT' FROM `" . DB_TBL_COMMENT . "` WHERE `book_id` = '" . $bookID . "'";
+		$countCmt	= $this->singleRecord($countCmt);
+		return ['fullname' => $fullname, 'comment' => $comment, 'created' => date('d/m/Y', strtotime($date)), 'count' => $countCmt['sumCMT']];
 	}
 }

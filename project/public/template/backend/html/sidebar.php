@@ -1,8 +1,5 @@
 <?php
 ob_start();
-$dashboard      = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'dashboard', 'index'), 'dashboard', 'fas fa-tachometer-alt', $this->arrParam['controller']);
-$cart           = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'cart', 'index'), 'cart', 'fas fa-shopping-cart', $this->arrParam['controller']);
-
 $arrItemGroup   =   [
     [
         'link' => URL::createLink($this->arrParam['module'], 'group', 'index'),
@@ -55,25 +52,42 @@ $arrItemCategory    =   [
     ],
 ];
 
+
+$arrItemSlider    =   [
+    [
+        'link' => URL::createLink($this->arrParam['module'], 'slider', 'index'),
+        'icon' => 'fas fa-list-ul',
+        'title' => 'list'
+    ],
+    [
+        'link' => URL::createLink($this->arrParam['module'], 'slider', 'form'),
+        'icon' => 'fas fa-edit',
+        'title' => 'form'
+    ],
+];
+
+$dashboard  = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'dashboard', 'index'), 'dashboard', 'fas fa-tachometer-alt', $this->arrParam['controller']);
+$cart       = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'cart', 'index'), 'cart', 'fas fa-shopping-cart', $this->arrParam['controller']);
 $group      = HelperBackend::itemSideBar('multi', '#', 'group', 'fas fa-users', $this->arrParam['controller'], $arrItemGroup);
 $user       = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $this->arrParam['controller'], $arrItemUser);
 $book       = HelperBackend::itemSideBar('multi', '#', 'book', 'fas fa-book-open', $this->arrParam['controller'], $arrItemBook);
-$category   = HelperBackend::itemSideBar('multi', '#', 'category', 'fas fa-bars', $this->arrParam['controller'], $arrItemCategory);
+$category   = HelperBackend::itemSideBar('multi', '#', 'category', 'far fa-list-alt', $this->arrParam['controller'], $arrItemCategory);
+$slider     = HelperBackend::itemSideBar('multi', '#', 'slider', 'fas fa-sliders-h', $this->arrParam['controller'], $arrItemSlider);
 
 
 // Check Permission
 if($_SESSION['login']['loginRole'] == 'admin' || $_SESSION['login']['loginRole'] == 'manager'){
-    $sideBarList = $dashboard . $group . $user . $category . $book . $cart;
+    $sideBarList = $dashboard . $group . $user . $category . $book . $slider . $cart;
 }else{
-    $sideBarList = $dashboard . $category . $book;
+    $sideBarList = $dashboard . $category . $book . $slider . $cart;
 }
 ?>
 
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
     <a href="index.php?module=backend&controller=dashboard&action=index" class="brand-link">
-        <img src="<?= $this->_dirImg ?>logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">ZendVN</span>
+        <img src="<?= $this->_dirImg ?>faviconWeb.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BOOKSTORE</span>
     </a>
 
     <!-- Sidebar -->

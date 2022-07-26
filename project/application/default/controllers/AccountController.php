@@ -145,9 +145,11 @@ class AccountController extends Controller
 	{
 		// Kiểm tra nếu chưa đăng nhập thì chuyển trang login
 		if (!isset($_SESSION['loginDefault']['idUser'])) {
+			$_SESSION['directToCart'] = URL::createLink('default', 'account', 'cart');
 			URL::direct('default', 'account', 'login');
 		} else {
-			$this->_view->breadcrumb 	= 'Giỏ hàng';
+			$countItemCart				= (!empty($_SESSION['cart']['quantity'])) ? count($_SESSION['cart']['quantity']) : '0';
+			$this->_view->breadcrumb 	= 'Giỏ hàng (' . $countItemCart . ' sản phẩm)';
 			$this->_view->itemsCart 	= $this->_model->listItems($this->_arrParam, 'cart');
 			$this->_view->render('account/cart');
 		}
@@ -155,8 +157,13 @@ class AccountController extends Controller
 
 	public function removeItemCartAction()
 	{
-		$this->_model->deleteItem($this->_arrParam, 'itemCart');
-		URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart');
+		if ($this->_arrParam['task'] == 'item') {
+			$this->_model->deleteItem($this->_arrParam, 'itemCart');
+			URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart');
+		} elseif ($this->_arrParam['task'] == 'cart') {
+			unset($_SESSION['cart']);
+			URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart');
+		}
 	}
 
 	public function ajaxChangeQtyAction()

@@ -66,20 +66,24 @@ $(document).ready(function(){
         })
     })
 
+    // add item to cart
     $('.btn-add-to-cart').click(function(){
         $('#quick-view').modal('hide');
     })
 
 })
 
-let linkItemCart = $('a.btn-add-item-cart').attr('href');
-$('a.btn-add-item-cart').attr('href', $('a.btn-add-item-cart').attr('href').replace(', quantity', ''));
-$('.btn-qty').click(function(){
-    let qty     = $('.input-number').val();
-    let link    = linkItemCart.replace('quantity', '\''+qty+'\'');
-    $('a.btn-add-item-cart').attr('href', link);
-})
 
+// nếu tồn tại class thì thực hiện
+if($('a.btn-add-item-cart').length){
+    let linkItemCart = $('a.btn-add-item-cart').attr('href');
+    $('a.btn-add-item-cart').attr('href', $('a.btn-add-item-cart').attr('href').replace(', quantity', ''));
+    $('.btn-qty').click(function(){
+        let qty     = $('.input-number').val();
+        let link    = linkItemCart.replace('quantity', '\''+qty+'\'');
+        $('a.btn-add-item-cart').attr('href', link);
+    })
+}
 
 
 function loginForm(link, direct) {
@@ -194,6 +198,47 @@ function addCart(bookID, price, quantity = null){
     })
 }
 
+function comment(){
+    if(!$('textarea#comment_place').val().trim()){
+        toastMsg('warning', 'Vui lòng nhập bình luận !');
+    }else{
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: 'index.php?module=default&controller=book&action=comment',
+            data: $('#form-comment').serialize(),
+            success: function (data) {
+                $('div.comment-area').prepend(rowComment(data['fullname'], data['created'], data['comment']));
+                $('p.count-comment').text(data['count'] + ' bình luận');
+                $('textarea#comment_place').val('');
+                toastMsg('success', 'Thêm bình luận thành công');
+            }
+        })
+    }  
+}
+
+function loadMoreComment(bookID){
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: 'index.php?module=default&controller=book&action=loadComment',
+        data: {bid: bookID},
+        success: function (data) {
+            $.each(data, function(index, value){
+
+                $('div.modal-comment-area').append(elementModalComment(value['fullname'], formatDate(value['created']), value['text']))
+            })
+        }
+    })
+    $('#view-comment').modal('show');
+}
+
+
+function formatDate(date){
+    let dataDate = new Date(date);
+    return dataDate.getDate() + '/' + (dataDate.getMonth() + 1) + '/' + dataDate.getFullYear();
+}
+
 function formatCurrency(number){
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number)
 }
@@ -212,7 +257,6 @@ function toastMsg(icon, msg) {
     })
 }
 
-
 function toastMsg2(icon, msg) {
     
     const Toast = Swal.mixin({
@@ -227,3 +271,15 @@ function toastMsg2(icon, msg) {
         title: msg
     })
 }
+
+function rowComment(name, date, comment){
+    let xhtml = '';
+    xhtml = '<div class="row my-5"><div class="col-sm-2"><p class="text-dark p-0"><strong>' + name + '</strong></p>' + '<p class="text-muted mt-1 p-0" style="font-size: 12px">' + date + '</p>' + '</div><div class="col-sm-10"><p class="p-0">' + comment + '</p></div></div>';
+    return xhtml;
+}
+
+function elementModalComment(name, date, comment){
+    let xhtml = '<div class="row mb-3"><div class="col-sm-2"><p class="text-dark p-0"><strong>'+name+'</strong></p><p class="text-muted mt-1 p-0" style="font-size: 12px">'+date+'</p></div><div class="col-sm-10"><p class="p-0">'+comment+'</p></div></div>';
+    return xhtml;
+}
+  
