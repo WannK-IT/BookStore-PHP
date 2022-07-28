@@ -1,13 +1,19 @@
 RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
 
 # --------------- HOME --------------- 
 RewriteRule index.html                          index.php?module=default&controller=home&action=index
 
-# --------------- BOOK --------------- 
-RewriteRule sach.html                           index.php?module=default&controller=book&action=list
-RewriteRule ([A-Za-z0-9_-]+)\&page\=([0-9]+)     index.php?module=default&controller=book&action=list&page=$2
-RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html     index.php?module=default&controller=book&action=list&cid=$2
-RewriteRule ([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)\.html     index.php?module=default&controller=book&action=item&bid=$3
+# --------------- BOOK ---------------
+RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html\&page\=([0-9]+)     index.php?module=default&controller=book&action=list&cid=$2&page=$3
+RewriteRule ([A-Za-z0-9_-]+)\.html\&page\=([0-9]+)              index.php?module=default&controller=book&action=list&page=$2
+RewriteRule sach.html                                           index.php?module=default&controller=book&action=list
+RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html                     index.php?module=default&controller=book&action=list&cid=$2
+
+RewriteRule ([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)\.html    index.php?module=default&controller=book&action=item&bid=$3
 
 # --------------- CATEGORY --------------- 
 RewriteRule danh-muc.html                       index.php?module=default&controller=category&action=list

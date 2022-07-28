@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    
     // --------- Fade popup
     $("#popup-alert").fadeTo(3000, 500).slideUp(500, function () {
         $("#popup-alert").slideUp(500);
@@ -9,19 +8,24 @@ $(document).ready(function(){
         let bookID      = $(this).data('id');
         let quantity    = $(this).val();
         let price       = $('#input_price_'+ bookID).val() ;
-        $.ajax({
-            type: 'post',
-            dataType: 'json',
-            url: 'index.php?module=default&controller=account&action=ajaxChangeQty',
-            data: {bookID: bookID, qty: quantity, price: price},
-            success: function (data) {
-                $('#cart-summary').text(data['summaryQuantity']);
-                $('.total-price-' + data['book_id']).text(formatCurrency(data['totalPriceItem']));
-                $('.total-price-books').text(formatCurrency(data['totalPriceBooks']));
-                $('#input_quantity_' + bookID).val(data['quantity_item']);
-                $('.boxQuantity-' + bookID).notify("Đã thay đổi số lượng", {className: 'success', position:"bottom center", autoHideDelay: 1500});   
-            }
-        })
+        if(!Number.isInteger(parseFloat(quantity))){
+            toastMsg('error', 'Vui lòng nhập số nguyên !');
+        }else{
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'index.php?module=default&controller=account&action=ajaxChangeQty',
+                data: {bookID: bookID, qty: quantity, price: price},
+                success: function (data) {
+                    $('#cart-summary').text(data['summaryQuantity']);
+                    $('.total-price-' + data['book_id']).text(formatCurrency(data['totalPriceItem']));
+                    $('.total-price-books').text(formatCurrency(data['totalPriceBooks']));
+                    $('#input_quantity_' + bookID).val(data['quantity_item']);
+                    $('.boxQuantity-' + bookID).notify("Đã thay đổi số lượng", {className: 'success', position:"bottom center", autoHideDelay: 1500});   
+                }
+            })
+        }
+        
     });
 
     $('button#btn-order').click(function(e){
@@ -186,16 +190,20 @@ function addCart(bookID, price, quantity = null){
     if(quantity != null){
         qty = quantity;
     }
-    $.ajax({
-        type: 'post',
-        dataType: 'json',
-        url: 'index.php?module=default&controller=account&action=order',
-        data: {order_id: bookID, order_price: price, order_qty: qty},
-        success: function (data) {
-            $('#cart-summary').text(data);
-            $('#cart-summary').notify("Đã thêm vào giỏ hàng", {className: 'success', position: "bottom right", autoHideDelay: 2500});
-        }
-    })
+    if(!Number.isInteger(parseFloat(qty))){
+        toastMsg('error', 'Vui lòng nhập số nguyên !')
+    }else{
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: 'index.php?module=default&controller=account&action=order',
+            data: {order_id: bookID, order_price: price, order_qty: qty},
+            success: function (data) {
+                $('#cart-summary').text(data);
+                $('#cart-summary').notify("Đã thêm vào giỏ hàng", {className: 'success', position: "bottom right", autoHideDelay: 2500});
+            }
+        })
+    }
 }
 
 function comment(){

@@ -60,6 +60,7 @@ if (!empty($newArrayList)) {
                     </div>
                 </div>
                 <div class="product-detail">
+                <!-- 
                     <div class="rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -67,6 +68,7 @@ if (!empty($newArrayList)) {
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                     </div>
+                -->
                     <a href="' . $linkItemBook . '">
                         <h6 class="cs-ellipsis-4 pb-0">' . $valueBook['book_name'] . '</h6>
                     </a>

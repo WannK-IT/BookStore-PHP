@@ -64,7 +64,7 @@
                                         <td>
                                             <div class="qty-box">
                                                 <div class="input-group boxQuantity-' . $value['id'] . '">
-                                                    <input type="number" name="quantity" value="' . $value['quantity'] . '" class="form-control input-number quantity-box" data-id="' . $value['id'] . '" min="1">
+                                                    <input type="number" name="quantity" value="' . $value['quantity'] . '" class="form-control input-number quantity-box" data-id="' . $value['id'] . '" min="1" autocomplete="off">
                                                 </div>
                                             </div>
                                         </td>

@@ -52,6 +52,7 @@ if (!empty($this->listBooks)) {
                     </div>
                 </div>
                 <div class="product-detail">
+                <!--
                     <div class="rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -59,6 +60,7 @@ if (!empty($this->listBooks)) {
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                     </div>
+                -->
                     <a href="' . $linkInfoItem1 . '">
                         <h6 class="pb-2">' . $book_name . '</h6>
                     </a>
@@ -72,7 +74,6 @@ if (!empty($this->listBooks)) {
 } else {
     $xhtmlBook = '<div class="row margin-res d-flex justify-content-center"><p class="font-weight-bold h6 text-muted pt-5 ml-3">Sách đang được cập nhật !</p></div';
 }
-
 
 // Duyệt mảng in ra các sách nổi bật ( `book`.`special` = 'yes' )
 if (!empty($this->listItemsSpecial)) {
@@ -94,6 +95,7 @@ if (!empty($this->listItemsSpecial)) {
                 <a href="' . $linkInfoItem2 . '">
                     <img class="img-fluid blur-up lazyload" src="' . $img . '" alt="Special Book" style="width: 130px; height: 160px"></a>
                 <div class="media-body align-self-center">
+                <!-- 
                     <div class="rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -101,6 +103,7 @@ if (!empty($this->listItemsSpecial)) {
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                     </div>
+                -->
 
                     <a href="' . $linkInfoItem2 . '">
                         <h6>' . $itemSpecial['book_name'] . '</h6>
@@ -175,3 +178,4 @@ if (!empty($this->listItemsSpecial)) {
 <!-- Quick-view modal popup start-->
 <?= FormFrontend::modalViewProduct() ?>
 <!-- Quick-view modal popup end-->
+

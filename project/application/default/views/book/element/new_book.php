@@ -18,6 +18,7 @@ if (!empty($this->listItemsNew)) {
                 <a href="' . $linkInfoItem . '">
                     <img class="img-fluid blur-up lazyload" src="' . $img . '" alt="Special Book" style="width: 130px; height: 160px"></a>
                 <div class="media-body align-self-center">
+                <!--
                     <div class="rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -25,7 +26,7 @@ if (!empty($this->listItemsNew)) {
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                     </div>
-
+                -->
                     <a href="' . $linkInfoItem . '">
                         <h6>' . $item['book_name'] . '</h6>
                     </a>                        

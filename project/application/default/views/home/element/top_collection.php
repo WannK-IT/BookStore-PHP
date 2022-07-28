@@ -28,6 +28,7 @@ if (!empty($list)) {
                 </div>
             </div>
             <div class="product-detail">
+            <!-- 
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -35,6 +36,7 @@ if (!empty($list)) {
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                 </div>
+            -->
                 <a href="' . $linkItemBook . '">
                     <h6 class="cs-ellipsis-4 pt-2 pb-0">' . $item['name'] . '</h6>
                 </a>

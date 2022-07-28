@@ -28,13 +28,15 @@ if (!empty($this->listItemsRelate)) {
                     </div>
                 </div>
                 <div class="product-detail">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
+                <!-- 
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                -->
                     <a href="' . $linkInfoItem . '">
                         <h6>' . $item['book_name'] . '</h6>
                     </a>

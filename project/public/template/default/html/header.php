@@ -85,7 +85,7 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-xl-12">
-                                                                <form action="" method="GET">
+                                                                <form action="<?= URL::createLink("default", "book", "list", ['search' => $this->arrParam['search'] ?? ''], 'sach.html')?>" method="POST">
                                                                     <input type="hidden" name="module" value="default">
                                                                     <input type="hidden" name="controller" value="book">
                                                                     <input type="hidden" name="action" value="list">
