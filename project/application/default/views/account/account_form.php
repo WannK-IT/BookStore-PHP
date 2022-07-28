@@ -1,4 +1,5 @@
 <?php
+
 $arrForm = [
     [
         'label' => FormFrontend::label('form[username]', 'Username'),

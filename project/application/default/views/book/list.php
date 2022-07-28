@@ -2,29 +2,34 @@
 $xhtmlCategory = $xhtmlBook = $xhtmlBookSpecial =  '';
 $search = $this->arrParam['search'] ?? ''; 
 
-// Duyệt mảng in sidebar category
+// ----------- Duyệt mảng in sidebar category ----------- 
 if (!empty($this->listCategories)) {
     $xhtmlCategory .= '<div class="collection-collapse-block-content">
                         <div class="collection-brand-filter">';
 
     foreach ($this->listCategories as $itemCategory) {
-        $linkCategory = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], $this->arrParam['action'], ['cid' => $itemCategory['id']]);
-        $xhtmlCategory .= HelperFrontend::sidebar($linkCategory, $itemCategory['name'], $itemCategory['id'], @$this->arrParam['cid'], 'category');
+        $idCategory         = $itemCategory['id'];
+        $categoryNameURL    = URL::filterURL($itemCategory['name']);
+        $linkCategory       = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], $this->arrParam['action'], ['cid' => $idCategory], "$categoryNameURL-$idCategory.html");
+        $xhtmlCategory      .= HelperFrontend::sidebar($linkCategory, $itemCategory['name'], $idCategory, @$this->arrParam['cid'], 'category');
     }
     $xhtmlCategory  .= '</div></div>';
 } else {
     $xhtmlCategory  = '<p class="font-weight-bold text-muted text-center pt-5">Danh mục đang được cập nhật !</p>';
 }
 
-// Duyệt mảng in danh sách các cuốn sách
+// ----------- Duyệt mảng in danh sách các cuốn sách ----------- 
 if (!empty($this->listBooks)) {
     $xhtmlBook .= '<div class="row margin-res">';
     foreach ($this->listBooks as $itemBook) {
+        $idBook                 = $itemBook['book_id'];
+        $bookNameURL            = URL::filterURL($itemBook['book_name']);
+        $categoryNameURL        = URL::filterURL($itemBook['category_name']);
         $book_name              = HelperFrontend::highlightSearch($search, $itemBook['book_name']);
         $imgBook                = UPLOAD_BOOK_URL . $itemBook['picture'];
-        $hrefModalView          = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $itemBook['book_id']]);
-        $linkInfoItem1          = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemBook['book_id']]);
-        $addCart              = 'javascript:addCart(\'' . $itemBook['book_id'] . '\', \'' . $itemBook['price_discount'] . '\')';
+        $hrefModalView          = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $idBook]);
+        $linkInfoItem1          = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $idBook], "$categoryNameURL/$bookNameURL-$idBook.html");
+        $addCart              = 'javascript:addCart(\'' . $idBook . '\', \'' . $itemBook['price_discount'] . '\')';
         $percent_saleoff = $price_discount = '';
         if ($itemBook['sale_off'] != 0) {
             $percent_saleoff    = '<div class="lable-block">
@@ -73,7 +78,10 @@ if (!empty($this->listBooks)) {
 if (!empty($this->listItemsSpecial)) {
     $index = 1;
     foreach ($this->listItemsSpecial as $itemSpecial) {
-        $linkInfoItem2   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemSpecial['book_id']]);
+        $idBookSpecial          = $itemSpecial['book_id'];
+        $bookSpecialNameURL     = URL::filterURL($itemSpecial['book_name']);
+        $categorySpecialNameURL = URL::filterURL($itemSpecial['category_name']);
+        $linkInfoItem2          = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $idBookSpecial], "$categorySpecialNameURL/$bookSpecialNameURL-$idBookSpecial.html");
 
         if ($index == 1) {
             $xhtmlBookSpecial .= '<div>';

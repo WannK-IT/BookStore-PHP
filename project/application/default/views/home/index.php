@@ -16,6 +16,7 @@ foreach ($this->listSpecial as $value) {
 if (!empty($newArrayList)) {
     $xhtmlCategory .= '<ul class="tabs tab-title">';
     $i = 1;
+
     foreach ($newArrayList as $keyCategory => $itemCategory) {
         // Danh mục nổi bật
         $activeDefault = ($i == 1) ? 'active default' : '';
@@ -32,13 +33,16 @@ if (!empty($newArrayList)) {
             if ($countItemBook > 8) {
                 break;
             }
-
+            $id             = $valueBook['book_id'];
+            $idCat          = $valueBook['category_id'];
+            $nameURL        = URL::filterURL($valueBook['book_name']);
+            $catNameURL     = URL::filterURL($valueBook['category_name']);
             $imgBook        = UPLOAD_BOOK_URL . $valueBook['picture'];
-            $urlBook        = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $valueBook['book_id']]);
+            $urlBook        = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $id]);
             $linkModalView  = 'javascript:loadModal(\'' . $urlBook . '\', \'' . UPLOAD_BOOK_URL . '\')';
-            $addCart        = 'javascript:addCart(\'' . $valueBook['book_id'] . '\', \'' . $valueBook['price_discount'] . '\')';
-            $linkItemBook   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $valueBook['book_id']]);
-            $linkViewAll    = URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $valueBook['category_id']]);
+            $addCart        = 'javascript:addCart(\'' . $id . '\', \'' . $valueBook['price_discount'] . '\')';
+            $linkItemBook   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $id], "$catNameURL/$nameURL-$id.html");
+            $linkViewAll    = URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $valueBook['category_id']], "$catNameURL-$idCat.html");
 
             $xhtmlBook .= '<div class="product-box">
                 <div class="img-wrapper">
@@ -64,9 +68,9 @@ if (!empty($newArrayList)) {
                         <i class="fa fa-star"></i>
                     </div>
                     <a href="' . $linkItemBook . '">
-                        <h6 class="cs-ellipsis-4 pb-0">' . $valueBook['description'] . '</h6>
+                        <h6 class="cs-ellipsis-4 pb-0">' . $valueBook['book_name'] . '</h6>
                     </a>
-                    <h4 class="text-lowercase pt-2">' . HelperFrontend::currencyVND($valueBook['price_discount']) . ' &#8363 <del>' . HelperFrontend::currencyVND($valueBook['price']) . ' &#8363</del></h4>
+                    <h4 class="text-lowercase">' . HelperFrontend::currencyVND($valueBook['price_discount']) . ' &#8363 <del>' . HelperFrontend::currencyVND($valueBook['price']) . ' &#8363</del></h4>
                 </div>
             </div>';
             $countItemBook++;

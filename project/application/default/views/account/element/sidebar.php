@@ -2,19 +2,19 @@
 $sidebar = '';
 $arrSideBarAccount = [
     [
-        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'accountForm'),
+        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'accountForm', null, 'tai-khoan.html'),
         'name'      => 'Thông tin tài khoản',
         'id'        => 'accountForm',
         'active'    => $this->arrParam['action']
     ],
     [
-        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'changePasswordForm'),
+        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'changePasswordForm', null, 'doi-mat-khau.html'),
         'name'      => 'Thay đổi mật khẩu',
         'id'        => 'changePasswordForm',
         'active'    => $this->arrParam['action']
     ],
     [
-        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'orderHistory'),
+        'link'      => URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'orderHistory', null, 'lich-su-mua-hang.html'),
         'name'      => 'Lịch sử mua hàng',
         'id'        => 'orderHistory',
         'active'    => $this->arrParam['action']

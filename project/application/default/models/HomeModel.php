@@ -11,7 +11,7 @@ class HomeModel extends Model
 	{
 		switch ($option) {
 			case 'bookSpecial':
-				$query[] = "SELECT `b`.`id`, `b`.`name`, `b`.`description`, `b`.`price`, `b`.`special`, `b`.`sale_off`, `b`.`picture`, round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
+				$query[] = "SELECT `b`.`id`, `b`.`name`, `b`.`description`, `b`.`price`, `b`.`special`, `b`.`sale_off`, `b`.`picture`, `c`.`name` AS 'category_name', round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
 				$query[] = "FROM `{$this->table}` AS `b`, `" . DB_TBL_CATEGORY . "` AS `c`";
 				$query[] = "WHERE `b`.`category_id` = `c`.`id`";
 				$query[] = "AND `b`.`special` = 'yes' AND `b`.`status` = 'active' AND `c`.`status` = 'active' AND `c`.`isShowHome` = 'yes'";
@@ -47,12 +47,24 @@ class HomeModel extends Model
 	public function infoItem($arrParams, $option)
 	{
 		if ($option == 'ajaxModalView') {
-			$query[] = "SELECT `id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`";
-			$query[] = "FROM `{$this->table}`";
-			$query[] = "WHERE `id` = '" . $arrParams['id'] . "' AND `status` = 'active'";
+			$query[] = "SELECT `b`.`id`, `b`.`name`, `b`.`description`, `b`.`price`, `b`.`special`, `b`.`sale_off`, `b`.`picture`, `c`.`name` AS 'category_name'";
+			$query[] = "FROM `{$this->table}` AS `b`, `category` AS `c`";
+			$query[] = "WHERE `b`.`category_id` = `c`.`id`";
+			$query[] = "AND `b`.`id` = '" . $arrParams['id'] . "' AND `b`.`status` = 'active'";
+
+			$query = implode(' ', $query);
+			$result = $this->singleRecord($query);
+
+			// create link url
+			$idBook				= $result['id'];
+			$bookNameURL		= URL::filterURL($result['name']);
+			$categoryNameURL	= URL::filterURL($result['category_name']);
+			$urlViewBook		= URL::createLink('default', 'book', 'item', ['bid' => $idBook], "$categoryNameURL/$bookNameURL-$idBook.html");
+			$link				= ['link' => $urlViewBook];
+
+			return $result + $link;
 		}
 
-		$result = implode(' ', $query);
-		return $this->singleRecord($result);
+		
 	}
 }

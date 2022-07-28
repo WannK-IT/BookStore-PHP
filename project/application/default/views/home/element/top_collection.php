@@ -4,12 +4,15 @@ $xhtml  = '';
 
 if (!empty($list)) {
     foreach ($list as $item) {
+        $idBook         = $item['id'];
+        $bookNameURL    = URL::filterURL($item['name']);
+        $categoryNameURL= URL::filterURL($item['category_name']);
         $labelSaleOff   = ($item['sale_off'] != 0) ? '<div class="lable-block"><span class="lable4 badge badge-danger"> -' . $item['sale_off'] . '%</span></div>' : '';
         $imageBook      = UPLOAD_BOOK_URL . $item['picture'];
-        $url            = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $item['id']]);
+        $url            = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $idBook]);
         $linkModalView  = 'javascript:loadModal(\'' . $url . '\', \'' . UPLOAD_BOOK_URL . '\')';
-        $addCart        = 'javascript:addCart(\'' . $item['id'] . '\', \'' . $item['price_discount'] . '\')';
-        $linkItemBook   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $item['id']]);
+        $addCart        = 'javascript:addCart(\'' . $idBook . '\', \'' . $item['price_discount'] . '\')';
+        $linkItemBook   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $idBook], "$categoryNameURL/$bookNameURL-$idBook.html");
 
         $xhtml .= '<div class="product-box">
             <div class="img-wrapper">
@@ -33,9 +36,9 @@ if (!empty($list)) {
                     <i class="fa fa-star"></i>
                 </div>
                 <a href="' . $linkItemBook . '">
-                    <h6 class="cs-ellipsis-4 pt-2 pb-0">' . $item['description'] . '</h6>
+                    <h6 class="cs-ellipsis-4 pt-2 pb-0">' . $item['name'] . '</h6>
                 </a>
-                <h4 class="text-lowercase pt-2">' . number_format($item['price_discount'], 0, '', ',') . ' &#8363 <del>' . number_format($item['price'], 0, '', ',') . ' &#8363</del></h4>
+                <h4 class="text-lowercase">' . number_format($item['price_discount'], 0, '', ',') . ' &#8363 <del>' . number_format($item['price'], 0, '', ',') . ' &#8363</del></h4>
             </div>
         </div>';
     }

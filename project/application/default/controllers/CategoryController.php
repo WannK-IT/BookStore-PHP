@@ -15,6 +15,7 @@ class CategoryController extends Controller
 
 	public function listAction()
 	{
+		$this->_view->setTitle('Danh mục | BookStore');
 		$this->_view->categories = $this->_model->listItems('category');
 		$this->_view->render('category/list', true);
 	}

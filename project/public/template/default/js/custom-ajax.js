@@ -54,7 +54,7 @@ $(document).ready(function(){
                                 cancelButtonText: 'Hủy bỏ',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                   window.location.href = 'index.php?module=default&controller=account&action=accountForm'
+                                   window.location.href = 'tai-khoan.html'
                                 }
                             })
                         }else if(data == 'exist'){
@@ -110,7 +110,7 @@ function loginForm(link, direct) {
 function registerForm(link, direct) {
     // Check empty input field
     if (!$('#username').val() || !$('#password').val() || !$('#fullname').val() || !$('#email').val()) {
-        toastMsg('warning', 'Vui lòng nhập thông tin tài khoản !');
+        toastMsg('warning', 'Vui lòng nhập thông tin<br>tài khoản !');
     } else {
         let checkExist = 'index.php?module=default&controller=account&action=checkExist';
         $.ajax({
@@ -138,7 +138,7 @@ function loadModal(link, uploadDir){
     inputNumber.val('1');
     let price = '';
     $.get(link, function(data){
-
+        console.log(data);
         //  ---------- LOAD INFO BOOK TO MODAL VIEW ----------
         // load img
         $('div.quick-view-img img').attr('src', uploadDir + data['picture'])
@@ -157,7 +157,7 @@ function loadModal(link, uploadDir){
         $('div.product-right .book-description').html(data['description'])
 
         //  -- load view info book
-        $('.btn-view-book-detail').attr('href', 'index.php?module=default&controller=book&action=item&bid=' + data['id'])
+        $('.btn-view-book-detail').attr('href', data['link'])
 
         //  ----------------------------------------------------------------------
         //  -- load quantity by click button minus or plus

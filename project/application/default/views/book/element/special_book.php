@@ -5,7 +5,10 @@ $xhtmlBookSpecial = '';
 if (!empty($this->listItemsSpecial)) {
     $index = 1;
     foreach ($this->listItemsSpecial as $itemSpecial) {
-        $linkInfoItem   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemSpecial['book_id']]);
+        $id             = $itemSpecial['book_id'];
+        $nameURL        = URL::filterURL($itemSpecial['book_name']);
+        $catNameURL     = URL::filterURL($itemSpecial['category_name']);
+        $linkInfoItem   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $id], "$catNameURL/$nameURL-$id.html");
         if ($index == 1) {
             $xhtmlBookSpecial .= '<div>';
         }

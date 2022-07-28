@@ -27,7 +27,7 @@
                             <input type="password" id="password" name="password" autocomplete="off" style="font-size: 15px;" value="" class="form-control">
                         </div>
                         <input type="hidden" id="form[token]" name="form[token]" value="1599208737">
-                        <a class="btn btn-solid" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= ($_SESSION['directToCart']) ?? URL::createLink('default', 'home', 'index') ?>')">Đăng nhập</a>
+                        <a class="btn btn-solid" href="javascript:loginForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'loginAccount')?>', '<?= ($_SESSION['directToCart']) ?? URL::createLink('default', 'home', 'index', null, 'index.html') ?>')">Đăng nhập</a>
                         
                         <?php 
                         // Sau khi truyền URL directToCart thì xóa session
@@ -43,7 +43,7 @@
                     <h6 class="title-font">Đăng ký tài khoản</h6>
                     <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be
                         able to order from our shop. To start shopping click register.</p>
-                    <a href="<?= URL::createLink($this->arrParam['module'], 'account', 'register')?>" class="btn btn-solid">Đăng ký</a>
+                    <a href="<?= URL::createLink($this->arrParam['module'], 'account', 'register', null, 'dang-ky.html')?>" class="btn btn-solid">Đăng ký</a>
                 </div>
             </div>
         </div>

@@ -24,8 +24,12 @@
                             <tbody>
                                 <?php
                                 foreach ($this->itemsCart as $value) {
+
+                                    $id             = $value['id'];
+                                    $bookNameURL    = URL::filterURL($value['name']);
+                                    $catNameURL    = URL::filterURL($value['category_name']);
                                     $imgBook        = UPLOAD_BOOK_URL . $value['picture'];
-                                    $linkBook       = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $value['id']]);
+                                    $linkBook       = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $value['id']], "$catNameURL/$bookNameURL-$id.html");
                                     $linkRemoveItem = URL::createLink($this->arrParam['module'], 'account', 'removeItemCart', ['task' => 'item', 'item_id' => $value['id']]);
                                     $price          = HelperFrontend::currencyVND($value['price']);
                                     $totalPrice     = HelperFrontend::currencyVND($value['totalPrice']);
@@ -93,15 +97,17 @@
                     </div>
                 </div>
                 <div class="row cart-buttons">
-                    <div class="col-6"><a href="<?= URL::createLink($this->arrParam['module'], 'book', 'list') ?>" class="btn btn-solid">Tiếp tục mua sắm</a></div>
-                    <div class="col-6"><button type="button" id="btn-order" class="btn btn-solid">Đặt hàng</button></div>
+                    <div class="col-6"><a href="<?= URL::createLink($this->arrParam['module'], 'book', 'list', null, 'sach.html') ?>" class="btn btn-solid">Tiếp tục mua sắm</a></div>
+                    <div class="col-6">
+                        <button type="button" id="btn-order" class="btn btn-solid">Đặt hàng</button>
+                    </div>
                 </div>
             <?php
             } else {
                 echo '<div class="text-center">
                         <i class="fa-solid fa-cart-plus fa-4x" style="color: #5fcbc4"></i>
                         <p class="my-4 h5 text-muted font-weight-bold">Chưa có sản phẩm nào trong giỏ hàng</p>
-                        <a href="' . URL::createLink($this->arrParam['module'], 'book', 'list') . '" class="btn btn-solid">Tiếp tục mua sắm</a>
+                        <a href="' . URL::createLink($this->arrParam['module'], 'book', 'list', null, 'sach.html') . '" class="btn btn-solid">Tiếp tục mua sắm</a>
                     </div>';
             } ?>
 

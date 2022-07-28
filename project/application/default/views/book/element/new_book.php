@@ -2,9 +2,13 @@
 $xhtmlBookNew = '';
 // Duyệt mảng in ra các sách mới ( ORDER BY `created` DESC )
 if (!empty($this->listItemsNew)) {
+
     $index = 1;
     foreach ($this->listItemsNew as $item) {
-        $linkInfoItem   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $item['book_id']]);
+        $idNewB             = $item['book_id'];
+        $nameNewBURL        = URL::filterURL($item['book_name']);
+        $catNameNewBURL     = URL::filterURL($item['category_name']);
+        $linkInfoItem       = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $idNewB], "$catNameNewBURL/$nameNewBURL-$idNewB.html");
         if ($index == 1) {
             $xhtmlBookNew .= '<div>';
         }

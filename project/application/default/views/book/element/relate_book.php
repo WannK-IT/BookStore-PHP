@@ -2,10 +2,14 @@
 $xhtml = '';
 if (!empty($this->listItemsRelate)) {
     $xhtml .= '<div class="row search-product">';
+
     foreach ($this->listItemsRelate as $item) {
+        $idNewR             = $item['book_id'];
+        $nameNewRURL        = URL::filterURL($item['book_name']);
+        $catNameNewRURL     = URL::filterURL($item['category_name']);
         $img = UPLOAD_BOOK_URL . $item['picture'];
-        $hrefModalView  = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $item['book_id']]);
-        $linkInfoItem   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $item['book_id']]);
+        $hrefModalView  = URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'ajaxLoadInfo', ['id' => $idNewR]);
+        $linkInfoItem   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $idNewR], "$catNameNewRURL/$nameNewRURL-$idNewR.html");
 
         $xhtml .= '<div class="col">
             <div class="product-box">

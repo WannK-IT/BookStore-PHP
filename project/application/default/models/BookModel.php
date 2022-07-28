@@ -54,10 +54,11 @@ class BookModel extends Model
 					$position	= ($pagination['currentPage'] - 1) * $totalItemsPerPage;
 					$query[]	= "LIMIT $position, $totalItemsPerPage";
 				}
+				// echo '<div style="margin-top: 150px">'.implode(" ",$query).'</div>';
 				break;
 
 			case 'bookSpecial':
-				$query[] = "SELECT `b`.`id` AS 'book_id', `b`.`name` AS 'book_name', `b`.`price`, `b`.`sale_off`, `b`.`picture`, round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
+				$query[] = "SELECT `b`.`id` AS 'book_id', `b`.`name` AS 'book_name', `c`.`name` AS 'category_name', `b`.`price`, `b`.`sale_off`, `b`.`picture`, round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
 				$query[] = "FROM `{$this->table}` AS `b`, `" . DB_TBL_CATEGORY . "` AS `c`";
 				$query[] = "WHERE `b`.`category_id` = `c`.`id`";
 				$query[] = "AND `b`.`status` = 'active' AND `b`.`special` = 'yes' AND `c`.`status` = 'active'";
@@ -65,7 +66,7 @@ class BookModel extends Model
 				break;
 
 			case 'bookNew':
-				$query[] = "SELECT `b`.`id` AS 'book_id', `b`.`name` AS 'book_name', `b`.`price`, `b`.`sale_off`, `b`.`picture`, round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
+				$query[] = "SELECT `b`.`id` AS 'book_id', `b`.`name` AS 'book_name', `c`.`name` AS 'category_name', `b`.`price`, `b`.`sale_off`, `b`.`picture`, round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
 				$query[] = "FROM `{$this->table}` AS `b`, `" . DB_TBL_CATEGORY . "` AS `c`";
 				$query[] = "WHERE `b`.`category_id` = `c`.`id`";
 				$query[] = "AND `b`.`status` = 'active' AND `c`.`status` = 'active'";
@@ -79,7 +80,7 @@ class BookModel extends Model
 				$catID		= $this->singleRecord($queryCatID)['category_id'];
 
 				// query to get relate book from ID Category
-				$query[] = "SELECT `b`.`id` AS 'book_id', `b`.`name` AS 'book_name', `b`.`price`, `b`.`sale_off`, `b`.`picture`, round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
+				$query[] = "SELECT `b`.`id` AS 'book_id', `b`.`name` AS 'book_name', `c`.`name` AS 'category_name', `b`.`price`, `b`.`sale_off`, `b`.`picture`, round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
 				$query[] = "FROM `{$this->table}` AS `b`, `" . DB_TBL_CATEGORY . "` AS `c`";
 				$query[] = "WHERE `b`.`category_id` = `c`.`id`";
 				$query[] = "AND `b`.`status` = 'active' AND `c`.`status` = 'active'";
@@ -105,33 +106,49 @@ class BookModel extends Model
 	{
 		switch ($option) {
 			case 'ajaxModalView':
-				$query[] = "SELECT `id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`, round(`price` - ((`price` * `sale_off`)/100)) AS 'price_discount'";
-				$query[] = "FROM `{$this->table}`";
-				$query[] = "WHERE `id` = '" . $arrParams['id'] . "'";
+				$query[] 	= "SELECT `b`.`id`, `b`.`name`, `b`.`description`, `b`.`price`, `b`.`special`, `b`.`sale_off`, `b`.`picture`, `c`.`name` AS 'category_name', round(`b`.`price` - ((`b`.`price` * `b`.`sale_off`)/100)) AS 'price_discount'";
+				$query[] 	= "FROM `{$this->table}` AS `b`, `category` AS `c`";
+				$query[] 	= "WHERE `b`.`category_id` = `c`.`id`";
+				$query[] 	= "AND `b`.`id` = '" . $arrParams['id'] . "'";
+				$query	 	= implode(' ', $query);
+
+				$result  	= $this->singleRecord($query);
+
+				// create link url
+				$idBook				= $result['id'];
+				$bookNameURL		= URL::filterURL($result['name']);
+				$categoryNameURL	= URL::filterURL($result['category_name']);
+				$urlViewBook		= URL::createLink('default', 'book', 'item', ['bid' => $idBook], "$categoryNameURL/$bookNameURL-$idBook.html");
+				$link				= ['link' => $urlViewBook];
+				
+				return $result + $link;
 				break;
 
 			case 'infoItem':
-				$query[] = "SELECT `id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`, `category_id`, round(`price` - ((`price` * `sale_off`)/100)) AS 'price_discount'";
-				$query[] = "FROM `{$this->table}`";
-				$query[] = "WHERE `id` = '" . $arrParams['bid'] . "'";
+				$query[] 	= "SELECT `id`, `name`, `description`, `price`, `special`, `sale_off`, `picture`, `category_id`, round(`price` - ((`price` * `sale_off`)/100)) AS 'price_discount'";
+				$query[] 	= "FROM `{$this->table}`";
+				$query[] 	= "WHERE `id` = '" . $arrParams['bid'] . "'";
+				$result 	= implode(' ', $query);
+				return $this->singleRecord($result);
 				break;
 
 			case 'getCategoryName':
-				$query[] = "SELECT `name`";
-				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
-				$query[] = "WHERE `id` = '" . $arrParams['cid'] . "'";
+				$query[] 	= "SELECT `name`";
+				$query[] 	= "FROM `" . DB_TBL_CATEGORY . "`";
+				$query[] 	= "WHERE `id` = '" . $arrParams['cid'] . "'";
+				$result 	= implode(' ', $query);
+				return $this->singleRecord($result);
 				break;
 
 			case 'getBookName':
-				$query[] = "SELECT `c`.`name` AS 'category_name', `b`.`name` AS 'book_name', `b`.`category_id` AS 'category_id'";
-				$query[] = "FROM `{$this->table}` AS `b`, `" . DB_TBL_CATEGORY . "` AS `c`";
-				$query[] = "WHERE `b`.`category_id` = `c`.`id`";
-				$query[] = "AND `b`.`id` = '" . $arrParams['bid'] . "'";
+				$query[] 	= "SELECT `c`.`name` AS 'category_name', `b`.`name` AS 'book_name', `b`.`category_id` AS 'category_id'";
+				$query[] 	= "FROM `{$this->table}` AS `b`, `" . DB_TBL_CATEGORY . "` AS `c`";
+				$query[] 	= "WHERE `b`.`category_id` = `c`.`id`";
+				$query[] 	= "AND `b`.`id` = '" . $arrParams['bid'] . "'";
+				$result 	= implode(' ', $query);
+				return $this->singleRecord($result);
 				break;
 		}
-
-		$result = implode(' ', $query);
-		return $this->singleRecord($result);
 	}
 
 	public function countItem($arrParams)

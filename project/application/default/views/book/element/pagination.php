@@ -8,7 +8,7 @@ if($this->totalItems > 12){
                 <div class="col-xl-6 col-md-6 col-sm-12">
                     <nav aria-label="Page navigation">
                         <nav>'.
-                        $this->pagination->showPaginationFrontend(URL::createLink($this->arrParam['module'], $this->arrParam['controller'], $this->arrParam['action'], ['cid' => $this->arrParam['cid'] ?? '', 'sort' => $this->arrParam['sort'] ?? '', 'search' => $this->arrParam['search'] ?? ''])).
+                        $this->pagination->showPaginationFrontend(URL::createLink('default', 'book', 'list', ['cid' => $this->arrParam['cid'] ?? '', 'sort' => $this->arrParam['sort'] ?? '', 'search' => $this->arrParam['search'] ?? ''], 'sach')).
                         '</nav>
                     </nav>
                 </div>

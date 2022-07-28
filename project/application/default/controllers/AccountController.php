@@ -29,7 +29,7 @@ class AccountController extends Controller
 	public function logoutAccountAction()
 	{
 		Session::delete('loginDefault');
-		URL::direct('default', 'account', 'login');
+		URL::direct('default', 'account', 'login', null, 'dang-nhap.html');
 	}
 
 	public function registerAction()
@@ -51,6 +51,12 @@ class AccountController extends Controller
 
 	public function accountFormAction()
 	{
+		// Kiểm tra đã đăng nhập
+		if(Authentication::checkLoginDefault() == false){
+			header("Location: dang-nhap.html");
+			exit();
+		}
+		$this->_view->setTitle('Tài khoản | BookStore');
 		$this->_view->breadcrumb = 'Thông tin tài khoản';
 		$infoItem 	= $this->_model->singleItem($_SESSION['loginDefault']['idUser']);
 		if (!empty($infoItem)) {
@@ -82,7 +88,7 @@ class AccountController extends Controller
 			} else {
 				$this->_model->formHandle($params, 'edit');
 				Session::set('updateInfoUser', true);
-				$this->redirect('default', 'account', 'accountForm');
+				URL::direct('default', 'account', 'accountForm', null, 'tai-khoan.html');
 				ob_end_flush();
 			}
 		}
@@ -92,6 +98,13 @@ class AccountController extends Controller
 
 	public function orderHistoryAction()
 	{
+		// Kiểm tra đã đăng nhập
+		if(Authentication::checkLoginDefault() == false){
+			header("Location: dang-nhap.html");
+			exit();
+		}
+
+		$this->_view->setTitle('Lịch sử mua hàng | BookStore');
 		$this->_view->breadcrumb 	= 'Lịch sử mua hàng';
 		$this->_view->orders 		= $this->_model->listItems($this->_arrParam, 'order-history');
 		$this->_view->render('account/order_history');
@@ -99,6 +112,13 @@ class AccountController extends Controller
 
 	public function changePasswordFormAction()
 	{
+		// Kiểm tra đã đăng nhập
+		if(Authentication::checkLoginDefault() == false){
+			header("Location: dang-nhap.html");
+			exit();
+		}
+
+		$this->_view->setTitle('Thay đổi mật khẩu | BookStore');
 		$this->_view->breadcrumb = 'Thay đổi mật khẩu';
 		if (!empty($this->_arrParam['form']) && $this->_arrParam['form']['token'] > 0) {
 			if (empty($this->_arrParam['form']['old_password']) || empty($this->_arrParam['form']['new_password'])) {
@@ -111,7 +131,7 @@ class AccountController extends Controller
 					if ($checkPass == 'exist') {
 						$this->_model->formHandle($this->_arrParam['form']['new_password'], 'changePassword');
 						Session::set('changePasswordDefault', true);
-						$this->redirect('default', 'account', 'changePasswordForm');
+						URL::direct('default', 'account', 'changePasswordForm', null, 'doi-mat-khau.html');
 					} else {
 						$this->_view->errors = '<li><b>Old password: </b>is incorrect. Please try again !</li>';
 					}
@@ -143,10 +163,12 @@ class AccountController extends Controller
 
 	public function cartAction()
 	{
+		$this->_view->setTitle('Giỏ hàng | BookStore');
+
 		// Kiểm tra nếu chưa đăng nhập thì chuyển trang login
 		if (!isset($_SESSION['loginDefault']['idUser'])) {
-			$_SESSION['directToCart'] = URL::createLink('default', 'account', 'cart');
-			URL::direct('default', 'account', 'login');
+			$_SESSION['directToCart'] = URL::createLink('default', 'account', 'cart', null, 'gio-hang.html');
+			URL::direct('default', 'account', 'login', null, 'dang-nhap.html');
 		} else {
 			$countItemCart				= (!empty($_SESSION['cart']['quantity'])) ? count($_SESSION['cart']['quantity']) : '0';
 			$this->_view->breadcrumb 	= 'Giỏ hàng (' . $countItemCart . ' sản phẩm)';
@@ -159,10 +181,10 @@ class AccountController extends Controller
 	{
 		if ($this->_arrParam['task'] == 'item') {
 			$this->_model->deleteItem($this->_arrParam, 'itemCart');
-			URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart');
+			URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart', null, 'gio-hang.html');
 		} elseif ($this->_arrParam['task'] == 'cart') {
 			unset($_SESSION['cart']);
-			URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart');
+			URL::direct($this->_arrParam['module'], $this->_arrParam['controller'], 'cart', null, 'gio-hang.html');
 		}
 	}
 
@@ -189,11 +211,13 @@ class AccountController extends Controller
 		$order_id = $this->_model->saveItem($this->_arrParam, 'saveCart');
 		//redirect page success order
 		unset($_SESSION['cart']);
-		URL::direct('default', 'account', 'orderSuccess', ['order_id' => $order_id]);
+		URL::direct('default', 'account', 'orderSuccess', ['order_id' => $order_id], "dat-hang-$order_id.html");
 	}
 
 	public function orderSuccessAction()
 	{
+
+		$this->_view->setTitle('Đặt hàng thành công | BookStore');
 		$this->_view->breadcrumb = 'Đặt hàng thành công';
 		$this->_view->render('account/order_success');
 	}

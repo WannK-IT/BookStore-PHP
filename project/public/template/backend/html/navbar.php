@@ -9,7 +9,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" href="index.php?module=default&controller=home&action=index" role="button">
+            <a class="nav-link" href="<?= URL::createLink('default', 'home', 'index', null, 'index.html')?>" role="button">
                 <i class="fas fa-eye"></i> View Site
             </a>
         </li>

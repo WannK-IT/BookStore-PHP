@@ -7,7 +7,7 @@ class Authentication{
     }
 
     public static function checkLoginDefault(){
-        $check =  true;
+        $check = true;
         if(!isset($_SESSION['loginDefault']['idUser'])){
             $check = false;
         }

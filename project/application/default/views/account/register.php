@@ -34,10 +34,10 @@
                                 <input type="password" id="password" name="password" style="font-size: 15px;" value="" class="form-control">
                             </div>
                         </div>
-                        <a class="btn btn-solid" href="javascript:registerForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'registerAccount')?>', '<?= URL::createLink('default', 'account', 'login')?>')">Đăng ký</a>
+                        <a class="btn btn-solid" href="javascript:registerForm('<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'registerAccount')?>', '<?= URL::createLink('default', 'account', 'login', null, 'dang-nhap.html')?>')">Đăng ký</a>
                     </form>
                 </div>
-                <p class="mt-4 h6">Đã có tài khoản ? <a style="color: #5fcbc4" class="font-weight-bold" href="<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'login')?>">Đăng nhập ngay</a></p>
+                <p class="mt-4 h6">Đã có tài khoản ? <a style="color: #5fcbc4" class="font-weight-bold" href="<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'login', null, 'dang-nhap.html')?>">Đăng nhập ngay</a></p>
             </div>
         </div>
     </div>

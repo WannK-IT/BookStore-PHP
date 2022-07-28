@@ -2,11 +2,14 @@
 
 $xhtml = '';
 $listCategories = $this->categories;
+
 if(!empty($listCategories)){
     $xhtml .= '<div class="no-slider five-product row">';
     foreach($listCategories as $item){
-        $img = UPLOAD_CATEGORY_URL . $item['picture'];
-        $linkCategory = URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $item['id']]);
+        $id             = $item['id'];
+        $nameURL        = URL::filterURL($item['name']);
+        $img            = UPLOAD_CATEGORY_URL . $item['picture'];
+        $linkCategory   = URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $id], "$nameURL-$id.html");
 
         $xhtml .= '<div class="product-box">
             <div class="img-wrapper">

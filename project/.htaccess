@@ -1,0 +1,28 @@
+RewriteEngine On
+
+# --------------- HOME --------------- 
+RewriteRule index.html                          index.php?module=default&controller=home&action=index
+
+# --------------- BOOK --------------- 
+RewriteRule sach.html                           index.php?module=default&controller=book&action=list
+RewriteRule ([A-Za-z0-9_-]+)\&page\=([0-9]+)     index.php?module=default&controller=book&action=list&page=$2
+RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html     index.php?module=default&controller=book&action=list&cid=$2
+RewriteRule ([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)\.html     index.php?module=default&controller=book&action=item&bid=$3
+
+# --------------- CATEGORY --------------- 
+RewriteRule danh-muc.html                       index.php?module=default&controller=category&action=list
+
+# --------------- ACCOUNT --------------- 
+RewriteRule dang-nhap.html                      index.php?module=default&controller=account&action=login
+RewriteRule dang-ky.html                        index.php?module=default&controller=account&action=register
+RewriteRule tai-khoan.html                      index.php?module=default&controller=account&action=accountForm
+RewriteRule doi-mat-khau.html                   index.php?module=default&controller=account&action=changePasswordForm
+RewriteRule lich-su-mua-hang.html               index.php?module=default&controller=account&action=orderHistory
+RewriteRule gio-hang.html                       index.php?module=default&controller=account&action=cart
+RewriteRule ^dat-hang-([A-Za-z0-9]+)\.html$     index.php?module=default&controller=account&action=orderSuccess&order_id=$1
+
+# --------------- ERROR --------------- 
+RewriteRule not-found.html                      index.php?module=default&controller=error&action=index
+ErrorDocument 404 http://localhost/php14_QuangNguyen/project/not-found.html
+
+#RewriteRule ([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)-([0-9]+)             index.php?module=default&controller=category&action=index&category_id=$3&page=$4

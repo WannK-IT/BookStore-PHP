@@ -1,7 +1,7 @@
 <?php
+$xhtmlInfoBook  = $xhtmlComment = '';
 $item           = $this->infoItem;
 $listComment    = $this->listComment;
-$xhtmlInfoBook  = $xhtmlComment = '';
 $imgBook        = UPLOAD_BOOK_URL . $item['picture'];
 $linkBuy        = 'javascript:addCart(\'' . $item['id'] . '\', \'' . $item['price_discount'] . '\', quantity)';
 
@@ -25,8 +25,8 @@ if (Authentication::checkLoginDefault() == true) {
         </div>
     </div>';
 } else {
-    $urlLogin       = URL::createLink('default', 'account', 'login');
-    $urlRegister    = URL::createLink('default', 'account', 'register');
+    $urlLogin       = URL::createLink('default', 'account', 'login', null, 'dang-nhap.html');
+    $urlRegister    = URL::createLink('default', 'account', 'register', null, 'dang-ky.html');
     $comment_place  = '<p class="text-center font-weight-bold mb-3">Chỉ có thành viên mới có thể bình luận. Vui lòng <a href="' . $urlLogin . '">đăng nhập</a> hoặc <a href="' . $urlRegister . '">đăng ký.</a> </p>';
 }
 

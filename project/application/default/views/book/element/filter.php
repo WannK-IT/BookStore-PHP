@@ -32,10 +32,8 @@
                     </ul>
                 </div>
                 <div class="product-page-filter">
-                    <form action="" id="sort-form" method="GET" class="d-flex align-items-center">
-                        <input type="hidden" name="module" value="<?= $this->arrParam['module'] ?>">
-                        <input type="hidden" name="controller" value="<?= $this->arrParam['controller'] ?>">
-                        <input type="hidden" name="action" value="<?= $this->arrParam['action'] ?>">
+                    <form action="" id="sort-form" method="POST" class="d-flex align-items-center">
+                        
                         <?php
                         if (!empty($this->arrParam['cid'])) {
                             echo '<input type="hidden" name="cid" value="' . $this->arrParam['cid'] . '">';

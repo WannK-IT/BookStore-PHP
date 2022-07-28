@@ -1,16 +1,17 @@
 <?php
 Session::init();
 $arrEleCategory = [];
-
 foreach ($this->categoriesNavbar as $value) {
-    $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $value['id']]), 'title' => $value['name'] . ' (' . $value['countBook'] . ')'];
+    $id         = $value['id'];
+    $nameURL    = URL::filterURL($value['name']);
+    $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $id], "$nameURL-$id.html"), 'title' => $value['name'] . ' (' . $value['countBook'] . ')'];
 }
 
-$home           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index'), 'Trang chủ', 'home');
-$book           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list'), 'Sách', 'book');
-$category       = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list'), 'Danh mục', 'category', $arrEleCategory);
+$home           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index', null, 'index.html'), 'Trang chủ', 'home');
+$book           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list', null, 'sach.html'), 'Sách', 'book');
+$category       = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list', null, 'danh-muc.html'), 'Danh mục', 'category', $arrEleCategory);
 
-$linkViewCart   = URL::createLink($this->arrParam['module'], 'account', 'cart');
+$linkViewCart   = URL::createLink($this->arrParam['module'], 'account', 'cart', null, 'gio-hang.html');
 $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
 ?>
 
@@ -22,7 +23,7 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
                 <div class="main-menu">
                     <div class="menu-left">
                         <div class="brand-logo">
-                            <a href="<?= URL::createLink($this->arrParam['module'], 'home', 'index') ?>">
+                            <a href="<?= URL::createLink($this->arrParam['module'], 'home', 'index', null, 'index.html') ?>">
                                 <h2 class="mb-0" style="color: #5fcbc4">BookStore</h2>
                             </a>
                         </div>
@@ -51,14 +52,14 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
                                         if (isset($_SESSION['loginDefault']['idUser'])) {
                                             $xhtml = '
                                             <li>
-                                                <a href="' . URL::createLink($this->arrParam['module'], 'account', 'accountForm') . '">Tài khoản</a>
+                                                <a href="' . URL::createLink($this->arrParam['module'], 'account', 'accountForm', null, 'tai-khoan.html') . '">Tài khoản</a>
                                             </li>
                                             <li>
                                                 <a href="' . URL::createLink($this->arrParam['module'], 'account', 'logoutAccount') . '">Đăng xuất</a>
                                             </li>';
                                         } else {
-                                            $xhtml = '<li><a href="' . URL::createLink($this->arrParam['module'], 'account', 'login') . '">Đăng nhập</a></li>
-                                            <li><a href="' . URL::createLink($this->arrParam['module'], 'account', 'register') . '">Đăng ký</a></li>';
+                                            $xhtml = '<li><a href="' . URL::createLink($this->arrParam['module'], 'account', 'login', null, 'dang-nhap.html') . '">Đăng nhập</a></li>
+                                            <li><a href="' . URL::createLink($this->arrParam['module'], 'account', 'register', null, 'dang-ky.html') . '">Đăng ký</a></li>';
                                         }
 
                                         echo $xhtml;
@@ -120,5 +121,4 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
             </div>
         </div>
     </div>
-
 </header>
