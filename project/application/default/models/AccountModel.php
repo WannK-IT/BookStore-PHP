@@ -100,12 +100,12 @@ class AccountModel extends Model
 			case 'cart':
 				if (!empty($_SESSION['cart']['quantity'])) {
 					$ids = implode(",", array_keys($_SESSION['cart']['quantity']));
-
 					$query[] 	= "SELECT `b`.`id`, `b`.`name`, `b`.`picture`, `c`.`name` AS 'category_name'";
 					$query[] 	= "FROM `" . DB_TBL_BOOK . "` AS `b`, `category` AS `c`";
 					$query[] 	= "WHERE `b`.`category_id` = `c`.`id`";
 					$query[] 	= "AND `b`.`status` = 'active' AND `b`.`id` IN (" . $ids . ")";
 					$query 		= implode(' ', $query);
+
 					$result 	= $this->listRecord($query);
 
 					foreach ($result as $key => $value) {

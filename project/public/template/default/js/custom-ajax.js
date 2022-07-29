@@ -14,7 +14,7 @@ $(document).ready(function(){
             $.ajax({
                 type: 'post',
                 dataType: 'json',
-                url: 'index.php?module=default&controller=account&action=ajaxChangeQty',
+                url: getDomainName() + 'index.php?module=default&controller=account&action=ajaxChangeQty',
                 data: {bookID: bookID, qty: quantity, price: price},
                 success: function (data) {
                     $('#cart-summary').text(data['summaryQuantity']);
@@ -44,7 +44,7 @@ $(document).ready(function(){
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: 'index.php?module=default&controller=account&action=checkExistInfoAccount',
+                    url: getDomainName() + 'index.php?module=default&controller=account&action=checkExistInfoAccount',
                     success: function (data) {
                         if(data == 'not exist'){
                             Swal.fire({
@@ -116,7 +116,7 @@ function registerForm(link, direct) {
     if (!$('#username').val() || !$('#password').val() || !$('#fullname').val() || !$('#email').val()) {
         toastMsg('warning', 'Vui lòng nhập thông tin<br>tài khoản !');
     } else {
-        let checkExist = 'index.php?module=default&controller=account&action=checkExist';
+        let checkExist = getDomainName() + 'index.php?module=default&controller=account&action=checkExist';
         $.ajax({
             type: 'post',
             dataType: 'json',
@@ -142,7 +142,6 @@ function loadModal(link, uploadDir){
     inputNumber.val('1');
     let price = '';
     $.get(link, function(data){
-        console.log(data);
         //  ---------- LOAD INFO BOOK TO MODAL VIEW ----------
         // load img
         $('div.quick-view-img img').attr('src', uploadDir + data['picture'])
@@ -190,13 +189,14 @@ function addCart(bookID, price, quantity = null){
     if(quantity != null){
         qty = quantity;
     }
+
     if(!Number.isInteger(parseFloat(qty))){
         toastMsg('error', 'Vui lòng nhập số nguyên !')
     }else{
         $.ajax({
             type: 'post',
             dataType: 'json',
-            url: 'index.php?module=default&controller=account&action=order',
+            url: getDomainName() + 'index.php?module=default&controller=account&action=order',
             data: {order_id: bookID, order_price: price, order_qty: qty},
             success: function (data) {
                 $('#cart-summary').text(data);
@@ -213,9 +213,10 @@ function comment(){
         $.ajax({
             type: 'post',
             dataType: 'json',
-            url: 'index.php?module=default&controller=book&action=comment',
+            url: getDomainName() + 'index.php?module=default&controller=book&action=comment',
             data: $('#form-comment').serialize(),
             success: function (data) {
+                console.log(data);
                 $('div.comment-area').prepend(rowComment(data['fullname'], data['created'], data['comment']));
                 $('p.count-comment').text(data['count'] + ' bình luận');
                 $('textarea#comment_place').val('');
@@ -229,7 +230,7 @@ function loadMoreComment(bookID){
     $.ajax({
         type: 'post',
         dataType: 'json',
-        url: 'index.php?module=default&controller=book&action=loadComment',
+        url: getDomainName() + 'index.php?module=default&controller=book&action=loadComment',
         data: {bid: bookID},
         success: function (data) {
             $.each(data, function(index, value){
@@ -290,4 +291,8 @@ function elementModalComment(name, date, comment){
     let xhtml = '<div class="row mb-3"><div class="col-sm-2"><p class="text-dark p-0"><strong>'+name+'</strong></p><p class="text-muted mt-1 p-0" style="font-size: 12px">'+date+'</p></div><div class="col-sm-10"><p class="p-0">'+comment+'</p></div></div>';
     return xhtml;
 }
-  
+
+function getDomainName(){
+
+    return window.location.origin + '/php14_QuangNguyen/project/';
+}

@@ -10,13 +10,21 @@ class CategoryController extends Controller
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
 		
-		$this->_view->categoriesNavbar = $this->_model->listItems('categoryNavbar');
+		$this->_view->categoriesNavbar = $this->_model->listItems($this->_arrParam, 'categoryNavbar');
 	}
 
 	public function listAction()
 	{
 		$this->_view->setTitle('Danh mục | BookStore');
-		$this->_view->categories = $this->_model->listItems('category');
+		@$totalItems = $this->_model->countItem($this->_arrParam);
+		$this->_view->totalItems = $totalItems['total'];
+
+		// Pagination
+		$configPagination = ['totalItemsPerPage'	=> 10, 'pageRange' => 3];
+		$this->setPagination($configPagination);
+		@$this->_view->pagination	= new Pagination($totalItems['total'], $this->_pagination);
+
+		$this->_view->categories = $this->_model->listItems($this->_arrParam, 'category');
 		$this->_view->render('category/list', true);
 	}
 

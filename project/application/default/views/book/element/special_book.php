@@ -3,13 +3,13 @@ $xhtmlBookSpecial = '';
 
 // Duyệt mảng in ra các sách nổi bật ( `book`.`special` = 'yes' )
 if (!empty($this->listItemsSpecial)) {
-    $index = 1;
+    $indexSpecialB = 1;
     foreach ($this->listItemsSpecial as $itemSpecial) {
         $id             = $itemSpecial['book_id'];
         $nameURL        = URL::filterURL($itemSpecial['book_name']);
         $catNameURL     = URL::filterURL($itemSpecial['category_name']);
         $linkInfoItem   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $id], "$catNameURL/$nameURL-$id.html");
-        if ($index == 1) {
+        if ($indexSpecialB == 1) {
             $xhtmlBookSpecial .= '<div>';
         }
 
@@ -34,10 +34,10 @@ if (!empty($this->listItemsSpecial)) {
                     <h4 class="text-lowercase">' . HelperFrontend::currencyVND($itemSpecial['price_discount']) . ' đ</h4>
                 </div>
             </div>';
-        $index++;
-        if ($index == 5) {
+        $indexSpecialB++;
+        if ($indexSpecialB == 5) {
             $xhtmlBookSpecial .= '</div>';
-            $index = 1;
+            $indexSpecialB = 1;
         }
     }
 } else {

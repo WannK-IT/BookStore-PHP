@@ -80,7 +80,7 @@ class FormFrontend
                                                         <i class="ti-angle-left"></i>
                                                     </button>
                                                 </span>
-                                                <input type="text" name="quantity" autocomplete="off" class="form-control input-number quantity-box" value="1">
+                                                <input type="number" name="quantity" autocomplete="off" class="form-control input-number quantity-box" value="1">
                                                 <span class="input-group-prepend">
                                                     <button type="button" class="btn quantity-right-plus btn-change-quantity" data-type="plus" data-field="">
                                                         <i class="ti-angle-right"></i>

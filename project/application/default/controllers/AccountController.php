@@ -164,7 +164,6 @@ class AccountController extends Controller
 	public function cartAction()
 	{
 		$this->_view->setTitle('Giỏ hàng | BookStore');
-
 		// Kiểm tra nếu chưa đăng nhập thì chuyển trang login
 		if (!isset($_SESSION['loginDefault']['idUser'])) {
 			$_SESSION['directToCart'] = URL::createLink('default', 'account', 'cart', null, 'gio-hang.html');

@@ -42,3 +42,4 @@ if(!empty($listCategories)){
         <?php include_once "element/pagination.php"?>
     </div>
 </section>
+

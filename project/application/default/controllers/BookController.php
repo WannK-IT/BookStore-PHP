@@ -66,15 +66,15 @@ class BookController extends Controller
 		echo json_encode($result);
 	}
 
-	public function commentAction(){
+	public function commentAction()
+	{
 		$result = $this->_model->comment($this->_arrParam);
 		echo json_encode($result);
 	}
 
-	public function loadCommentAction(){
+	public function loadCommentAction()
+	{
 		$result = $this->_model->listItems($this->_arrParam, 'comment');
 		echo json_encode($result);
 	}
-
-
 }

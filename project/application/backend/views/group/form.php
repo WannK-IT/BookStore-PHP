@@ -42,9 +42,6 @@ FormBackend::showError(($this->errors) ?? '');
         <div class="card-footer">
             <div class="col-12 col-sm-8 offset-sm-2">
                 <input type="submit" name="submit_form" class="btn btn-sm bg-gradient-success mr-1" value="Save">
-                <!-- <a href="index.php?module=backend&controller=group&action=form" class="btn btn-sm btn-success mr-1"> Save</a> -->
-                <!-- <a href="" class="btn btn-sm btn-success mr-1"> Save & Close</a> -->
-                <!-- <a href="" class="btn btn-sm btn-success mr-1"> Save & New</a> -->
                 <a href="<?= URL::createLink($this->arrParam['module'], $this->arrParam['controller'], 'index')?>" class="btn btn-sm bg-gradient-danger mr-1"> Cancel</a>
             </div>
         </div>
