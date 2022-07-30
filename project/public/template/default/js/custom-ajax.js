@@ -4,12 +4,15 @@ $(document).ready(function(){
         $("#popup-alert").slideUp(500);
     });
 
-    $('.quantity-box').change(function(){
+
+    // change info book in cart
+    $('.quantity-box').change(function(e){
         let bookID      = $(this).data('id');
         let quantity    = $(this).val();
         let price       = $('#input_price_'+ bookID).val() ;
-        if(!Number.isInteger(parseFloat(quantity))){
-            toastMsg('error', 'Vui lòng nhập số nguyên !');
+        
+        if(!Number.isInteger(parseFloat(quantity)) || quantity < 1){
+            toastMsg('error', 'Vui lòng nhập số nguyên !<br>Giá trị nhỏ nhất là 1');
         }else{
             $.ajax({
                 type: 'post',
@@ -80,12 +83,24 @@ $(document).ready(function(){
 
 // nếu tồn tại class thì thực hiện
 if($('a.btn-add-item-cart').length){
-    let linkItemCart = $('a.btn-add-item-cart').attr('href');
+    var linkItemCart = $('a.btn-add-item-cart').attr('href');
+    $('.quantity-box-item').change(function(e){
+        if(!Number.isInteger(parseFloat($('.quantity-box-item').val())) || $('.quantity-box-item').val() < 1){
+            e.preventDefault();
+            toastMsg('error', 'Vui lòng nhập số nguyên !<br>Giá trị nhỏ nhất là 1');
+        }else{
+            var qtyItem                 = $('.quantity-box-item').val();
+            var linkChangeQtyItem       = linkItemCart.replace('quantity', '\''+qtyItem+'\'');
+            $('a.btn-add-item-cart').attr('href', linkChangeQtyItem);
+        }
+    })
+    
+    
     $('a.btn-add-item-cart').attr('href', $('a.btn-add-item-cart').attr('href').replace(', quantity', ''));
-    $('.btn-qty').click(function(){
-        let qty     = $('.input-number').val();
-        let link    = linkItemCart.replace('quantity', '\''+qty+'\'');
-        $('a.btn-add-item-cart').attr('href', link);
+    $('button.btn-qty').click(function(){
+        var qtyItem     = $('.quantity-box-item').val();
+        var linkChangeQtyItem    = linkItemCart.replace('quantity', '\''+qtyItem+'\'');
+        $('a.btn-add-item-cart').attr('href', linkChangeQtyItem);
     })
 }
 
@@ -143,6 +158,9 @@ function loadModal(link, uploadDir){
     let price = '';
     $.get(link, function(data){
         //  ---------- LOAD INFO BOOK TO MODAL VIEW ----------
+        // load id in input
+        // $('.quantity-box').attr('data-id', data['id']);
+
         // load img
         $('div.quick-view-img img').attr('src', uploadDir + data['picture'])
 
@@ -171,8 +189,13 @@ function loadModal(link, uploadDir){
 
         //  -- load quantity by input typing
         $('input.input-number').change(function(){
-            var qtyByChange = $('.input-number').val();
-            $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '", "' + qtyByChange + '")');
+            if(!Number.isInteger(parseFloat($('.quantity-box-modal').val())) || $('.quantity-box-modal').val() < 1){
+                toastMsg('error', 'Vui lòng nhập số nguyên !<br>Giá trị nhỏ nhất là 1');
+            }else{
+                var qtyByClick = $('.input-number').val();
+                $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '", "' + qtyByClick + '")');
+            }
+            
         })
 
         //  -- load quantity default
@@ -216,7 +239,6 @@ function comment(){
             url: getDomainName() + 'index.php?module=default&controller=book&action=comment',
             data: $('#form-comment').serialize(),
             success: function (data) {
-                console.log(data);
                 $('div.comment-area').prepend(rowComment(data['fullname'], data['created'], data['comment']));
                 $('p.count-comment').text(data['count'] + ' bình luận');
                 $('textarea#comment_place').val('');

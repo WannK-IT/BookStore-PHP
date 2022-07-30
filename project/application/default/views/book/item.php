@@ -80,7 +80,7 @@ $xhtmlInfoBook = '<div class="col-lg-9 col-sm-12 col-xs-12">
                                             <i class="ti-angle-left"></i>
                                         </button>
                                     </span>
-                                    <input type="number" autocomplete="off" name="quantity" class="form-control input-number quantity-box" value="1">
+                                    <input type="number" autocomplete="off" name="quantity" min="1" class="form-control input-number quantity-box-item" value="1">
                                     <span class="input-group-prepend">
                                         <button type="button" class="btn quantity-right-plus btn-qty" data-type="plus" data-field="">
                                             <i class="ti-angle-right"></i>

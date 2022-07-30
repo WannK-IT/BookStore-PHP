@@ -32,7 +32,7 @@ class URL
 				}
 			}
 		}
-		header(sprintf("location: " . ROOT_URL . " index.php?module=%s&controller=%s&action=%s%s", $module, $controller, $action, $linkParams));
+		header(sprintf("location: index.php?module=%s&controller=%s&action=%s%s", $module, $controller, $action, $linkParams));
 		exit();
 	}
 

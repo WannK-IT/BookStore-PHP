@@ -43,7 +43,8 @@ class BookController extends Controller
 		@$this->_view->pagination	= new Pagination($totalItems['total'], $this->_pagination);
 
 		$this->_view->listCategories 	= $this->_model->listItems($this->_arrParam, 'listCategories');
-		$this->_view->listBooks 		= $this->_model->listItems($this->_arrParam, 'listBooks');
+		$this->_view->listBooks 		= $this->_model->listItems($this->_arrParam, 'listBooks')['list'];
+		$this->_view->totalItemsPerPage	= $this->_model->listItems($this->_arrParam, 'listBooks')['resultshowItems'];
 		$this->_view->listItemsSpecial 	= $this->_model->listItems($this->_arrParam, 'bookSpecial');
 		$this->_view->render('book/list', true);
 	}

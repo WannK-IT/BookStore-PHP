@@ -17,6 +17,8 @@ class BookModel extends Model
 				$query[] = "AND `c`.`status` = 'active' AND `b`.`status` = 'active'";
 				$query[] = "GROUP BY `c`.`id`";
 				$query[] = "ORDER BY `c`.`ordering`";
+				$query	 = implode(' ', $query);
+				$result = $this->listRecord($query);
 				break;
 
 			case 'listCategories':
@@ -24,6 +26,8 @@ class BookModel extends Model
 				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
 				$query[] = "WHERE `status` = 'active'";
 				$query[] = "ORDER BY `ordering`";
+				$query	 = implode(' ', $query);
+				$result = $this->listRecord($query);
 				break;
 
 			case 'listBooks':
@@ -51,10 +55,36 @@ class BookModel extends Model
 				$pagination			= $arrParams['pagination'];
 				$totalItemsPerPage	= $pagination['totalItemsPerPage'];
 				if ($totalItemsPerPage > 0) {
-					$position	= ($pagination['currentPage'] - 1) * $totalItemsPerPage;
-					$query[]	= "LIMIT $position, $totalItemsPerPage";
+					$position		= ($pagination['currentPage'] - 1) * $totalItemsPerPage;
+					$query[]		= "LIMIT $position, $totalItemsPerPage";
 				}
-				// echo '<div style="margin-top: 150px">'.implode(" ",$query).'</div>';
+				$query = implode(' ', $query);
+				$arrlistBooks 		= $this->listRecord($query);
+
+				// show total items per page
+				$start				= ($position + 1);
+				$end  				= $pagination['currentPage'] * $totalItemsPerPage;
+				$totalBooks			= $this->countItem($arrParams)['total'];
+
+				/**
+				 * vd: showing items 3 - 6 of 20 result => start = 3; end = 6; total = 20
+				 * kiểm tra nếu end > total => set end = total
+				 */
+				if ($end > $totalBooks) {
+					$end = $totalBooks;
+				}
+
+				/**
+				 * vd: thay vì vd: showing items 9 - 9 of 9 result 
+				 * thì thay bằng : showing items 9 of 9 result 
+				 */
+				$rangeItems			= $start . ' - ' . $end;
+				if($start == $end){
+					$rangeItems		= $end;
+				}
+				$resultshowItems 	= 'Showing Items ' . $rangeItems . ' of ' . $totalBooks . ' Result ';
+
+				$result = ['list' => $arrlistBooks, 'resultshowItems' => $resultshowItems];
 				break;
 
 			case 'bookSpecial':
@@ -63,6 +93,8 @@ class BookModel extends Model
 				$query[] = "WHERE `b`.`category_id` = `c`.`id`";
 				$query[] = "AND `b`.`status` = 'active' AND `b`.`special` = 'yes' AND `c`.`status` = 'active'";
 				$query[] = "ORDER BY RAND()";
+				$query	 = implode(' ', $query);
+				$result  = $this->listRecord($query);
 				break;
 
 			case 'bookNew':
@@ -72,6 +104,8 @@ class BookModel extends Model
 				$query[] = "AND `b`.`status` = 'active' AND `c`.`status` = 'active'";
 				$query[] = "ORDER BY `b`.`created` DESC";
 				$query[] = "LIMIT 12";
+				$query	 = implode(' ', $query);
+				$result = $this->listRecord($query);
 				break;
 
 			case 'listRelate':
@@ -87,6 +121,8 @@ class BookModel extends Model
 				$query[] = "AND `b`.`category_id` = '" . $catID . "' AND `b`.`id` NOT IN ('" . $arrParams['bid'] . "')";
 				$query[] = "ORDER BY RAND()";
 				$query[] = "LIMIT 6";
+				$query	 = implode(' ', $query);
+				$result = $this->listRecord($query);
 				break;
 
 			case 'comment':
@@ -95,11 +131,12 @@ class BookModel extends Model
 				$query[] = "WHERE `book_id` = '" . $arrParams['bid'] . "'";
 				$query[] = "AND `status` = 'active'";
 				$query[] = "ORDER BY `created` DESC";
+				$query	 = implode(' ', $query);
+				$result = $this->listRecord($query);
 				break;
 		}
 
-		$result = implode(' ', $query);
-		return $this->listRecord($result);
+		return $result;
 	}
 
 	public function singleItem($arrParams, $option)
@@ -120,7 +157,7 @@ class BookModel extends Model
 				$categoryNameURL	= URL::filterURL($result['category_name']);
 				$urlViewBook		= URL::createLink('default', 'book', 'item', ['bid' => $idBook], "$categoryNameURL/$bookNameURL-$idBook.html");
 				$link				= ['link' => $urlViewBook];
-				
+
 				return $result + $link;
 				break;
 
