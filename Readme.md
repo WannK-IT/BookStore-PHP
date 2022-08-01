@@ -3,8 +3,7 @@
 1. Clone project BookStore-PHP
 2. Import file SQL in folder "database" into phpMyAdmin.
 3. URL default on local: http://localhost/BookStore-PHP/ 
-<br />
-Enjoy !
+4. Enjoy !
 <br /> --------------------- For Customize ---------------------
 <br />
 . Change path in file "define.php", constant_name: ROOT_URL.
