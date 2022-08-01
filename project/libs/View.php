@@ -57,7 +57,7 @@ class View{
 		if(!empty($arrMeta)){
 			foreach($arrMeta as $meta){
 				$temp = explode('|', $meta);
-				$xhtml .= '<meta '.$typeMeta.'="'.$temp[0].'" content="'.$temp[1].'" />';
+				$xhtml .= '<meta '.$typeMeta.'=\''.$temp[0].'\' content=\''.$temp[1].'\' />';
 			}
 		}
 		return $xhtml;

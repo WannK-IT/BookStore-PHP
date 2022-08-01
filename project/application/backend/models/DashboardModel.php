@@ -41,6 +41,10 @@ class DashboardModel extends Model
 				$query[] = "SELECT COUNT(`id`) AS 'totalCart'";
 				$query[] = "FROM `cart`";
 				break;
+			case 'slider':
+				$query[] = "SELECT COUNT(`id`) AS 'totalSlider'";
+				$query[] = "FROM `slider`";
+				break;
 		}
 
 		$query = implode(" ", $query);

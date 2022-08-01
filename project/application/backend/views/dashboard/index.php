@@ -53,6 +53,19 @@
             </div>
         </div>
 
+        <!-- Slider -->
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-gradient-info">
+                <div class="inner">
+                    <h3><?= $this->countSlider['totalSlider'] ?></h3>
+                    <p>Slider</p>
+                </div>
+                <div class="icon text-white">
+                    <i class="ion ion-android-options"></i>
+                </div>
+            </div>
+        </div>
+
         <!-- Cart -->
         <div class="col-lg-3 col-6">
             <div class="small-box bg-gradient-info">
@@ -65,5 +78,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

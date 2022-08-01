@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 28, 2022 at 03:13 AM
+-- Generation Time: Aug 01, 2022 at 07:10 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.0.19
 
@@ -94,22 +94,23 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `username`, `books`, `prices`, `quantities`, `names`, `pictures`, `status`, `date`) VALUES
 ('0zTdDmwceE', 'nnquanght', '[\"15\"]', '[\"70000\"]', '[\"1\"]', '[\"Người mẹ quỷ\"]', '[\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\"]', 'active', '2022-07-20 22:12:08'),
-('3vAHYRqfDo', 'admin', '[\"13\",\"15\",\"22\"]', '[\"50000\",\"70000\",\"100100\"]', '[\"4\",\"3\",\"1\"]', '[\"Xe bus ma\",\"Người mẹ quỷ\",\"Giải Thích Ngữ Pháp Tiếng Anh (Tái Bản 2022)\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\",\"z3097453775918_7ea22457f168a4de92d0ba8178a2257bDW6h8K9J.jpg\"]', 'inactive', '2022-07-28 04:27:36'),
+('3vAHYRqfDo', 'admin', '[\"13\",\"15\",\"22\"]', '[\"50000\",\"70000\",\"100100\"]', '[\"4\",\"3\",\"1\"]', '[\"Xe bus ma\",\"Người mẹ quỷ\",\"Giải Thích Ngữ Pháp Tiếng Anh (Tái Bản 2022)\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\",\"z3097453775918_7ea22457f168a4de92d0ba8178a2257bDW6h8K9J.jpg\"]', 'active', '2022-07-28 04:27:36'),
 ('8ndh1oRaOT', 'admin', '[\"27\"]', '[\"27000\"]', '[\"1\"]', '[\"FinTech 4.0  - Cách mạng công nghệ tài chính\"]', '[\"image_17519045OJhdHF.jpg\"]', 'inactive', '2022-07-20 16:54:29'),
 ('CizdwfQHG0', 'admin', '[\"13\"]', '[\"50000\"]', '[\"1\"]', '[\"Xe bus ma\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\"]', 'active', '2022-07-21 14:44:55'),
 ('ckzUJsm718', 'admin', '[\"13\",\"21\",\"25\",\"27\",\"28\"]', '[\"50000\",\"40500\",\"72500\",\"27000\",\"90000\"]', '[\"1\",\"1\",\"1\",\"1\",\"1\"]', '[\"Xe bus ma\",\"Những Câu Chuyện Truyền Cảm Hứng: Con Sẽ Tự Giác\",\"Hành Trang Lập Trình - Những Kỹ Năng Lập Trình Viên Chuyên Nghiệp Cần Có\",\"FinTech 4.0  - Cách mạng công nghệ tài chính\",\"Kỳ Lân Công Nghệ - Giấc Mơ, Hiện Thực & Sự Tan Biến...\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"image_195509_1_7128ZBAwIbYc.jpg\",\"image_195509_1_19543h4MRTLVg.jpg\",\"image_17519045OJhdHF.jpg\",\"9786043354263nBrsXN30.jpg\"]', 'active', '2022-07-20 02:29:01'),
-('D20RdEqnNV', 'admin', '[\"15\"]', '[\"70000\"]', '[\"2\"]', '[\"Người mẹ quỷ\"]', '[\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\"]', 'inactive', '2022-07-28 04:08:34'),
+('D20RdEqnNV', 'admin', '[\"15\"]', '[\"70000\"]', '[\"2\"]', '[\"Người mẹ quỷ\"]', '[\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\"]', 'active', '2022-07-28 04:08:34'),
 ('ht0ljXxHO6', 'admin', '[\"13\",\"15\",\"22\"]', '[\"50000\",\"70000\",\"100100\"]', '[\"2\",\"1\",\"1\"]', '[\"Xe bus ma\",\"Người mẹ quỷ\",\"Giải Thích Ngữ Pháp Tiếng Anh (Tái Bản 2022)\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\",\"z3097453775918_7ea22457f168a4de92d0ba8178a2257bDW6h8K9J.jpg\"]', 'inactive', '2022-07-21 13:08:11'),
 ('IsiW423SnM', 'admin', '[\"13\",\"15\",\"18\",\"22\"]', '[\"50000\",\"70000\",\"85400\",\"100100\"]', '[\"1\",\"1\",\"2\",\"2\"]', '[\"Xe bus ma\",\"Người mẹ quỷ\",\"Hai số phận\",\"Giải Thích Ngữ Pháp Tiếng Anh (Tái Bản 2022)\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\",\"image_179484vzkeJ6Ln.jpg\",\"z3097453775918_7ea22457f168a4de92d0ba8178a2257bDW6h8K9J.jpg\"]', 'active', '2022-07-23 23:00:06'),
 ('IXEh4lng7j', 'admin', '[\"13\",\"14\"]', '[\"50000\",\"76500\"]', '[\"1\",\"1\"]', '[\"Xe bus ma\",\"Oan hồn người vợ trẻ\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"oan-hon-nguoi-vo-treaONg8bRn.jpg\"]', 'active', '2022-07-19 20:10:17'),
 ('kWcZKejF6E', 'admin', '[\"13\",\"15\"]', '[\"50000\",\"70000\"]', '[\"1\",\"1\"]', '[\"Xe bus ma\",\"Người mẹ quỷ\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\"]', 'inactive', '2022-07-24 02:54:19'),
-('lPpwfqtjiz', 'admin', '[\"13\",\"14\",\"15\"]', '[\"50000\",\"76500\",\"70000\"]', '[\"1\",\"2\",\"3\"]', '[\"Xe bus ma\",\"Oan hồn người vợ trẻ\",\"Người mẹ quỷ\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"oan-hon-nguoi-vo-treaONg8bRn.jpg\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\"]', 'inactive', '2022-07-28 04:03:23'),
+('lPpwfqtjiz', 'admin', '[\"13\",\"14\",\"15\"]', '[\"50000\",\"76500\",\"70000\"]', '[\"1\",\"2\",\"3\"]', '[\"Xe bus ma\",\"Oan hồn người vợ trẻ\",\"Người mẹ quỷ\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"oan-hon-nguoi-vo-treaONg8bRn.jpg\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\"]', 'active', '2022-07-28 04:03:23'),
 ('pF9aJqRg6n', 'admin', '[\"13\"]', '[\"50000\"]', '[\"5\"]', '[\"Xe bus ma\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\"]', 'inactive', '2022-07-28 04:04:36'),
 ('pjBHLcRFdK', 'admin', '[\"13\",\"15\",\"16\"]', '[\"50000\",\"70000\",\"72000\"]', '[\"2\",\"1\",\"1\"]', '[\"Xe bus ma\",\"Người mẹ quỷ\",\"Mao sơn tróc quỷ nhân\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\",\"mao-son-troc-quy-nhan83hngfm4.jpg\"]', 'active', '2022-07-19 20:06:07'),
 ('QmD0Y8yIzf', 'admin', '[\"13\"]', '[\"50000\"]', '[\"1\"]', '[\"Xe bus ma\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\"]', 'inactive', '2022-07-28 03:45:09'),
 ('vYMEhUNAnc', 'admin', '[\"16\",\"18\",\"24\"]', '[\"72000\",\"85400\",\"58300\"]', '[\"10\",\"1\",\"1\"]', '[\"Mao sơn tróc quỷ nhân\",\"Hai số phận\",\"Lập trình với C#\"]', '[\"mao-son-troc-quy-nhan83hngfm4.jpg\",\"image_179484vzkeJ6Ln.jpg\",\"image_191566onab1gl8.jpg\"]', 'inactive', '2022-07-19 22:05:43'),
 ('Wtnf8NMDSC', 'admin', '[\"15\",\"17\",\"18\",\"19\",\"20\",\"25\",\"27\",\"30\"]', '[\"70000\",\"38500\",\"85400\",\"64400\",\"35880\",\"72500\",\"27000\",\"98400\"]', '[\"1\",\"1\",\"3\",\"3\",\"3\",\"1\",\"2\",\"1\"]', '[\"Người mẹ quỷ\",\"Nhà giả kim\",\"Hai số phận\",\"Chiến binh cầu vồng\",\"Hoàng tử bé\",\"Hành Trang Lập Trình - Những Kỹ Năng Lập Trình Viên Chuyên Nghiệp Cần Có\",\"FinTech 4.0  - Cách mạng công nghệ tài chính\",\"Thuyết Tiến Hóa Công Nghệ Số\"]', '[\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\",\"image_195509_1_36793FToQdJyN.jpg\",\"image_179484vzkeJ6Ln.jpg\",\"image_195509_1_36366X8Gc0KCT.jpg\",\"image_1870105rj61ysc.jpg\",\"image_195509_1_19543h4MRTLVg.jpg\",\"image_17519045OJhdHF.jpg\",\"image_241309EhgBjHay.jpg\"]', 'inactive', '2022-07-20 16:55:04'),
 ('WV2QhaMvSK', 'nnquanght', '[\"13\",\"14\",\"22\",\"24\",\"27\"]', '[\"50000\",\"76500\",\"100100\",\"58300\",\"27000\"]', '[\"3\",\"2\",\"1\",\"2\",\"1\"]', '[\"Xe bus ma\",\"Oan hồn người vợ trẻ\",\"Giải Thích Ngữ Pháp Tiếng Anh (Tái Bản 2022)\",\"Lập trình với C#\",\"FinTech 4.0  - Cách mạng công nghệ tài chính\"]', '[\"29757e5d-1389-4740-9c99-36cdc124042a2k1PlRFy.png\",\"oan-hon-nguoi-vo-treaONg8bRn.jpg\",\"z3097453775918_7ea22457f168a4de92d0ba8178a2257bDW6h8K9J.jpg\",\"image_191566onab1gl8.jpg\",\"image_17519045OJhdHF.jpg\"]', 'active', '2022-07-20 22:08:00'),
+('YS5PXxuyVo', 'admin2', '[\"14\",\"15\"]', '[\"76500\",\"70000\"]', '[\"2\",\"1\"]', '[\"Oan hồn người vợ trẻ\",\"Người mẹ quỷ\"]', '[\"oan-hon-nguoi-vo-treaONg8bRn.jpg\",\"nguoimequymXwh8zNQPWTEA3nC9K.jpg\"]', 'active', '2022-07-28 11:29:40'),
 ('zabKyYCDWv', 'nnquanght', '[\"26\"]', '[\"34930\"]', '[\"1\"]', '[\"Mặt trái của công nghệ\"]', '[\"image_182009xYtQVAn2.jpg\"]', 'inactive', '2022-07-24 03:00:25');
 
 -- --------------------------------------------------------
@@ -170,7 +171,14 @@ INSERT INTO `comment` (`id`, `text`, `fullname`, `status`, `created`, `book_id`)
 (44, 'sách hay', 'Nguyễn Nhựt Quang', 'active', '2022-07-25 23:47:35', 14),
 (45, 'truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma truyện ma ', 'Nguyễn Nhựt Quang', 'active', '2022-07-25 23:51:47', 14),
 (46, '5 sao luôn 5*', 'Nguyễn Nhựt Quang', 'active', '2022-07-25 23:53:11', 17),
-(47, 'sách hay quá ạ', 'Quang Nguyễn', 'active', '2022-07-26 16:49:15', 18);
+(47, 'sách hay quá ạ', 'Quang Nguyễn', 'active', '2022-07-26 16:49:15', 18),
+(48, 'wow', 'Quang Nguyễn', 'active', '2022-07-29 17:12:22', 13),
+(49, 'wow', 'Quang Nguyễn', 'active', '2022-07-29 18:33:55', 14),
+(50, 'hayyyyy', 'Quang Nguyễn', 'active', '2022-07-29 18:34:21', 14),
+(51, 'truyện ghê quá', 'Quang Nguyễn', 'active', '2022-07-29 18:34:31', 14),
+(52, 'quá tuyệt !', 'Quang Nguyễn', 'active', '2022-07-29 18:34:40', 14),
+(53, 'test comment', 'admin2', 'active', '2022-08-01 12:31:27', 14),
+(54, 'testtt', 'admin2', 'active', '2022-08-01 12:31:29', 14);
 
 -- --------------------------------------------------------
 
@@ -260,7 +268,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `phone`, `address`, `created`, `created_by`, `modified`, `modified_by`, `status`, `group_id`) VALUES
 (26, 'usertest', 'quang@gmail.com', 'Quang Nguyễn', '974e0509eda5affaf61e79d882c9e6ba', NULL, NULL, '2022-05-21 13:42:06', 'Nguyễn Nhựt Quang', '2022-05-21 13:42:42', 'Nguyễn Nhựt Quang', 'active', 2),
 (29, 'admin2', 'admin2@gmail.com', 'admin2', '21232f297a57a5a743894a0e4a801fc3', '0123456789', 'TPHCM', '2022-05-21 16:38:44', 'Quang Nguyen', '2022-07-27 16:16:46', 'admin2', 'active', 3),
-(30, 'admin', 'admin@gmail.com', 'Quang Nguyễn', '21232f297a57a5a743894a0e4a801fc3', '0356853654', 'LTP TPHCM', NULL, NULL, '2022-07-27 17:36:04', 'Quang Nguyễn', 'active', 1),
+(30, 'admin', 'admin@gmail.com', 'Quang Nguyễn', '21232f297a57a5a743894a0e4a801fc3', '0356853654', 'LTP TPHCM', NULL, NULL, '2022-07-29 23:19:23', 'Quang Nguyễn', 'active', 1),
 (32, 'quangnguyen', 'n.nquangh4t@gmail.com', 'Nguyễn Quang', '5f765ce6a2ae0c963cf720a71c13d32a', NULL, NULL, '2022-07-02 17:39:14', 'Quang Nguyễn', NULL, NULL, 'active', 2),
 (35, 'nnquanght', 'n.nquanght@gmail.com', 'Nguyễn Nhựt Quang', '9fafde0a3ab3890eb4ebd593678e5454', '0356809728', 'LTP TPHCM', '2022-07-20 19:15:25', NULL, '2022-07-20 22:07:26', 'Nguyễn Nhựt Quang', 'active', 4);
 
@@ -272,7 +280,8 @@ INSERT INTO `user` (`id`, `username`, `email`, `fullname`, `password`, `phone`, 
 -- Indexes for table `book`
 --
 ALTER TABLE `book`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `book_ibfk_1` (`category_id`);
 
 --
 -- Indexes for table `cart`
@@ -290,7 +299,8 @@ ALTER TABLE `category`
 -- Indexes for table `comment`
 --
 ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comment_ibfk_1` (`book_id`);
 
 --
 -- Indexes for table `group`
@@ -331,7 +341,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `group`
@@ -354,6 +364,18 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `book`
+--
+ALTER TABLE `book`
+  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user`

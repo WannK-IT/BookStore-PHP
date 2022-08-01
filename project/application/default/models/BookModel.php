@@ -122,7 +122,7 @@ class BookModel extends Model
 				$query[] = "ORDER BY RAND()";
 				$query[] = "LIMIT 6";
 				$query	 = implode(' ', $query);
-				$result = $this->listRecord($query);
+				$result  = $this->listRecord($query);
 				break;
 
 			case 'comment':
@@ -132,7 +132,17 @@ class BookModel extends Model
 				$query[] = "AND `status` = 'active'";
 				$query[] = "ORDER BY `created` DESC";
 				$query	 = implode(' ', $query);
-				$result = $this->listRecord($query);
+				$result  = $this->listRecord($query);
+				break;
+
+			case 'footer':
+				$query[] = "SELECT `id`, `name`";
+				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
+				$query[] = "WHERE `status` = 'active' AND `isShowHome` = 'yes'";
+				$query[] = "ORDER BY `ordering`";
+				$query[] = "LIMIT 4";
+				$query	 = implode(' ', $query);
+				$result  = $this->listRecord($query);
 				break;
 		}
 

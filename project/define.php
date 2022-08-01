@@ -2,7 +2,7 @@
 	
 	// ====================== PATHS ===========================
 	define ('DS'					, '/');
-	define ('ROOT_PATH'				, dirname(__FILE__));						
+	define ('ROOT_PATH'				, dirname(__FILE__));					
 	define ('LIBRARY_PATH'			, ROOT_PATH . DS . 'libs' . DS);			
 	define ('PUBLIC_PATH'			, ROOT_PATH . DS . 'public' . DS);									
 	define ('APPLICATION_PATH'		, ROOT_PATH . DS . 'application' . DS);								
@@ -38,4 +38,7 @@
 	define ('DB_TBL_BOOK'			, 'book');						
 	define ('DB_TBL_CART'			, 'cart');						
 	define ('DB_TBL_SLIDER'			, 'slider');						
-	define ('DB_TBL_COMMENT'		, 'comment');						
+	define ('DB_TBL_COMMENT'		, 'comment');	
+	
+	// ====================== TIME ===========================
+	define ('SESSION_TIMEOUT'		, 3600);	

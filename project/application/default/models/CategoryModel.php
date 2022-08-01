@@ -17,7 +17,7 @@ class CategoryModel extends Model
 				$query[] = "AND `c`.`status` = 'active' AND `b`.`status` = 'active'";
 				$query[] = "GROUP BY `c`.`id`";
 				$query[] = "ORDER BY `c`.`ordering`";
-				$query = implode(' ', $query);
+				$query 	= implode(' ', $query);
 				$result = $this->listRecord($query);
 				break;
 
@@ -61,6 +61,16 @@ class CategoryModel extends Model
 				$resultshowItems 	= 'Showing Items ' . $rangeItems . ' of ' . $totalCategory . ' Result ';
 
 				$result = ['list' => $arrlistCategory, 'resultshowItems' => $resultshowItems];
+				break;
+
+			case 'footer':
+				$query[] = "SELECT `id`, `name`";
+				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
+				$query[] = "WHERE `status` = 'active' AND `isShowHome` = 'yes'";
+				$query[] = "ORDER BY `ordering`";
+				$query[] = "LIMIT 4";
+				$query   = implode(' ', $query);
+                $result  = $this->listRecord($query);
 				break;
 		}
 

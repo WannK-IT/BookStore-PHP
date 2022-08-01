@@ -44,5 +44,5 @@ RewriteRule not-found.html                      index.php?module=default&control
 ErrorDocument 404 http://localhost/php14_QuangNguyen/project/not-found.html
 
 # --------------- ADMIN --------------- 
-RewriteRule admin                               index.php?module=backend&controller=account&action=login
+RewriteRule ^admin$                               index.php?module=backend&controller=account&action=login
 

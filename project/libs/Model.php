@@ -22,8 +22,9 @@ class Model{
 			$this->database = $params['database'];
 			$this->table 	= $params['table'];
 			$this->setDatabase();
-			$this->query("SET NAMES 'utf8'");
-			$this->query("SET CHARACTER SET 'utf8'");
+			// $this->query("SET NAMES 'utf8'");
+			// $this->query("SET CHARACTER SET 'utf8'");
+			mysqli_set_charset($link, "utf8mb4");
 		}
 	}
 	

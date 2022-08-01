@@ -10,7 +10,6 @@ class AccountController extends Controller
 		$this->_templateObj->setFileTemplate('index.php');
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
-		Session::init();
 	}
 
 	public function loginAction()

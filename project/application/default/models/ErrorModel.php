@@ -18,6 +18,13 @@ class ErrorModel extends Model
 				$query[] = "GROUP BY `c`.`id`";
 				$query[] = "ORDER BY `c`.`ordering`";
 				break;
+			case 'footer':
+				$query[] = "SELECT `id`, `name`";
+				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
+				$query[] = "WHERE `status` = 'active' AND `isShowHome` = 'yes'";
+				$query[] = "ORDER BY `ordering`";
+				$query[] = "LIMIT 4";
+				break;
 		}
 
 		$result = implode(' ', $query);

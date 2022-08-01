@@ -9,7 +9,6 @@ class CartController extends Controller
 		$this->_templateObj->setFileTemplate('index.php');
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
-		Session::init();
 		Authentication::checkLogin();
 
 		$this->_view->getFullName 	= $this->_model->getFullName($this->_arrParam);

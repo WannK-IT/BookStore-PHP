@@ -25,6 +25,7 @@ class AccountModel extends Model
 				$_SESSION['login']['loginSuccess'] = true;
 				$_SESSION['login']['idUser'] = $loadInfo['id'];
 				$_SESSION['login']['loginRole'] = $loadInfo['role'];
+				$_SESSION['login']['timeout'] = time() + SESSION_TIMEOUT;
 			} else {
 				$result = 'notPermission';
 			}

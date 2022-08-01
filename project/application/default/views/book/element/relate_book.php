@@ -68,6 +68,5 @@ if (!empty($this->listItemsRelate)) {
 
             <?= $xhtmlRelate ?>
         </div>
-</div>
-</section>
+    </section>
 </div>

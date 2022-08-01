@@ -1,3 +1,7 @@
+<?php 
+    Authentication::checkSessionTimeout($_SESSION['login']['timeout'] ?? '', 'backend');
+?>
+
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">

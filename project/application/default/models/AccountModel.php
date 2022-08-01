@@ -20,9 +20,11 @@ class AccountModel extends Model
 		// Check username & password exist
 		if ($this->isExist($query)) {
 			$result = 'success';
-			$_SESSION['loginDefault']['idUser'] = $loadInfo['id'];
-			$_SESSION['loginDefault']['username'] = $loadInfo['username'];
-			$_SESSION['loginDefault']['fullnameUser'] = $loadInfo['fullname'];
+			$_SESSION['loginDefault']['idUser'] 		= $loadInfo['id'];
+			$_SESSION['loginDefault']['username'] 		= $loadInfo['username'];
+			$_SESSION['loginDefault']['fullnameUser'] 	= $loadInfo['fullname'];
+			$_SESSION['loginDefault']['timeout'] 		= time() + SESSION_TIMEOUT;
+
 		} else {
 			$result = 'failed';
 		}
@@ -124,6 +126,16 @@ class AccountModel extends Model
 				$query[] 	= "ORDER BY `status` DESC ";
 				$query 		= implode(' ', $query);
 				$result 	= $this->listRecord($query);
+				return $result;
+				break;
+			case 'footer':
+				$query[] = "SELECT `id`, `name`";
+				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
+				$query[] = "WHERE `status` = 'active' AND `isShowHome` = 'yes'";
+				$query[] = "ORDER BY `ordering`";
+				$query[] = "LIMIT 4";
+				$query 	 = implode(' ', $query);
+				$result  = $this->listRecord($query);
 				return $result;
 				break;
 		}

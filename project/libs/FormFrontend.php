@@ -58,6 +58,9 @@ class FormFrontend
         $xhtml = '<div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content quick-view-modal">
+                    <div id="loading-modal-book" class="text-center my-5 font-weight-bold" style="font-size: 30px;">
+                        <p>Đang tải thông tin sách ...</p>
+                    </div>
                     <div class="modal-body">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
                         <div class="row mr-2">
@@ -80,7 +83,7 @@ class FormFrontend
                                                         <i class="ti-angle-left"></i>
                                                     </button>
                                                 </span>
-                                                <input type="number" name="quantity" autocomplete="off" min="1" data-id="" class="form-control input-number quantity-box-modal" value="1">
+                                                <input type="number" name="quantity" autocomplete="off" min="1" data-id="" class="form-control input-number quantity-box-modal" value="1" disabled>
                                                 <span class="input-group-prepend">
                                                     <button type="button" class="btn quantity-right-plus btn-change-quantity" data-type="plus" data-field="">
                                                         <i class="ti-angle-right"></i>
@@ -114,6 +117,11 @@ class FormFrontend
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    
+                    <div id="loading-modal-comment" class="text-center my-5 font-weight-bold" style="font-size: 30px;">
+                        <p>Đang tải bình luận ...</p>
+                    </div>
+
                     <div class="modal-body">
                         <div class="modal-comment-area mx-3">
                             

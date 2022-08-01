@@ -152,56 +152,117 @@ function registerForm(link, direct) {
 
 // Load modal info book
 function loadModal(link, uploadDir){
+    
     let inputNumber = $(".input-number");
     inputNumber.attr('value', '1');
     inputNumber.val('1');
     let price = '';
-    $.get(link, function(data){
-        //  ---------- LOAD INFO BOOK TO MODAL VIEW ----------
-        // load id in input
-        // $('.quantity-box').attr('data-id', data['id']);
+    
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: link,
 
-        // load img
-        $('div.quick-view-img img').attr('src', uploadDir + data['picture'])
+        beforeSend: function(){
+            $("#loading-modal-book").show();
+            $(".modal-body").hide();
+        },
 
-        //  -- load name
-        $('div.product-right .book-name').html(data['name'])
+        success:  function (data) {
+            $("#loading-modal-book").hide();
+            $(".modal-body").show();
+            //  ---------- LOAD INFO BOOK TO MODAL VIEW ----------
+            // load id in input
+            // $('.quantity-box').attr('data-id', data['id']);
 
-        //  -- load price
-        if(data['sale_off'] != 0){
-            price = formatCurrency(data['price']);
-        }
-        salePrice = data['price'] - ((parseFloat(data['price']) * parseFloat(data['sale_off'])) / 100);
-        $('div.product-right .book-price').html(formatCurrency(salePrice) + ' <del>' + price + ' </del>')
+            // load img
+            $('div.quick-view-img img').attr('src', uploadDir + data['picture'])
 
-        //  -- load description
-        $('div.product-right .book-description').html(data['description'])
+            //  -- load name
+            $('div.product-right .book-name').html(data['name'])
 
-        //  -- load view info book
-        $('.btn-view-book-detail').attr('href', data['link'])
+            //  -- load price
+            if(data['sale_off'] != 0){
+                price = formatCurrency(data['price']);
+            }
+            salePrice = data['price'] - ((parseFloat(data['price']) * parseFloat(data['sale_off'])) / 100);
+            $('div.product-right .book-price').html(formatCurrency(salePrice) + ' <del>' + price + ' </del>')
 
-        //  ----------------------------------------------------------------------
-        //  -- load quantity by click button minus or plus
-        $('button.btn-change-quantity').click(function(){
-            var qtyByClick = $('.input-number').val();
-            $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '", "' + qtyByClick + '")');
-        })
+            //  -- load description
+            $('div.product-right .book-description').html(data['description'])
 
-        //  -- load quantity by input typing
-        $('input.input-number').change(function(){
-            if(!Number.isInteger(parseFloat($('.quantity-box-modal').val())) || $('.quantity-box-modal').val() < 1){
-                toastMsg('error', 'Vui lòng nhập số nguyên !<br>Giá trị nhỏ nhất là 1');
-            }else{
+            //  -- load view info book
+            $('.btn-view-book-detail').attr('href', data['link'])
+
+            //  ----------------------------------------------------------------------
+            //  -- load quantity by click button minus or plus
+            $('button.btn-change-quantity').click(function(){
                 var qtyByClick = $('.input-number').val();
                 $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '", "' + qtyByClick + '")');
-            }
-            
-        })
+            })
 
-        //  -- load quantity default
-        $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '")');
+            //  -- load quantity by input typing
+            $('input.input-number').change(function(){
+                if(!Number.isInteger(parseFloat($('.quantity-box-modal').val())) || $('.quantity-box-modal').val() < 1){
+                    toastMsg('error', 'Vui lòng nhập số nguyên !<br>Giá trị nhỏ nhất là 1');
+                }else{
+                    var qtyByClick = $('.input-number').val();
+                    $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '", "' + qtyByClick + '")');
+                }
+            })
+
+            //  -- load quantity default
+            $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '")');
+        }
         
-    }, 'json');
+    })
+
+    // $.get(link, function(data){
+    //     //  ---------- LOAD INFO BOOK TO MODAL VIEW ----------
+    //     // load id in input
+    //     // $('.quantity-box').attr('data-id', data['id']);
+
+    //     // load img
+    //     $('div.quick-view-img img').attr('src', uploadDir + data['picture'])
+
+    //     //  -- load name
+    //     $('div.product-right .book-name').html(data['name'])
+
+    //     //  -- load price
+    //     if(data['sale_off'] != 0){
+    //         price = formatCurrency(data['price']);
+    //     }
+    //     salePrice = data['price'] - ((parseFloat(data['price']) * parseFloat(data['sale_off'])) / 100);
+    //     $('div.product-right .book-price').html(formatCurrency(salePrice) + ' <del>' + price + ' </del>')
+
+    //     //  -- load description
+    //     $('div.product-right .book-description').html(data['description'])
+
+    //     //  -- load view info book
+    //     $('.btn-view-book-detail').attr('href', data['link'])
+
+    //     //  ----------------------------------------------------------------------
+    //     //  -- load quantity by click button minus or plus
+    //     $('button.btn-change-quantity').click(function(){
+    //         var qtyByClick = $('.input-number').val();
+    //         $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '", "' + qtyByClick + '")');
+    //     })
+
+    //     //  -- load quantity by input typing
+    //     $('input.input-number').change(function(){
+    //         if(!Number.isInteger(parseFloat($('.quantity-box-modal').val())) || $('.quantity-box-modal').val() < 1){
+    //             toastMsg('error', 'Vui lòng nhập số nguyên !<br>Giá trị nhỏ nhất là 1');
+    //         }else{
+    //             var qtyByClick = $('.input-number').val();
+    //             $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '", "' + qtyByClick + '")');
+    //         }
+            
+    //     })
+
+    //     //  -- load quantity default
+    //     $('.btn-add-to-cart').attr('href', 'javascript:addCart("' + data['id'] + '", "' + salePrice + '")');
+        
+    // }, 'json');
     $('#quick-view').modal('show')
 }
 
@@ -221,6 +282,7 @@ function addCart(bookID, price, quantity = null){
             dataType: 'json',
             url: getDomainName() + 'index.php?module=default&controller=account&action=order',
             data: {order_id: bookID, order_price: price, order_qty: qty},
+
             success: function (data) {
                 $('#cart-summary').text(data);
                 $('#cart-summary').notify("Đã thêm vào giỏ hàng", {className: 'success', position: "bottom right", autoHideDelay: 2500});
@@ -238,6 +300,7 @@ function comment(){
             dataType: 'json',
             url: getDomainName() + 'index.php?module=default&controller=book&action=comment',
             data: $('#form-comment').serialize(),
+
             success: function (data) {
                 $('div.comment-area').prepend(rowComment(data['fullname'], data['created'], data['comment']));
                 $('p.count-comment').text(data['count'] + ' bình luận');
@@ -254,9 +317,17 @@ function loadMoreComment(bookID){
         dataType: 'json',
         url: getDomainName() + 'index.php?module=default&controller=book&action=loadComment',
         data: {bid: bookID},
-        success: function (data) {
-            $.each(data, function(index, value){
 
+        beforeSend: function(){
+            $("#loading-modal-comment").show();
+            $(".modal-body").hide();
+        },
+
+        success: function (data) {
+            $("#loading-modal-comment").hide();
+            $(".modal-body").show();
+            
+            $.each(data, function(index, value){
                 $('div.modal-comment-area').append(elementModalComment(value['fullname'], formatDate(value['created']), value['text']))
             })
         }
@@ -316,5 +387,5 @@ function elementModalComment(name, date, comment){
 
 function getDomainName(){
 
-    return window.location.origin + '/php14_QuangNguyen/project/';
+    return 'http://localhost/php14_QuangNguyen/project/';
 }

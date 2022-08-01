@@ -1,5 +1,5 @@
 <?php
-Session::init();
+Authentication::checkSessionTimeout($_SESSION['loginDefault']['timeout'] ?? '');
 $arrEleCategory = [];
 foreach ($this->categoriesNavbar as $value) {
     $id         = $value['id'];
