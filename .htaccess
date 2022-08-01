@@ -41,7 +41,7 @@ RewriteRule ^dat-hang-([A-Za-z0-9]+)\.html$     index.php?module=default&control
 
 # --------------- ERROR --------------- 
 RewriteRule not-found.html                      index.php?module=default&controller=error&action=index
-ErrorDocument 404 http://localhost/php14_QuangNguyen/project/not-found.html
+ErrorDocument 404 http://localhost/BookStore-PHP/not-found.html
 
 # --------------- ADMIN --------------- 
 RewriteRule ^admin$                               index.php?module=backend&controller=account&action=login

@@ -13,7 +13,7 @@
 	define ('UPLOAD_CATEGORY_PATH'	, UPLOAD_PATH . 'category' . DS);							
 	define ('UPLOAD_SLIDER_PATH'	, UPLOAD_PATH . 'slider' . DS);							
 	
-	define	('ROOT_URL'				, DS . 'php14_QuangNguyen/project'. DS); 
+	define	('ROOT_URL'				, DS . 'BookStore-PHP'. DS); 
 	define	('APPLICATION_URL'		, ROOT_URL . 'application' . DS);
 	define	('PUBLIC_URL'			, ROOT_URL . 'public' . DS);
 	define	('TEMPLATE_URL'			, PUBLIC_URL . 'template' . DS);

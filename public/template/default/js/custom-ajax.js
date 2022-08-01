@@ -387,5 +387,5 @@ function elementModalComment(name, date, comment){
 
 function getDomainName(){
 
-    return 'http://localhost/php14_QuangNguyen/project/';
+    return 'http://localhost/BookStore-PHP/';
 }
