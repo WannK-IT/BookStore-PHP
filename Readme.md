@@ -6,10 +6,14 @@
 <br />
 Enjoy !
 <br /> --------------------- For Customize ---------------------
-* Change path in file "define.php", constant_name: ROOT_URL.
-* Replace above URL into file ".htaccess", part ERROR
-* Replace above URL into file "custom-ajax.js" (in the end function of file), path: /public/template/default/js/custom-ajax.js <br />
-* Enjoy !
+<br />
+. Change path in file "define.php", constant_name: ROOT_URL.
+<br />
+. Replace above URL into file ".htaccess", part ERROR
+<br />
+. Replace above URL into file "custom-ajax.js" (in the end function of file), path: /public/template/default/js/custom-ajax.js 
+<br />
+. Enjoy !
 
 
 
