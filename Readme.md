@@ -5,6 +5,7 @@
 3. URL default on local: http://localhost/BookStore-PHP/ 
 4. Enjoy !
 <br /> --------------------- For Customize ---------------------
+<br />
 . Change path in file "define.php", constant_name: ROOT_URL.
 <br />
 . Replace above URL into file ".htaccess", part ERROR
