@@ -1,0 +1,48 @@
+RewriteEngine On
+
+# --------------- HOME --------------- 
+RewriteRule index.html                          index.php?module=default&controller=home&action=index
+
+# --------------- BOOK ---------------
+
+## category-id.html&page=2
+RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html\&page\=([0-9]+)     index.php?module=default&controller=book&action=list&cid=$2&page=$3
+
+## danh-muc.html&page=2
+RewriteRule danh-muc.html\&page\=([0-9]+)                       index.php?module=default&controller=category&action=list&page=$1
+
+## sach.html&page=2
+RewriteRule sach.html\&page\=([0-9]+)                           index.php?module=default&controller=book&action=list&page=$1
+
+## sach.html
+RewriteRule sach.html                                           index.php?module=default&controller=book&action=list
+
+## cong-nghe-37.html
+RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html                     index.php?module=default&controller=book&action=list&cid=$2
+
+## thuyet-tien-hoa-cong-nghe-so-30.html
+RewriteRule ([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)\.html    index.php?module=default&controller=book&action=item&bid=$3
+
+
+# --------------- CATEGORY --------------- 
+## danh-muc.html
+RewriteRule danh-muc.html                                       index.php?module=default&controller=category&action=list
+
+
+# --------------- ACCOUNT --------------- 
+RewriteRule dang-nhap.html                      index.php?module=default&controller=account&action=login
+RewriteRule dang-ky.html                        index.php?module=default&controller=account&action=register
+RewriteRule tai-khoan.html                      index.php?module=default&controller=account&action=accountForm
+RewriteRule doi-mat-khau.html                   index.php?module=default&controller=account&action=changePasswordForm
+RewriteRule lich-su-mua-hang.html               index.php?module=default&controller=account&action=orderHistory
+RewriteRule gio-hang.html                       index.php?module=default&controller=account&action=cart
+RewriteRule ^dat-hang-([A-Za-z0-9]+)\.html$     index.php?module=default&controller=account&action=orderSuccess&order_id=$1
+
+
+# --------------- ERROR --------------- 
+RewriteRule not-found.html                      index.php?module=default&controller=error&action=index
+ErrorDocument 404 http://localhost/php14_QuangNguyen/project/not-found.html
+
+# --------------- ADMIN --------------- 
+RewriteRule ^admin$                               index.php?module=backend&controller=account&action=login
+
