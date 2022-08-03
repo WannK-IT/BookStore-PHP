@@ -125,17 +125,13 @@ class AccountController extends Controller
 			if (empty($this->_arrParam['form']['old_password']) || empty($this->_arrParam['form']['new_password'])) {
 				$this->_view->errors = '<li>Please type password !</li>';
 			} else {
-				if ($this->_arrParam['form']['old_password'] !== $this->_arrParam['form']['new_password']) {
-					$this->_view->errors = '<li><b>Password: </b>is not match. Please try again !</li>';
-				} else {
-					$checkPass = $this->_model->checkExist($this->_arrParam['form'], 'password');
-					if ($checkPass == 'exist') {
-						$this->_model->formHandle($this->_arrParam['form']['new_password'], 'changePassword');
-						Session::set('changePasswordDefault', true);
-						URL::direct('default', 'account', 'changePasswordForm', null, 'doi-mat-khau.html');
-					} else {
-						$this->_view->errors = '<li><b>Old password: </b>is incorrect. Please try again !</li>';
-					}
+				$checkPass = $this->_model->checkExist($this->_arrParam['form'], 'password');
+				if ($checkPass == 'exist') {
+					$this->_model->formHandle($this->_arrParam['form']['new_password'], 'changePassword');
+					Session::set('changePasswordDefault', true);
+					URL::direct('default', 'account', 'changePasswordForm', null, 'doi-mat-khau.html');
+				} elseif($checkPass == 'not exist') {
+					$this->_view->errors = '<li><b>Old password: </b>is incorrect. Please try again !</li>';
 				}
 			}
 		}

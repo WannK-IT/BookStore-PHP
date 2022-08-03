@@ -24,7 +24,6 @@ class AccountModel extends Model
 			$_SESSION['loginDefault']['username'] 		= $loadInfo['username'];
 			$_SESSION['loginDefault']['fullnameUser'] 	= $loadInfo['fullname'];
 			$_SESSION['loginDefault']['timeout'] 		= time() + SESSION_TIMEOUT;
-
 		} else {
 			$result = 'failed';
 		}
@@ -101,7 +100,7 @@ class AccountModel extends Model
 				break;
 			case 'cart':
 				if (!empty($_SESSION['cart']['quantity'])) {
-					
+
 					$ids = implode(",", array_keys($_SESSION['cart']['quantity']));
 					$query[] 	= "SELECT `b`.`id`, `b`.`name`, `b`.`picture`, `c`.`name` AS 'category_name'";
 					$query[] 	= "FROM `" . DB_TBL_BOOK . "` AS `b`, `category` AS `c`";
@@ -159,7 +158,8 @@ class AccountModel extends Model
 			$arrParams['modified'] 		= date('Y-m-d H:i:s');
 			$this->update($arrParams, [['id', $_SESSION['loginDefault']['idUser']]]);
 		} elseif ($option == 'changePassword') {
-			$this->update(md5($arrParams), [['id', $_SESSION['loginDefault']['idUser']]]);
+			$query = "UPDATE `{$this->table}` SET `password` = '" . md5($arrParams) . "' WHERE `id` = '" . $_SESSION['loginDefault']['idUser'] . "'";
+			$this->query($query);
 		}
 	}
 
