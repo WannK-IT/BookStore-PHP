@@ -23,7 +23,7 @@
                         <li class="my-layout-view" data-number="3">
                             <img src="<?= $this->_dirImg ?>icon/3.png" alt="" class="product-3-layout-view">
                         </li>
-                        <li class="my-layout-view active" data-number="4">
+                        <li class="my-layout-view" data-number="4">
                             <img src="<?= $this->_dirImg ?>icon/4.png" alt="" class="product-4-layout-view">
                         </li>
                         <li class="my-layout-view" data-number="6">

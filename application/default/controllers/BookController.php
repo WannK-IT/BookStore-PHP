@@ -10,12 +10,6 @@ class BookController extends Controller
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
 
-		// Navbar
-		$this->_view->categoriesNavbar 	= $this->_model->listItems($this->_arrParam, 'categoryNavbar');
-
-		// Footer
-		$this->_view->footer 			= $this->_model->listItems($this->_arrParam, 'footer');
-
 		// Breadcrumb
 		if ($this->_arrParam['action'] == 'list') {
 			$this->_view->breadcrumb 		= '<span class="mx-1">TẤT CẢ SÁCH </span>';

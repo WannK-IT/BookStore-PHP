@@ -20,6 +20,7 @@ class DashboardController extends Controller{
 		$this->_view->countBook 	= $this->_model->countItem('book');
 		$this->_view->countCart 	= $this->_model->countItem('cart');
 		$this->_view->countSlider 	= $this->_model->countItem('slider');
+		$this->_view->countBlog 	= $this->_model->countItem('blog');
 		$this->_view->render('dashboard/index', true);
 	}
 

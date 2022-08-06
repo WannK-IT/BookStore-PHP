@@ -1,6 +1,6 @@
 <?php
-$xhtmlCategory = $xhtmlBook = $xhtmlBookSpecial =  '';
-$search = $this->arrParam['search'] ?? ''; 
+$xhtmlCategory = $xhtmlBook = $xhtmlBookSpecial = $key_search = '';
+$search = $this->arrParam['search'] ?? '';
 
 // ----------- Duyệt mảng in sidebar category ----------- 
 if (!empty($this->listCategories)) {
@@ -93,7 +93,7 @@ if (!empty($this->listItemsSpecial)) {
 
         $xhtmlBookSpecial .= '<div class="media">
                 <a href="' . $linkInfoItem2 . '">
-                    <img class="img-fluid blur-up lazyload" src="' . $img . '" alt="Special Book" style="width: 130px; height: 160px"></a>
+                    <img class="img-fluid blur-up lazyload" src="' . $img . '" alt="Special Book" style="max-height: 180px"></a>
                 <div class="media-body align-self-center">
                 <!-- 
                     <div class="rating">
@@ -122,6 +122,8 @@ if (!empty($this->listItemsSpecial)) {
 } else {
     $xhtmlBookSpecial = '<p class="font-weight-bold text-muted text-center">Đang cập nhật !</p>';
 }
+
+$key_search = isset($this->arrParam['search']) ? '<h5 class="mb-3 font-weight-bold">Kết quả tìm kiếm với: ' . $this->arrParam['search'] . '</h5>' : '';
 ?>
 
 <!-- Breadcrumb -->
@@ -148,16 +150,17 @@ if (!empty($this->listItemsSpecial)) {
                             <?= $xhtmlBookSpecial ?>
                         </div>
                     </div>
-                    <!-- silde-bar colleps block end here -->
                 </div>
+
             </div>
 
             <!-- List Book -->
-            <div class="collection-content col">
+            <div class="col-sm-9 collection-content">
                 <div class="page-main-content">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="collection-product-wrapper">
+                                <?= $key_search ?>
                                 <?php include_once "element/filter.php" ?>
                                 <div class="product-wrapper-grid" id="my-product-list">
                                     <?= $xhtmlBook ?>
@@ -171,6 +174,8 @@ if (!empty($this->listItemsSpecial)) {
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </section>
@@ -178,4 +183,3 @@ if (!empty($this->listItemsSpecial)) {
 <!-- Quick-view modal popup start-->
 <?= FormFrontend::modalViewProduct() ?>
 <!-- Quick-view modal popup end-->
-

@@ -219,6 +219,24 @@ $(document).ready(function () {
         }
     })
 
+    // change ordering blog
+    $('.chkOrderingBlog').change(function (e) {
+        if ($(this).val() < 1) {
+            e.preventDefault();
+            toastMsg('warning', 'Giá trị Ordering thấp nhất là 1');
+        } else {
+            $(this).notify("Cập nhật thành công !", {
+                className: 'success',
+                position: 'top center'
+            });
+            let id = $(this).data('id');
+            let value = $(this).val();
+            let link = 'index.php?module=backend&controller=blog&action=changeOrdering&newValue=' + value + '&id=' + id;
+            $.get(link, function (data) {
+            });
+        }
+    })
+
     //change status order in cart
     $('select[name=status_order]').change(function (e) {
         e.preventDefault();

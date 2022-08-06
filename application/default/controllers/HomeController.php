@@ -9,8 +9,6 @@ class HomeController extends Controller
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
 
-		$this->_view->categoriesNavbar 	= $this->_model->listItems('categoryNavbar');
-		$this->_view->footer 			= $this->_model->listItems('footer');
 	}
 
 	public function indexAction()
@@ -19,6 +17,7 @@ class HomeController extends Controller
 		$this->_view->itemsSpecial 	= $this->_model->listItems('bookSpecial');
 		$this->_view->listSpecial 	= $this->_model->listItems('listItemsSpecial');
 		$this->_view->listSlider	= $this->_model->listItems('slider');
+		$this->_view->blogs 		= $this->_model->listItems('blog');
 		$this->_view->render('home/index', true);
 	}
 

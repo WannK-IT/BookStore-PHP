@@ -66,6 +66,19 @@ $arrItemSlider    =   [
     ],
 ];
 
+$arrItemBlog    =   [
+    [
+        'link' => URL::createLink($this->arrParam['module'], 'blog', 'index'),
+        'icon' => 'fas fa-list-ul',
+        'title' => 'list'
+    ],
+    [
+        'link' => URL::createLink($this->arrParam['module'], 'blog', 'form'),
+        'icon' => 'fas fa-edit',
+        'title' => 'form'
+    ],
+];
+
 $dashboard  = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'dashboard', 'index'), 'dashboard', 'fas fa-tachometer-alt', $this->arrParam['controller']);
 $cart       = HelperBackend::itemSideBar('single', URL::createLink($this->arrParam['module'], 'cart', 'index'), 'cart', 'fas fa-shopping-cart', $this->arrParam['controller']);
 $group      = HelperBackend::itemSideBar('multi', '#', 'group', 'fas fa-users', $this->arrParam['controller'], $arrItemGroup);
@@ -73,13 +86,13 @@ $user       = HelperBackend::itemSideBar('multi', '#', 'user', 'fas fa-user', $t
 $book       = HelperBackend::itemSideBar('multi', '#', 'book', 'fas fa-book-open', $this->arrParam['controller'], $arrItemBook);
 $category   = HelperBackend::itemSideBar('multi', '#', 'category', 'far fa-list-alt', $this->arrParam['controller'], $arrItemCategory);
 $slider     = HelperBackend::itemSideBar('multi', '#', 'slider', 'fas fa-sliders-h', $this->arrParam['controller'], $arrItemSlider);
-
+$blog       = HelperBackend::itemSideBar('multi', '#', 'blog', 'fas fa-newspaper', $this->arrParam['controller'], $arrItemBlog);
 
 // Check Permission
 if($_SESSION['login']['loginRole'] == 'admin' || $_SESSION['login']['loginRole'] == 'manager'){
-    $sideBarList = $dashboard . $group . $user . $category . $book . $slider . $cart;
+    $sideBarList = $dashboard . $group . $user . $category . $book . $slider . $blog . $cart;
 }else{
-    $sideBarList = $dashboard . $category . $book . $slider . $cart;
+    $sideBarList = $dashboard . $category . $book . $slider . $blog . $cart;
 }
 ?>
 

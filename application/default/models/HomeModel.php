@@ -24,26 +24,18 @@ class HomeModel extends Model
 				$query[] = "AND `b`.`status` = 'active' AND `b`.`special` = 'yes' AND `c`.`status` = 'active' AND `c`.`isShowHome` = 'yes'";
 				$query[] = "ORDER BY `c`.`ordering`";
 				break;
-			case 'categoryNavbar':
-				$query[] = "SELECT `c`.`id`, `c`.`name`, count(`b`.`id`) AS 'countBook'";
-				$query[] = "FROM `" . DB_TBL_CATEGORY . "` AS `c`";
-				$query[] = "LEFT JOIN `" . DB_TBL_BOOK . "` AS `b` ON  `c`.`id` = `b`.`category_id`";
-				$query[] = "AND `c`.`status` = 'active' AND `b`.`status` = 'active'";
-				$query[] = "GROUP BY `c`.`id`";
-				$query[] = "ORDER BY `c`.`ordering`";
-				break;
 			case 'slider':
 				$query[] = "SELECT `picture`";
 				$query[] = "FROM `" . DB_TBL_SLIDER . "`";
 				$query[] = "WHERE `status` = 'active'";
 				$query[] = "ORDER BY `ordering`";
 				break;
-			case 'footer':
-				$query[] = "SELECT `id`, `name`";
-				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
-				$query[] = "WHERE `status` = 'active' AND `isShowHome` = 'yes'";
+			case 'blog':
+				$query[] = "SELECT `id`, `title`, `content`, `posted_by`, `posted_date`, `picture`";
+				$query[] = "FROM `" . DB_TBL_BLOG . "`";
+				$query[] = "WHERE `status` = 'active'";
+				$query[] = "AND `ordering` != '1'";
 				$query[] = "ORDER BY `ordering`";
-				$query[] = "LIMIT 4";
 				break;
 		}
 

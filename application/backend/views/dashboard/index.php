@@ -79,5 +79,18 @@
             </div>
         </div>
 
+        <!-- Blog -->
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-gradient-info">
+                <div class="inner">
+                    <h3><?= $this->countBlog['totalBlog'] ?></h3>
+                    <p>Blog</p>
+                </div>
+                <div class="icon text-white">
+                    <i class="ion ion-ios-paper"></i>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

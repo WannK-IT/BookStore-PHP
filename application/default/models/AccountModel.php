@@ -86,18 +86,6 @@ class AccountModel extends Model
 	public function listItems($arrParams, $option)
 	{
 		switch ($option) {
-			case 'categoryNavbar':
-				$query[] = "SELECT `c`.`id`, `c`.`name`, count(`b`.`id`) AS 'countBook'";
-				$query[] = "FROM `" . DB_TBL_CATEGORY . "` AS `c`";
-				$query[] = "LEFT JOIN `" . DB_TBL_BOOK . "` AS `b` ON  `c`.`id` = `b`.`category_id`";
-				$query[] = "AND `c`.`status` = 'active' AND `b`.`status` = 'active'";
-				$query[] = "GROUP BY `c`.`id`";
-				$query[] = "ORDER BY `c`.`ordering`";
-
-				$query = implode(' ', $query);
-				$result = $this->listRecord($query);
-				return $result;
-				break;
 			case 'cart':
 				if (!empty($_SESSION['cart']['quantity'])) {
 
@@ -122,19 +110,9 @@ class AccountModel extends Model
 				$query[] 	= "SELECT *";
 				$query[] 	= "FROM `" . DB_TBL_CART . "`";
 				$query[] 	= "WHERE `username` = '" . $_SESSION['loginDefault']['username'] . "'";
-				$query[] 	= "ORDER BY `status` DESC ";
+				$query[] 	= "ORDER BY `status` DESC, `date` DESC";
 				$query 		= implode(' ', $query);
 				$result 	= $this->listRecord($query);
-				return $result;
-				break;
-			case 'footer':
-				$query[] = "SELECT `id`, `name`";
-				$query[] = "FROM `" . DB_TBL_CATEGORY . "`";
-				$query[] = "WHERE `status` = 'active' AND `isShowHome` = 'yes'";
-				$query[] = "ORDER BY `ordering`";
-				$query[] = "LIMIT 4";
-				$query 	 = implode(' ', $query);
-				$result  = $this->listRecord($query);
 				return $result;
 				break;
 		}

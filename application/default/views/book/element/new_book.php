@@ -16,7 +16,7 @@ if (!empty($this->listItemsNew)) {
         $img            = UPLOAD_BOOK_URL . $itemNewB['picture'];
         $xhtmlBookNew .= '<div class="media">
                 <a href="' . $linkInfoItem . '">
-                    <img class="img-fluid blur-up lazyload" src="' . $img . '" alt="Special Book" style="width: 130px; height: 160px"></a>
+                    <img class="img-fluid blur-up lazyload" src="' . $img . '" alt="Special Book" style="height: 180px"></a>
                 <div class="media-body align-self-center">
                 <!--
                     <div class="rating">

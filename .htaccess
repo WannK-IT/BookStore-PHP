@@ -1,7 +1,7 @@
 RewriteEngine On
 
 # --------------- HOME --------------- 
-RewriteRule index.html                          index.php?module=default&controller=home&action=index
+RewriteRule index.html                                          index.php?module=default&controller=home&action=index
 
 # --------------- BOOK ---------------
 
@@ -20,13 +20,19 @@ RewriteRule sach.html                                           index.php?module
 ## cong-nghe-37.html
 RewriteRule ([A-Za-z0-9_-]+)-([0-9]+)\.html                     index.php?module=default&controller=book&action=list&cid=$2
 
-## thuyet-tien-hoa-cong-nghe-so-30.html
+## cong-nghe/thuyet-tien-hoa-cong-nghe-so-30.html
 RewriteRule ([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)\.html    index.php?module=default&controller=book&action=item&bid=$3
 
 
 # --------------- CATEGORY --------------- 
 ## danh-muc.html
 RewriteRule danh-muc.html                                       index.php?module=default&controller=category&action=list
+
+
+# --------------- BLOG --------------- 
+RewriteRule ^tin-tuc/([A-Za-z0-9_-]+)-([0-9]+)                  index.php?module=default&controller=blog&action=item&id=$2
+RewriteRule tin-tuc.html\&page\=([0-9]+)                        index.php?module=default&controller=blog&action=list&page=$1
+RewriteRule tin-tuc.html                                        index.php?module=default&controller=blog&action=list
 
 
 # --------------- ACCOUNT --------------- 
@@ -44,5 +50,5 @@ RewriteRule not-found.html                      index.php?module=default&control
 ErrorDocument 404 http://localhost/BookStore-PHP/not-found.html
 
 # --------------- ADMIN --------------- 
-RewriteRule ^admin$                               index.php?module=backend&controller=account&action=login
+RewriteRule ^admin$                             index.php?module=backend&controller=account&action=login
 

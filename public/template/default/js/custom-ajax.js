@@ -127,10 +127,16 @@ function loginForm(link, direct) {
 }
 
 function registerForm(link, direct) {
+    var regexUsername = /[ `ÀÁÂÃÈÉÊÌÍĨÒÓÔÕÙÚĂĐŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    var regexEmail = /[ `ÀÁÂÃÈÉÊÌÍĨÒÓÔÕÙÚĂĐŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ!#$%^&*()+\-=\[\]{};':"\\|,<>\/?~]/;;
     // Check empty input field
     if (!$('#username').val() || !$('#password').val() || !$('#fullname').val() || !$('#email').val()) {
         toastMsg('warning', 'Vui lòng nhập thông tin<br>tài khoản !');
-    } else {
+    } else if(regexUsername.test($('#username').val())){
+        toastMsg('warning', 'Tên tài khoản không được<br>chứa ký tự đặc biệt !');
+    } else if(regexEmail.test($('#email').val())){
+        toastMsg('warning', 'Email không đúng định dạng !');
+    } else{
         let checkExist = getDomainName() + 'index.php?module=default&controller=account&action=checkExist';
         $.ajax({
             type: 'post',
@@ -146,7 +152,6 @@ function registerForm(link, direct) {
                 }
             }
         })
-
     }
 }
 

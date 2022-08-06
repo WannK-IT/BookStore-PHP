@@ -9,7 +9,7 @@ $catName    = implode('-', $splitCat);
 
 if (isset($this->arrParam['cid'])) {
 
-    $link = $this->pagination->showPaginationFrontend(URL::createLink('default', 'book', 'list', ['cid' => $catID ?? '', 'sort' => $this->arrParam['sort'] ?? '', 'search' => $this->arrParam['search'] ?? ''], "$catName-$catID.html"));
+    $link = $this->pagination->showPaginationFrontend(URL::createLink('default', 'book', 'list', ['cid' => $catID ?? '', 'sort' => $this->arrParam['sort'] ?? '', 'search' => $this->arrParam['search'] ?? '', 'price_asc' => $this->arrParam['price_asc'] ?? '', 'price_desc' => $this->arrParam['price_desc'] ?? '', 'latest' => $this->arrParam['latest'] ?? ''], "$catName-$catID.html"));
 } else {
     $link = $this->pagination->showPaginationFrontend(URL::createLink('default', 'book', 'list', ['sort' => $this->arrParam['sort'] ?? '', 'search' => $this->arrParam['search'] ?? ''], "sach.html"));
 }

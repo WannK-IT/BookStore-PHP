@@ -116,7 +116,7 @@ class SliderModel extends Model
 		$upload = new Upload();
 		if ($option == 'add') {
 			require_once EXTEND_PATH . 'Upload.php';
-			$upload = new Upload();
+			$upload 	= new Upload();
 			$newPicture = $upload->uploadFile($arrParams['picture'], 'slider');
 
 			// $arrParams['created'] set default ở phpmyadmin

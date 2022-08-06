@@ -121,6 +121,10 @@ if (!empty($newArrayList)) {
     </div>
 </section>
 
+<!-- blog layout -->
+<?php include_once "element/blog.php" ?>
+<!-- blog layout  end -->
+
 <!-- Quick-view modal popup start-->
 <?= FormFrontend::modalViewProduct() ?>
 <!-- Quick-view modal popup end-->

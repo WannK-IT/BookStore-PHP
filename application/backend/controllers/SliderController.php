@@ -18,12 +18,13 @@ class sliderController extends Controller
 	{
 		$this->_view->setTitle('List Slider');
 		$this->_view->_title = ('Slider :: List');
+		
 		$countStatus 	= $this->_model->countItem($this->_arrParam, ['task' => 'count-status']);
 		$totalItems 	= @$countStatus[$this->_arrParam['status'] ?? 'all'];
 		$this->_view->countStatus = $countStatus;
 
 		// Pagination
-		$configPagination = ['totalItemsPerPage'	=> 5, 'pageRange' => 3];
+		$configPagination = ['totalItemsPerPage'	=> 6, 'pageRange' => 3];
 		$this->setPagination($configPagination);
 		@$this->_view->pagination	= new Pagination($totalItems, $this->_pagination);
 
@@ -32,7 +33,7 @@ class sliderController extends Controller
 	}
 
 
-	// // Change single status item
+	// Change single status item
 	public function changeStatusAction()
 	{
 		$result = $this->_model->changeStatus($this->_arrParam);

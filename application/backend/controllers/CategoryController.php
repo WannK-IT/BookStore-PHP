@@ -23,7 +23,7 @@ class CategoryController extends Controller
 		$this->_view->countStatus = $countStatus;
 
 		// Pagination
-		$configPagination = ['totalItemsPerPage'	=> 5, 'pageRange' => 3];
+		$configPagination = ['totalItemsPerPage'	=> 6, 'pageRange' => 3];
 		$this->setPagination($configPagination);
 		@$this->_view->pagination	= new Pagination($totalItems, $this->_pagination);
 

@@ -1,12 +1,37 @@
 <?php
-$catFooter = '';
-if ($this->footer) {
-    foreach ($this->footer as $value) {
+$catFooter = $policyFooter = '';
+$model              = new Model();
+
+$queryCatFooter[]   = "SELECT `id`, `name` FROM `" . DB_TBL_CATEGORY . "`";
+$queryCatFooter[]   = "WHERE `status` = 'active' AND `isShowHome` = 'yes'";
+$queryCatFooter[]   = "ORDER BY `ordering` LIMIT 4";
+$queryCatFooter     = implode(' ', $queryCatFooter);
+$resultCatFooter    = $model->listRecord($queryCatFooter);
+
+$queryPolicy[]      = "SELECT `id`, `title` FROM `blog`";
+$queryPolicy[]      = "WHERE `status` = 'active' AND `ordering` = '1'";
+$queryPolicy        = implode(' ', $queryPolicy);
+$resultPolicy       = $model->listRecord($queryPolicy);
+
+if (!empty($resultCatFooter)) {
+    foreach ($resultCatFooter as $value) {
         $idCatFooter    = $value['id'];
         $nameCatFooter  = URL::filterURL($value['name']);
         $linkViewFooter = URL::createLink('default', 'book', 'list', ['cid' => $idCatFooter], "$nameCatFooter-$idCatFooter.html");
         $catFooter      .= '<li><a href="' . $linkViewFooter . '">' . $value['name'] . '</a></li>';
     }
+}
+
+if (!empty($resultPolicy)) {
+    $policyFooter .= '<ul>';
+    foreach ($resultPolicy as $valuePolicy) {
+        $idPolicy       = $valuePolicy['id'];
+        $titlePolicy    = $valuePolicy['title'];
+        $titlePolicyURL = URL::filterURL($valuePolicy['title']);
+        $linkPolicy     = URL::createLink('default', 'blog', 'item', ['id' => $idPolicy], "tin-tuc/$titlePolicyURL-$idPolicy");
+        $policyFooter .= '<li><a href="' . $linkPolicy . '">' . $titlePolicy . '</a></li>';
+    }
+    $policyFooter .= '</ul>';
 }
 ?>
 
@@ -51,13 +76,7 @@ if ($this->footer) {
                             <h4>Chính sách</h4>
                         </div>
                         <div class="footer-contant">
-                            <ul>
-                                <li><a href="#">Điều khoản sử dụng</a></li>
-                                <li><a href="#">Chính sách bảo mật</a></li>
-                                <li><a href="#">Hợp tác phát hành</a></li>
-                                <li><a href="#">Phương thức vận chuyển</a>
-                                </li>
-                            </ul>
+                            <?= $policyFooter ?>
                         </div>
                     </div>
                 </div>

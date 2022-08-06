@@ -37,12 +37,17 @@ if (!empty($this->orders)) {
         $sum_price          = 0;
         foreach ($arrBookID as $keyBook => $itemBook) {
             $book_name      = $arrBookName[$keyBook];
-            $book_img       = UPLOAD_BOOK_URL . $arrBookImg[$keyBook];
+            if(file_exists(UPLOAD_BOOK_PATH . $arrBookImg[$keyBook])){
+                $book_img       = UPLOAD_BOOK_URL . $arrBookImg[$keyBook];
+                $linkViewBook   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemBook]);
+            }else{
+                $book_img       = IMG_ADMIN_URL . 'no-image.jpg';
+                $linkViewBook   = 'not-found.html';
+            }
             $book_price     = $arrPrice[$keyBook];
             $book_qty       = $arrQty[$keyBook];
             $total_price    = intval($book_price) * intval($book_qty);
             $sum_price      += $total_price;
-            $linkViewBook   = URL::createLink($this->arrParam['module'], 'book', 'item', ['bid' => $itemBook]);
 
             $xhtml          .= '<tr>
                     <td><a href="' . $linkViewBook . '"><img src="' . $book_img . '" alt="' . $book_name . '" style="width: 80px"></a></td>

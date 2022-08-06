@@ -21,6 +21,8 @@
 	define	('UPLOAD_BOOK_URL'		, UPLOAD_URL . 'book' . DS);
 	define	('UPLOAD_CATEGORY_URL'	, UPLOAD_URL . 'category' . DS);
 	define	('UPLOAD_SLIDER_URL'	, UPLOAD_URL . 'slider' . DS);
+	define	('UPLOAD_BLOG_URL'		, UPLOAD_URL . 'blog' . DS);
+	define	('IMG_ADMIN_URL'		, TEMPLATE_URL . 'backend' . DS . 'images' . DS);
 	
 	define	('DEFAULT_MODULE'		, 'default');
 	define	('DEFAULT_CONTROLLER'	, 'home');
@@ -39,6 +41,7 @@
 	define ('DB_TBL_CART'			, 'cart');						
 	define ('DB_TBL_SLIDER'			, 'slider');						
 	define ('DB_TBL_COMMENT'		, 'comment');	
+	define ('DB_TBL_BLOG'			, 'blog');	
 	
 	// ====================== TIME ===========================
-	define ('SESSION_TIMEOUT'		, 3600);	
+	define ('SESSION_TIMEOUT'		, 7200);	

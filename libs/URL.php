@@ -87,7 +87,7 @@ class URL
 		$replaceCharaterY = 'y';
 		$value = preg_replace($charaterY, $replaceCharaterY, $value);
 
-		$charaterSpecial = '#[`~\#$,.<>;\':"\\/\[\]\|{}()=+*]#imsU';
+		$charaterSpecial = '#[`~\#$,.<>;\':"\\/\[\]\|{}()=?+*]#imsU';
 		$replaceSpecial = '';
 		$value = preg_replace($charaterSpecial, $replaceSpecial, $value);
 

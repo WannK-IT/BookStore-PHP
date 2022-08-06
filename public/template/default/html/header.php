@@ -1,7 +1,19 @@
 <?php
 Authentication::checkSessionTimeout($_SESSION['loginDefault']['timeout'] ?? '');
 $arrEleCategory = [];
-foreach ($this->categoriesNavbar as $value) {
+
+// Query get list Category Header
+$modelCat           = new Model();
+$queryCatNavbar[]   = "SELECT `c`.`id`, `c`.`name`, count(`b`.`id`) AS 'countBook'";
+$queryCatNavbar[]   = "FROM `" . DB_TBL_CATEGORY . "` AS `c`, `" . DB_TBL_BOOK . "` AS `b`";
+$queryCatNavbar[]   = "WHERE  `c`.`id` = `b`.`category_id`";
+$queryCatNavbar[]   = "AND `c`.`status` = 'active' AND `b`.`status` = 'active'";
+$queryCatNavbar[]   = "GROUP BY `c`.`id`";
+$queryCatNavbar[]   = "ORDER BY `c`.`ordering`";
+$queryCatNavbar     = implode(' ', $queryCatNavbar);
+$categoriesNavbar   = $modelCat->listRecord($queryCatNavbar);
+
+foreach ($categoriesNavbar as $value) {
     $id         = $value['id'];
     $nameURL    = URL::filterURL($value['name']);
     $arrEleCategory[] = ['link' => URL::createLink($this->arrParam['module'], 'book', 'list', ['cid' => $id], "$nameURL-$id.html"), 'title' => $value['name'] . ' (' . $value['countBook'] . ')'];
@@ -10,6 +22,7 @@ foreach ($this->categoriesNavbar as $value) {
 $home           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'home', 'index', null, 'index.html'), 'Trang chủ', 'home');
 $book           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'book', 'list', null, 'sach.html'), 'Sách', 'book');
 $category       = HelperFrontend::itemNavBar('dropdown', URL::createLink($this->arrParam['module'], 'category', 'list', null, 'danh-muc.html'), 'Danh mục', 'category', $arrEleCategory);
+$blog           = HelperFrontend::itemNavBar('single', URL::createLink($this->arrParam['module'], 'blog', 'list', null, 'tin-tuc.html'), 'Tin tức', 'blog');
 
 $linkViewCart   = URL::createLink($this->arrParam['module'], 'account', 'cart', null, 'gio-hang.html');
 $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
@@ -36,7 +49,7 @@ $linkSearch     = URL::createLink($this->arrParam['module'], 'book', 'list');
                                     <li>
                                         <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                                     </li>
-                                    <?= $home . $book . $category ?>
+                                    <?= $home . $book . $category . $blog ?>
                                 </ul>
                             </nav>
                         </div>

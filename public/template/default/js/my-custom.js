@@ -35,13 +35,28 @@ $(document).ready(function () {
         $(this).text() === 'Xem thêm' ? $(this).text('Thu gọn') : $(this).text('Xem thêm');
     });
 
+
+    // grid-view fetch layout
+    if(localStorage.getItem("layoutViewNumber") != null){
+        $('li.my-layout-view').removeClass('active');
+        $('[data-number="' + localStorage.getItem("layoutViewNumber") + '"]').addClass('active');
+        let numberCol = 12/parseInt(localStorage.getItem("layoutViewNumber"))
+        $(".product-wrapper-grid").children().children().removeClass();
+        $(".product-wrapper-grid").children().children().addClass("col-lg-" + numberCol);
+    }
+    else{
+        localStorage.setItem("layoutViewNumber", 4);
+        $('li.my-layout-view[data-number="' + localStorage.getItem("layoutViewNumber") + '"]').addClass('active');
+    }
+  
+    // set layout book by level
     $('li.my-layout-view > img').click(function () {
         $('li.my-layout-view').removeClass('active');
+        localStorage.setItem("layoutViewNumber", $(this).parent().data('number'));
         $(this).parent().addClass('active');
     });
 
     $('#sort-form select[name="sort"]').change(function () {
-        // console.log(getUrlParam('filter_price'));
         if (getUrlParam('filter_price')) {
             $('#sort-form').append(
                 '<input type="hidden" name="filter_price" value="' +

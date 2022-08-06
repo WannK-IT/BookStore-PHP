@@ -10,9 +10,6 @@ class ErrorController extends Controller
 		$this->_templateObj->setFileTemplate('index.php');
 		$this->_templateObj->setFileConfig('template.ini');
 		$this->_templateObj->load();
-
-		$this->_view->categoriesNavbar 	= $this->_model->listItems($this->_arrParam, 'categoryNavbar');
-		$this->_view->footer 			= $this->_model->listItems($this->_arrParam, 'footer');
 	}
 
 	public function indexAction()
